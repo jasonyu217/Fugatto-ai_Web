@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0,180 C320,220 420,120 640,150 C860,180 980,80 1200,110 C1420,140 1440,180 1440,180 L1440,900 L0,900 Z" fill="white" fill-opacity="0.05"/>
+  <path d="M0,300 C320,340 420,240 640,270 C860,300 980,200 1200,230 C1420,260 1440,300 1440,300 L1440,900 L0,900 Z" fill="white" fill-opacity="0.05"/>
+  <path d="M0,420 C320,460 420,360 640,390 C860,420 980,320 1200,350 C1420,380 1440,420 1440,420 L1440,900 L0,900 Z" fill="white" fill-opacity="0.05"/>
+</svg>
