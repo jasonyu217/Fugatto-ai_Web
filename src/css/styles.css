@@ -24,6 +24,16 @@ body {
   @apply px-4 py-2 text-gray-300 hover:text-white transition-colors duration-200;
 }
 
+.lang-btn {
+  @apply px-2 py-1 text-sm text-gray-400 hover:text-white transition-colors duration-200
+         focus:outline-none relative;
+}
+
+.lang-btn.active {
+  @apply text-white font-medium after:content-[''] after:absolute after:bottom-0 
+         after:left-0 after:w-full after:h-0.5 after:bg-white;
+}
+
 .input-area {
   @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6
          focus-within:border-white/20 transition-all duration-300;
@@ -43,7 +53,55 @@ body {
 }
 
 .testimonial-card {
-  @apply bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10;
+  @apply bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 
+         flex flex-col gap-4 min-w-[300px] max-w-[400px] mx-4 shrink-0;
+}
+
+.testimonial-card p {
+  @apply text-gray-300 line-clamp-3 break-words whitespace-normal;
+}
+
+.testimonials-container {
+  @apply relative overflow-hidden py-20 w-full;
+}
+
+.testimonials-track {
+  @apply flex gap-4 py-4;
+  animation: scroll 40s linear infinite;
+  width: max-content;
+}
+
+.testimonials-track-reverse {
+  animation-direction: reverse;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.testimonial-author {
+  @apply flex items-center gap-4;
+}
+
+.testimonial-avatar {
+  @apply w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500;
+}
+
+.testimonial-info {
+  @apply flex flex-col;
+}
+
+.testimonial-name {
+  @apply font-medium text-white;
+}
+
+.testimonial-role {
+  @apply text-sm text-gray-400;
 }
 
 .faq-item {

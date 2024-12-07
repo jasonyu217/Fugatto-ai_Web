@@ -1,26 +1,46 @@
 export default {
+  nav: {
+    brand: "Fugatto AI",
+    nvidia: "NVIDIA",
+    discover: "Discover",
+    synthesis: "Voice Synthesis",
+    build: "Build Voice",
+    myVoices: "My Voices",
+    manage: "Manage Membership",
+    signIn: "Sign In"
+  },
   hero: {
-    title: "AI Fugatto - Create Unique Audio with AI",
-    subtitle: "Transform text into audio and clone voices with advanced AI technology",
+    title: "Fugatto AI - World's Most Flexible Sound",
+    subtitle: "Using text and audio as input, Fugatto AI models can create any combination of music, sounds, and effects",
+    docs: "Read Documentation",
+    apiWaitlist: "Join API Waitlist",
     input: {
       title: "Enter Your Text",
       placeholder: "Type your text here...",
       generate: "Generate Audio"
-    },
-    output: {
-      title: "Generated Audio"
     }
+  },
+  tabs: {
+    textToSpeech: "Text to Speech",
+    speechToText: "Speech to Text"
   },
   features: {
     title: "Features",
-    textToAudio: {
-      title: "Text to Unique Audio",
-      description: "Create never-before-heard sounds from simple text descriptions"
-    },
-    voiceCloning: {
-      title: "Voice Cloning",
-      description: "Clone your voice and make it sing or speak any text"
-    }
+    description: "Fugatto is NVIDIA's latest generative AI model, capable of creating sound, music, and speech from text and audio",
+    cards: [
+      {
+        title: "AI-Driven Audio Generation",
+        description: "Create sounds, voices, and music from text and audio input"
+      },
+      {
+        title: "Creative Sound Effects",
+        description: "Guide Fugatto to create unexpected sound effects"
+      },
+      {
+        title: "Immersive Soundscapes",
+        description: "Provide rich and varied soundscape experiences"
+      }
+    ]
   },
   pricing: {
     title: "Pricing",
