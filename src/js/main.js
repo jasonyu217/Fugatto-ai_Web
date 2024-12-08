@@ -263,6 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateContent();
   initVoiceSelector();
   initTTSFeature();
+  initModal();
 });
 
 // 监听语言变化
@@ -278,6 +279,173 @@ document.querySelectorAll('.faq-question').forEach(question => {
     answer.classList.toggle('hidden');
   });
 });
+
+function openWaitlistModal() {
+  document.getElementById('waitlistModal').classList.remove('hidden');
+  document.getElementById('waitlistModal').classList.add('flex');
+}
+
+function closeWaitlistModal() {
+  const modal = document.getElementById('waitlistModal');
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+  // 清空表单
+  document.getElementById('waitlistForm').reset();
+}
+
+// 绑定点击事件
+document.getElementById('openWaitlistBtn').addEventListener('click', openWaitlistModal);
+
+// 修改表单提交处理
+document.getElementById('waitlistForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitButton = e.target.querySelector('button[type="submit"]');
+  const loadingSpinner = submitButton.querySelector('.loading-spinner');
+  
+  try {
+    submitButton.disabled = true;
+    loadingSpinner.classList.remove('hidden');
+    
+    const formData = new FormData(e.target);
+    console.log('Submitting form data:', {
+      name: formData.get('entry.276476973'),
+      email: formData.get('entry.1846138449'),
+      company: formData.get('entry.758142325'),
+      scenario: formData.get('entry.1411681852')
+    });
+    
+    const response = await fetch('http://127.0.0.1:8002/api/waitlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.get('entry.276476973'),
+        email: formData.get('entry.1846138449'),
+        company: formData.get('entry.758142325'),
+        scenario: formData.get('entry.1411681852')
+      })
+    });
+
+    console.log('Response status:', response.status);
+    const result = await response.json();
+    console.log('Response data:', result);
+    
+    if (result.status === 'success') {
+      alert('感谢您的注册！我们会尽快与您联系。');
+      closeWaitlistModal();
+      e.target.reset();
+    } else {
+      throw new Error(result.message);
+    }
+
+  } catch (error) {
+    console.error('Error:', error);
+    alert('提交失败，请稍后重试。');
+  } finally {
+    submitButton.disabled = false;
+    loadingSpinner.classList.add('hidden');
+  }
+});
+
+// 点击模态框背景时也关闭
+document.getElementById('waitlistModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) {
+    closeWaitlistModal();
+  }
+});
+
+// 将 closeWaitlistModal 函数添加到全局作用域
+window.closeWaitlistModal = closeWaitlistModal;
+
+// 添加测试函数
+function submitTestData() {
+  const formData = new FormData();
+  formData.append('entry.276476973', 'Test User');
+  formData.append('entry.1846138449', 'test@example.com');
+  formData.append('entry.758142325', 'Test Company');
+  formData.append('entry.1411681852', '这是一条测试数据，用于验证表单提交功能是否正常工作。');
+
+  // 调用表单提交函数
+  const form = document.getElementById('waitlistForm');
+  form.dispatchEvent(new Event('submit'));
+}
+
+// 添加模态框初始化函数
+function initModal() {
+  const modal = document.getElementById('waitlistModal');
+  const cancelButton = document.getElementById('cancelButton');
+  const openButton = document.querySelector('[data-i18n="hero.apiWaitlist"]');
+  const form = document.getElementById('waitlistForm');
+
+  // 打开模态框
+  openButton.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  });
+
+  // 关闭模态框
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    form.reset();
+  }
+
+  // 取消按钮点击事件
+  cancelButton.addEventListener('click', closeModal);
+
+  // 点击背景关闭
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // 表单提交后关闭
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitButton = e.target.querySelector('button[type="submit"]');
+    const loadingSpinner = submitButton.querySelector('.loading-spinner');
+    
+    try {
+      submitButton.disabled = true;
+      loadingSpinner.classList.remove('hidden');
+      
+      const formData = new FormData(e.target);
+      
+      // 通过我们的后端 API 提交
+      const response = await fetch('http://127.0.0.1:8002/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.get('entry.276476973'),
+          email: formData.get('entry.1846138449'),
+          company: formData.get('entry.758142325'),
+          scenario: formData.get('entry.1411681852')
+        })
+      });
+
+      const result = await response.json();
+      
+      if (result.status === 'success') {
+        alert('感谢您的注册！我们会尽快与您联系。');
+        closeModal();
+        e.target.reset();
+      } else {
+        throw new Error(result.message);
+      }
+
+    } catch (error) {
+      console.error('Error:', error);
+      alert('提交失败，请稍后重试。');
+    } finally {
+      submitButton.disabled = false;
+      loadingSpinner.classList.add('hidden');
+    }
+  });
+}
 
 if (import.meta.hot) {
   import.meta.hot.accept()

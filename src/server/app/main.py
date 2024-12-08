@@ -7,6 +7,7 @@ import io
 import logging
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import HTMLResponse
+import requests
 
 # 配置日志
 logging.basicConfig(level=logging.INFO)
@@ -39,6 +40,12 @@ class TTSRequest(BaseModel):
     text: str
     language: str
     voice: str
+
+class WaitlistRequest(BaseModel):
+    name: str
+    email: str
+    company: str = None
+    scenario: str = None
 
 @app.post("/api/tts")
 async def text_to_speech(request: TTSRequest):
@@ -141,3 +148,30 @@ async def root():
 @app.get("/test")
 async def test():
     return {"status": "ok", "message": "API is working"} 
+
+@app.post("/api/waitlist")
+async def submit_waitlist(request: WaitlistRequest):
+    try:
+        logger.info(f"Received waitlist request: {request}")
+        form_url = "https://docs.google.com/forms/d/e/1FAIpQLSeDSDQEXoC2j00UHWx30gZQwhFrUT8XQiO55W4NPkjgovJXbw/formResponse"
+        
+        form_data = {
+            'entry.276476973': request.name,
+            'entry.1846138449': request.email,
+            'entry.758142325': request.company,
+            'entry.1411681852': request.scenario
+        }
+        logger.info(f"Sending form data: {form_data}")
+        
+        response = requests.post(form_url, data=form_data)
+        logger.info(f"Google Forms response status: {response.status_code}")
+        
+        if response.status_code == 200:
+            return {"status": "success", "message": "Successfully submitted"}
+        else:
+            logger.error(f"Failed to submit form: {response.status_code}")
+            return {"status": "error", "message": "Failed to submit form"}
+            
+    except Exception as e:
+        logger.error(f"Error submitting waitlist form: {str(e)}")
+        return {"status": "error", "message": str(e)} 

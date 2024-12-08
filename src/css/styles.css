@@ -222,3 +222,7 @@ audio::-webkit-media-controls-play-button {
          text-white rounded-lg transition-colors duration-200 disabled:opacity-50 
          disabled:cursor-not-allowed;
 }
+
+.loading-spinner {
+  @apply w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin;
+}
