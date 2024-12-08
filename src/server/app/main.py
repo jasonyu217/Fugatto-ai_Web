@@ -17,7 +17,10 @@ app = FastAPI()
 # 配置 CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 临时允许所有源，生产环境中应该限制
+    allow_origins=[
+        "http://localhost:3001",  # 添加您的实际前端地址
+        "http://127.0.0.1:3001"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -29,7 +32,7 @@ app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
 @app.middleware("http")
 async def add_security_headers(request, call_next):
     response = await call_next(request)
-    response.headers["Content-Security-Policy"] = "default-src 'self' http://127.0.0.1:8002; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
+    response.headers["Content-Security-Policy"] = "default-src 'self' http://127.0.0.1:8002 http://localhost:8002; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
     return response
 
 class TTSRequest(BaseModel):
