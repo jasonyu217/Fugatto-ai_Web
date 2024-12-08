@@ -1,80 +1,179 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* 自定义样式 */
 body {
-  @apply bg-black text-white;
-}
-
-.hero-section {
-  @apply min-h-screen bg-gradient-to-b from-black to-gray-900 relative overflow-hidden;
-}
-
-.hero-section::before {
-  content: '';
-  @apply absolute inset-0 bg-[url('/wave-pattern.svg')] opacity-10 bg-repeat-x bg-cover;
-}
-
-.btn-primary {
-  @apply bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-lg font-medium 
-         hover:bg-white/20 transition-all duration-300 border border-white/20;
+  @apply text-white bg-gradient-to-b from-gray-900 to-black min-h-screen;
 }
 
 .nav-link {
-  @apply px-4 py-2 text-gray-300 hover:text-white transition-colors duration-200;
+  @apply text-gray-300 hover:text-white transition-colors;
 }
 
-.lang-btn {
-  @apply px-2 py-1 text-sm text-gray-400 hover:text-white transition-colors duration-200
-         focus:outline-none relative;
+.btn-primary {
+  @apply px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors;
 }
 
-.lang-btn.active {
-  @apply text-white font-medium after:content-[''] after:absolute after:bottom-0 
-         after:left-0 after:w-full after:h-0.5 after:bg-white;
-}
-
-.input-area {
-  @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6
-         focus-within:border-white/20 transition-all duration-300;
-}
-
-.audio-player {
-  @apply w-full h-12 rounded-lg bg-white/5 backdrop-blur-md;
-}
-
-.tab-button {
-  @apply px-8 py-3 text-gray-400 border-b-2 border-transparent transition-all duration-200
-         hover:text-white focus:outline-none;
-}
-
-.tab-button.active {
-  @apply text-white border-white;
+.feature-card {
+  @apply transform hover:-translate-y-1 transition-all duration-300;
 }
 
 .testimonial-card {
-  @apply bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 
-         flex flex-col gap-4 min-w-[300px] max-w-[400px] mx-4 shrink-0;
+  @apply p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10;
 }
 
-.testimonial-card p {
-  @apply text-gray-300 line-clamp-3 break-words whitespace-normal;
+.faq-question {
+  @apply w-full flex justify-between items-center p-4 bg-white/5 backdrop-blur-md rounded-lg text-left hover:bg-white/10 transition-colors;
 }
 
+.price-card {
+  @apply p-8 bg-white/5 backdrop-blur-md rounded-xl border border-white/10;
+}
+
+/* Tab 样式优化 */
+.tab-container {
+  @apply bg-black/30 backdrop-blur-md rounded-full p-1.5 flex gap-2 mx-auto inline-flex shadow-lg;
+}
+
+.tab-button {
+  @apply px-8 py-3 rounded-full transition-all duration-300 text-gray-400 hover:text-white relative;
+  min-width: 140px;
+  text-align: center;
+}
+
+.tab-button.active {
+  @apply bg-white/10 text-white shadow-inner;
+}
+
+/* 容器布局优化 */
+.conversion-container {
+  @apply max-w-7xl mx-auto px-4 w-full;
+}
+
+/* 输入输出区域样式优化 */
+.input-output-container {
+  @apply grid grid-cols-2 gap-8 w-full mt-8 mx-auto;
+  min-height: 400px;
+  max-width: 1200px;
+}
+
+.input-output-container.hidden {
+  display: none;
+}
+
+/* 输入输出区域样式 */
+.input-area, .output-area {
+  @apply bg-black/20 backdrop-blur-md rounded-xl p-8 border border-white/10 hover:border-white/20 transition-all duration-300;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 480px;
+}
+
+/* 文本输入区域 */
+textarea {
+  @apply w-full p-4 rounded-lg bg-black/20 border border-white/10 text-white placeholder-white/50 
+    focus:outline-none focus:ring-1 focus:ring-white/30 mb-4 transition-all duration-300
+    hover:border-white/20;
+  flex: 1;
+  min-height: 200px;
+  resize: none;
+}
+
+/* 音频播放器样式 */
+.audio-player-container {
+  @apply flex-1 flex flex-col justify-center items-center;
+}
+
+audio {
+  @apply w-full mb-4 rounded;
+  height: 40px;
+}
+
+/* 录音按钮样式 */
+.record-button {
+  @apply p-8 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 mb-4
+    flex items-center justify-center mx-auto;
+  width: 100px;
+  height: 100px;
+}
+
+.record-icon {
+  @apply text-4xl transition-all duration-300;
+}
+
+.record-button:hover .record-icon {
+  @apply transform scale-110;
+}
+
+/* 文本输出区域 */
+.text-output {
+  @apply p-4 bg-black/20 rounded-lg border border-white/10 transition-all duration-300
+    hover:border-white/20;
+  flex: 1;
+  min-height: 200px;
+  overflow-y: auto;
+}
+
+/* 状态提示文本 */
+.status-text {
+  @apply text-center text-white/80 mt-2;
+}
+
+/* 标题样式优化 */
+.area-title {
+  @apply text-xl font-medium mb-6 text-white/90;
+}
+
+/* 评价卡片容器样式 */
 .testimonials-container {
-  @apply relative overflow-hidden py-20 w-full;
+  @apply py-20 overflow-hidden;
 }
 
+/* 评价轨道样式 */
 .testimonials-track {
-  @apply flex gap-4 py-4;
-  animation: scroll 40s linear infinite;
+  @apply flex gap-6 mb-8;
+  animation: scroll 30s linear infinite;
   width: max-content;
 }
 
 .testimonials-track-reverse {
-  animation-direction: reverse;
+  animation: scroll-reverse 30s linear infinite;
 }
 
+/* 评价卡片样式 */
+.testimonial-card {
+  @apply bg-white/5 backdrop-blur-md rounded-xl border border-white/10 p-6 flex flex-col hover:border-white/20 transition-all duration-300;
+  min-width: 400px;
+  max-width: 400px;
+}
+
+.testimonial-content {
+  @apply text-gray-300 mb-6 text-lg leading-relaxed;
+}
+
+.testimonial-author {
+  @apply flex items-center gap-4 mt-auto;
+}
+
+.testimonial-avatar {
+  @apply w-12 h-12 rounded-full bg-cover bg-center;
+}
+
+.testimonial-info {
+  @apply flex flex-col;
+}
+
+.testimonial-name {
+  @apply text-white font-medium;
+}
+
+.testimonial-role {
+  @apply text-gray-400 text-sm;
+}
+
+/* 滚动动画 */
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -84,44 +183,28 @@ body {
   }
 }
 
-.testimonial-author {
-  @apply flex items-center gap-4;
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
-.testimonial-avatar {
-  @apply w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500;
+/* 悬停时暂停动画 */
+.testimonials-track:hover,
+.testimonials-track-reverse:hover {
+  animation-play-state: paused;
 }
 
-.testimonial-info {
-  @apply flex flex-col;
+/* 区块标题和描述样式 */
+.section-title {
+  @apply text-4xl font-bold text-center;
 }
 
-.testimonial-name {
-  @apply font-medium text-white;
-}
-
-.testimonial-role {
-  @apply text-sm text-gray-400;
-}
-
-.faq-item {
-  @apply border-b border-white/10 py-4;
-}
-
-.faq-question {
-  @apply flex justify-between items-center w-full text-left py-2 text-lg font-medium
-         hover:text-white/90 transition-colors duration-200;
-}
-
-.price-card {
-  @apply bg-white/5 backdrop-blur-md rounded-xl p-8 border border-white/10
-         hover:border-white/20 transition-all duration-300;
-}
-
-#video-overlay {
-  @apply transition-opacity duration-300;
-}
-
-.play-button {
-  @apply transform hover:scale-110 transition-transform duration-300;
+.section-description {
+  @apply text-xl text-gray-400 text-center max-w-3xl mx-auto;
+  margin-top: 1rem;  /* 减小标题和描述的距离 */
+  margin-bottom: 3rem; /* 调整描述和内容的距离 */
 }

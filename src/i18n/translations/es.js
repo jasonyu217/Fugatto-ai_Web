@@ -1,115 +1,158 @@
 export default {
   nav: {
     brand: "Fugatto AI",
-    nvidia: "NVIDIA",
     discover: "Descubrir",
     synthesis: "Síntesis de Voz",
     build: "Construir Voz",
     myVoices: "Mis Voces",
-    manage: "Gestionar Membresía",
+    manage: "Gestionar",
     signIn: "Iniciar Sesión"
   },
   hero: {
-    title: "Fugatto AI - El Sonido más Flexible del Mundo",
-    subtitle: "Usando texto y audio como entrada, los modelos de Fugatto AI pueden crear cualquier combinación de música, sonidos y efectos",
+    title: "Fugatto AI - El Sonido Más Flexible del Mundo",
+    subtitle: "Usando texto y audio como entrada, los modelos de Fugatto AI pueden crear cualquier combinación de música, voz y efectos de sonido",
     docs: "Leer Documentación",
-    apiWaitlist: "Unirse a la Lista de Espera API"
-  },
-  tabs: {
-    textToSpeech: "Texto a Voz",
-    speechToText: "Voz a Texto"
+    apiWaitlist: "Unirse a la Lista de Espera API",
+    input: {
+      title: "Ingrese el texto",
+      placeholder: "Escriba el texto para convertir...",
+      generate: "Generar Audio",
+      speechToText: {
+        title: "Voz a Texto"
+      }
+    }
   },
   features: {
     title: "Características",
-    description: "Fugatto es el último modelo de IA generativa de NVIDIA, capaz de crear sonido, música y voz a partir de texto y audio, permitiendo efectos sonoros innovadores, separación de audio y transformación de estilos.",
+    description: "Fugatto es el último modelo de IA generativa de NVIDIA, capaz de crear sonido, música y voz a partir de texto y audio",
     cards: [
       {
-        emoji: "🎵",
-        title: "Generación de Audio por IA",
-        description: "Crea sonidos, voces y música a partir de texto y audio, mostrando el poder innovador de la IA."
+        title: "Generación de Audio Impulsada por IA",
+        description: "Crea sonidos, voces y música a partir de texto y entrada de audio"
       },
       {
-        emoji: "🎨",
         title: "Efectos de Sonido Creativos",
-        description: "Guía a Fugatto para crear efectos de sonido inesperados, dando nueva vida a sonidos familiares."
+        description: "Guía a Fugatto para crear efectos de sonido innovadores"
       },
       {
-        emoji: "🎬",
         title: "Paisajes Sonoros Inmersivos",
-        description: "Proporciona experiencias de paisajes sonoros ricas y variadas para películas y producción de audio."
+        description: "Experiencia sonora rica y variada para películas y producción de audio"
       },
       {
-        emoji: "🎼",
         title: "Extracción de Elementos de Audio",
-        description: "Separa fácilmente elementos de audio como voces de la música para un procesamiento preciso."
+        description: "Separe fácilmente voces y otros elementos de audio de la música para un procesamiento preciso"
       },
       {
-        emoji: "🎹",
-        title: "Experimentación Musical",
-        description: "Los músicos pueden añadir nuevos instrumentos al audio existente para experimentos creativos."
+        title: "Experimentación con Instrumentos",
+        description: "Los músicos pueden añadir nuevos instrumentos al audio existente para una creación musical innovadora"
       },
       {
-        emoji: "✨",
-        title: "Posibilidades Infinitas",
-        description: "Como modelo base potente, otorga a los usuarios capacidades ilimitadas de creación de audio."
-      }
-    ]
-  },
-  testimonials: {
-    title: "Testimonios",
-    items: [
-      {
-        quote: "Fugatto AI nos ayuda a generar contenido de voz de alta calidad rápidamente, mejorando enormemente nuestra eficiencia.",
-        author: "Zhang Ming",
-        role: "Creador de Contenido"
-      },
-      {
-        quote: "La función de clonación de voz es increíble, permitiéndonos crear contenido multilingüe rápidamente.",
-        author: "Sarah Chen",
-        role: "Gerente de Producto"
+        title: "Potencial Creativo Ilimitado",
+        description: "Como modelo base potente, ofrece capacidades ilimitadas de creación de audio"
       }
     ]
   },
   pricing: {
-    title: "Planes",
-    basic: {
-      title: "Básico",
-      price: "€9/mes",
-      features: [
-        "10 horas de generación de voz al mes",
-        "5 clones de voz"
-      ]
+    title: "Precios",
+    description: "Elija el plan que mejor se adapte a sus necesidades y disfrute de las potentes funciones de Fugatto AI. Ofrecemos opciones de precios flexibles para satisfacer diferentes requisitos de escala.",
+    starter: {
+      title: "Inicial",
+      price: "9€/mes",
+      features: ["Generación básica de audio", "5 clones de voz", "Soporte estándar"],
+      cta: "Elegir Plan"
     },
     pro: {
       title: "Profesional",
-      price: "€29/mes",
-      features: [
-        "Generación de voz ilimitada",
-        "Clones de voz ilimitados"
-      ]
+      price: "29€/mes",
+      features: ["Generación avanzada de audio", "Clones de voz ilimitados", "Soporte prioritario"],
+      cta: "Elegir Plan"
     }
   },
   faq: {
     title: "Preguntas Frecuentes",
-    items: [
+    description: "Hemos recopilado las preguntas más comunes y respuestas detalladas para ayudarle a comprender mejor las características y el uso de Fugatto AI.",
+    q1: "¿Qué es NVIDIA Fugatto AI?",
+    a1: "Fugatto es el modelo de audio de IA generativa de NVIDIA que puede crear música, efectos de sonido y voz basados en indicaciones de texto, particularmente adecuado para industrias creativas.",
+    q2: "¿Cómo funciona Fugatto?",
+    a2: "Utiliza algoritmos avanzados entrenados en grandes conjuntos de datos de audio para generar o modificar sonidos dinámicamente según la entrada del usuario.",
+    q3: "¿Qué industrias pueden beneficiarse de Fugatto?",
+    a3: "Las industrias de producción musical, juegos, publicidad y cine pueden usarlo para crear contenido de audio único y mejorar experiencias.",
+    q4: "¿Puede Fugatto clonar voces?",
+    a4: "Sí, puede generar y ajustar voces con diferentes acentos, emociones y tonos.",
+    q5: "¿Admite Fugatto la edición de sonido en tiempo real?",
+    a5: "Sí, permite la modificación dinámica del audio según los cambios en la entrada.",
+    q6: "¿Qué hace que Fugatto sea diferente de otras herramientas de audio AI?",
+    a6: "Su flexibilidad para generar salidas de sonido diversas y de alta calidad y su capacidad para manejar indicaciones complejas lo hacen único."
+  },
+  about: {
+    title: "Descubre Fugatto AI",
+    description: "Experimenta la próxima generación de generación de audio impulsada por IA"
+  },
+  testimonials: {
+    title: "Testimonios",
+    description: "Usuarios de todo el mundo comparten sus historias de éxito y experiencias con Fugatto AI",
+    reviews: [
       {
-        question: "¿Qué es NVIDIA Fugatto AI?",
-        answer: "Fugatto es el modelo de audio de IA generativa de NVIDIA que puede crear música, efectos de sonido y voz basándose en indicaciones de texto, especialmente adecuado para industrias creativas."
+        content: "Esta plataforma ha sido fundamental para mejorar nuestro ciclo de desarrollo de productos y esfuerzos colaborativos.",
+        name: "Ana García",
+        role: "Cofundadora de Infinituma"
       },
       {
-        question: "¿Cómo funciona Fugatto?",
-        answer: "Utiliza algoritmos avanzados entrenados con grandes conjuntos de datos de audio para generar o modificar sonidos dinámicamente según la entrada del usuario."
+        content: "El software de colaboración de Fugatto optimizó nuestro proceso de desarrollo con integraciones perfectas.",
+        name: "Carlos Rodríguez",
+        role: "Ingeniero en DevTech"
       },
       {
-        question: "¿Qué industrias pueden beneficiarse de Fugatto?",
-        answer: "Las industrias de producción musical, juegos, publicidad y cine pueden utilizarlo para crear contenido de audio único y mejorar experiencias."
+        content: "¡Muy feliz de que nuestro equipo se mudara a Fugatto! Simplificó nuestro proceso de contratación.",
+        name: "María Sánchez",
+        role: "Desarrolladora en Tinker"
+      },
+      {
+        content: "Las capacidades de IA han transformado nuestra forma de abordar la creación de contenido. ¡Increíble!",
+        name: "Diego Martínez",
+        role: "Director de Contenido en MediaFlow"
+      },
+      {
+        content: "La mejor decisión que tomamos este año. ¡La función de clonación de voz es revolucionaria!",
+        name: "Laura Torres",
+        role: "Productora de Audio"
+      },
+      {
+        content: "La interfaz es limpia y simple de navegar. ¡Es verdaderamente la plataforma soñada de un diseñador!",
+        name: "Isabel López",
+        role: "Diseñadora UI en Creatify"
+      },
+      {
+        content: "Nuestro proceso creativo nunca ha sido más fluido. ¡Las características son excelentes y fáciles de usar!",
+        name: "Pablo Ruiz",
+        role: "Director Creativo en VisualVibe"
+      },
+      {
+        content: "El soporte multilingüe ha hecho que nuestra expansión global sea mucho más sencilla.",
+        name: "Miguel Hernández",
+        role: "Operaciones Internacionales"
+      },
+      {
+        content: "Calidad de síntesis de voz increíble. Nuestros audiolibros suenan más naturales que nunca.",
+        name: "Carmen Jiménez",
+        role: "Directora de Publicación"
+      },
+      {
+        content: "El equipo de soporte al cliente es excepcional. Nos han ayudado a maximizar el potencial de la plataforma.",
+        name: "Roberto Morales",
+        role: "Líder Técnico"
       }
     ]
   },
   footer: {
+    copyright: "© 2024 AI Fugatto. Todos los derechos reservados",
+    contact: "Contacto: jasonkui217@gmail.com",
+    owner: "Creado por Jason Yu",
     resources: {
       title: "Recursos",
-      items: ["Guías", "Referencia API", "Soporte"]
+      guides: "Guías",
+      api: "Referencia API",
+      support: "Soporte"
     },
     products: {
       title: "Productos",
@@ -119,6 +162,50 @@ export default {
       title: "Empresa",
       items: ["Blog", "GitHub"]
     },
-    legal: ["Política de Privacidad", "Términos de Servicio", "Reportar Problema"]
+    legal: {
+      privacy: "Política de Privacidad",
+      terms: "Términos de Servicio",
+      report: "Reportar un Problema"
+    }
+  },
+  tabs: {
+    textToSpeech: "Texto a Voz",
+    speechToText: "Voz a Texto"
+  },
+  input: {
+    textToSpeech: {
+      title: "Entrada de texto",
+      placeholder: "Ingrese el texto para convertir...",
+      generate: "Generar audio"
+    },
+    speechToText: {
+      title: "Entrada de voz",
+      record: "Comenzar grabación",
+      recording: "Grabando...",
+      stop: "Detener grabación"
+    }
+  },
+  output: {
+    textToSpeech: {
+      title: "Salida de audio",
+      processing: "Generando audio...",
+      ready: "Audio listo"
+    },
+    speechToText: {
+      title: "Salida de texto",
+      processing: "Convirtiendo...",
+      placeholder: "El texto transcrito aparecerá aquí"
+    }
+  },
+  status: {
+    generating: "Generando audio...",
+    success: "¡Audio generado con éxito!"
+  },
+  errors: {
+    noText: "Por favor ingrese texto para convertir",
+    apiKeyMissing: "Clave API no configurada, contacte al soporte",
+    apiError: "Servicio temporalmente no disponible, intente más tarde",
+    networkError: "Error de red, verifique su conexión",
+    unknownError: "Error inesperado, intente nuevamente"
   }
 }

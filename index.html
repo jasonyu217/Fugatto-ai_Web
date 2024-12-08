@@ -63,28 +63,105 @@
             </div>
           </div>
           
-          <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
+          <div class="conversion-container">
             <!-- Tabs -->
-            <div class="col-span-2 flex justify-center space-x-4 mb-8">
-              <button class="tab-button active" data-tab="text-to-speech" data-i18n="tabs.textToSpeech">文本转语音</button>
-              <button class="tab-button" data-tab="speech-to-text" data-i18n="tabs.speechToText">语音转文本</button>
+            <div class="flex justify-center mb-12">
+              <div class="tab-container">
+                <button class="tab-button active" data-tab="text-to-speech">
+                  <span data-i18n="tabs.textToSpeech">文本转语音</span>
+                </button>
+                <button class="tab-button" data-tab="speech-to-text">
+                  <span data-i18n="tabs.speechToText">语音转文本</span>
+                </button>
+              </div>
             </div>
 
-            <div class="input-area">
-              <h2 class="text-xl font-medium mb-4" data-i18n="input.title">文本转语音</h2>
-              <textarea 
-                id="textInput"
-                class="w-full h-48 p-4 rounded-lg bg-black/20 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-white/30"
-                data-i18n-placeholder="input.placeholder"
-              ></textarea>
-              <button id="generateButton" class="btn-primary mt-4 w-full" data-i18n="input.generate">生成音频</button>
+            <!-- Text to Speech View -->
+            <div class="input-output-container" id="text-to-speech-view">
+              <div class="input-area">
+                <h2 class="area-title" data-i18n="input.textToSpeech.title">文本输入</h2>
+                
+                <!-- 语言和声音选择区域 -->
+                <div class="flex gap-4 mb-4">
+                  <!-- 语言选择 -->
+                  <div class="flex-1">
+                    <label class="block text-sm text-gray-400 mb-2" data-i18n="input.textToSpeech.language">语言选择</label>
+                    <div class="relative">
+                      <select id="languageSelect" class="w-full bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 text-white appearance-none hover:border-white/20 focus:border-white/30 focus:outline-none transition-colors">
+                        <option value="en-US">English (US)</option>
+                        <option value="zh-CN">中文 (简体)</option>
+                        <option value="ja-JP">日本語</option>
+                        <option value="es-ES">Español</option>
+                        <option value="ru-RU">Русский</option>
+                        <option value="ar-SA">العربية</option>
+                      </select>
+                      <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 声音选择 -->
+                  <div class="flex-1">
+                    <label class="block text-sm text-gray-400 mb-2" data-i18n="input.textToSpeech.voice">声音选择</label>
+                    <div class="relative">
+                      <select id="voiceSelect" class="w-full bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 text-white appearance-none hover:border-white/20 focus:border-white/30 focus:outline-none transition-colors">
+                        <option value="energetic-male">Energetic Male</option>
+                        <option value="professional-female">Professional Female</option>
+                        <option value="friendly-male">Friendly Male</option>
+                        <option value="warm-female">Warm Female</option>
+                        <option value="news-anchor">News Anchor</option>
+                        <option value="storyteller">Storyteller</option>
+                      </select>
+                      <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 文本输入区域 -->
+                <textarea 
+                  id="textInput"
+                  class="w-full h-32 bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg p-4 text-white placeholder-gray-500 resize-none hover:border-white/20 focus:border-white/30 focus:outline-none transition-colors"
+                  data-i18n-placeholder="input.textToSpeech.placeholder"
+                ></textarea>
+                <button id="generateButton" class="btn-primary w-full mt-4">
+                  <span data-i18n="input.textToSpeech.generate">生成音频</span>
+                </button>
+              </div>
+
+              <div class="output-area">
+                <h2 class="area-title" data-i18n="output.textToSpeech.title">音频输出</h2>
+                <div class="audio-player-container">
+                  <audio id="audioOutput" controls></audio>
+                  <div id="audioStatus" class="status-text"></div>
+                </div>
+              </div>
             </div>
 
-            <div class="input-area">
-              <h2 class="text-xl font-medium mb-4">语音转文本</h2>
-              <div class="audio-player-container">
-                <audio id="audioPlayer" controls class="audio-player mb-4"></audio>
-                <div id="audioStatus" class="text-center text-white/80"></div>
+            <!-- Speech to Text View -->
+            <div class="input-output-container hidden" id="speech-to-text-view">
+              <div class="input-area">
+                <h2 class="area-title" data-i18n="input.speechToText.title">语音输入</h2>
+                <div class="audio-input-container">
+                  <button id="recordButton" class="record-button">
+                    <span class="record-icon">🎤</span>
+                  </button>
+                  <audio id="audioInput" controls></audio>
+                  <div id="recordingStatus" class="status-text"></div>
+                </div>
+              </div>
+
+              <div class="output-area">
+                <h2 class="area-title" data-i18n="output.speechToText.title">文本输出</h2>
+                <div class="text-output">
+                  <p id="transcriptionOutput" class="text-white/90"></p>
+                </div>
               </div>
             </div>
           </div>
@@ -94,18 +171,18 @@
       <!-- Video Section -->
       <section class="py-20 px-4">
         <div class="container mx-auto max-w-4xl">
-          <h2 class="text-4xl font-bold text-center mb-12">了解 AI Fugatto</h2>
+          <h2 class="text-4xl font-bold text-center mb-12" data-i18n="about.title">了解 AI Fugatto</h2>
           <div class="relative aspect-video rounded-xl overflow-hidden bg-white/5 backdrop-blur-md">
-            <iframe
+            <video
               id="promo-video"
               class="w-full h-full absolute inset-0"
-              src="about:blank"
-              title="AI Fugatto 演示视频"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-            <div id="video-overlay" class="absolute inset-0 flex items-center justify-center bg-black/50 cursor-pointer">
+              controls
+              preload="metadata"
+            >
+              <source src="/Audio AI Fugatto Generates Sound from Text _ NVIDIA Research - NVIDIA Developer (1080p, h264, youtube).mp4" type="video/mp4">
+              您的浏览器不支持视频播放。
+            </video>
+            <div id="video-overlay" class="absolute inset-0 flex items-center justify-center bg-black/50 cursor-pointer hover:bg-black/60 transition-all duration-300">
               <button class="play-button p-6 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all duration-300">
                 <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z"/>
@@ -119,120 +196,180 @@
       <!-- Features -->
       <section class="py-20 px-4">
         <div class="container mx-auto max-w-6xl">
-          <h2 class="text-4xl font-bold text-center mb-12">功能特点</h2>
-          <div class="text-center mb-12">
-            <p class="text-xl text-gray-400">Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐及语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创意可能。</p>
-          </div>
+          <h2 class="section-title" data-i18n="features.title">功能特点</h2>
+          <p class="section-description" data-i18n="features.description">
+            Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐及语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创意可能。
+          </p>
           
           <div class="grid md:grid-cols-3 gap-8">
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎵</div>
-              <h3 class="text-xl font-bold mb-3">AI驱动的音频生成</h3>
-              <p class="text-gray-400">根据文本和音频输入创造声音、语音和音乐，展现AI的创新力量。</p>
+              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.0.title">AI驱动的音频生成</h3>
+              <p class="text-gray-400" data-i18n="features.cards.0.description">根据文本和音频输入创造声音、语音和音乐</p>
             </div>
             
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎨</div>
-              <h3 class="text-xl font-bold mb-3">创意声音效果</h3>
-              <p class="text-gray-400">引导Fugatto创造意想不到的声音效果，为熟悉的声音赋予全新品质。</p>
+              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.1.title">创意声音效果</h3>
+              <p class="text-gray-400" data-i18n="features.cards.1.description">引导Fugatto创造意想不到的声音效果</p>
             </div>
             
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
-              <div class="text-3xl mb-4">🎬</div>
-              <h3 class="text-xl font-bold mb-3">沉浸式音景</h3>
-              <p class="text-gray-400">为电影或音频制作提供丰富多变的音景体验。</p>
+              <div class="text-3xl mb-4">🎨</div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.2.title">沉浸式音景</h3>
+              <p class="text-gray-400" data-i18n="features.cards.2.description">为电影或音频制作提供丰富多变的音景体验</p>
             </div>
             
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
-              <div class="text-3xl mb-4">🎼</div>
-              <h3 class="text-xl font-bold mb-3">音频元素提取</h3>
-              <p class="text-gray-400">轻松从音乐中分离人声等音频元素，实现精确的音频处理。</p>
+              <div class="text-3xl mb-4">🎨</div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.3.title">音频元素提取</h3>
+              <p class="text-gray-400" data-i18n="features.cards.3.description">轻松从音乐中分离人声等音频元素</p>
             </div>
             
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
-              <div class="text-3xl mb-4">🎹</div>
-              <h3 class="text-xl font-bold mb-3">乐器实验</h3>
-              <p class="text-gray-400">音乐家可以在现有音频中添加新乐器，进行创新的音乐创作实验。</p>
+              <div class="text-3xl mb-4">🎨</div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.4.title">乐器实验</h3>
+              <p class="text-gray-400" data-i18n="features.cards.4.description">音乐家可以在现有音频中添加新乐器</p>
             </div>
             
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">✨</div>
-              <h3 class="text-xl font-bold mb-3">无限创意可能</h3>
-              <p class="text-gray-400">作为强大的基础模型，赋予用户无限的音频创作能力和可能性。</p>
+              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.5.title">无限创意可能</h3>
+              <p class="text-gray-400" data-i18n="features.cards.5.description">作为强大的基础模型，赋予用户无限的音频创作能力</p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Testimonials -->
-      <section class="testimonials-container bg-black/30">
+      <section class="testimonials-container">
         <div class="container mx-auto max-w-6xl">
-          <h2 class="text-4xl font-bold text-center mb-12">用户评价</h2>
-          <div class="space-y-8">
-            <!-- Top row - scrolling left -->
-            <div class="testimonials-track">
-              <div class="testimonial-card">
-                <p class="text-gray-300">"AI Fugatto帮助我们快速生成高质量的语音内容，大大提高了工作效率。"</p>
-                <div class="testimonial-author">
-                  <div class="testimonial-avatar"></div>
-                  <div class="testimonial-info">
-                    <p class="testimonial-name">张明</p>
-                    <p class="testimonial-role">内容创作者</p>
-                  </div>
-                </div>
-              </div>
-              <div class="testimonial-card">
-                <p class="text-gray-300">"Fugatto的声音效果处理能力令人惊叹，为我们的项目带来了全新的可能性。"</p>
-                <div class="testimonial-author">
-                  <div class="testimonial-avatar"></div>
-                  <div class="testimonial-info">
-                    <p class="testimonial-name">John Smith</p>
-                    <p class="testimonial-role">音频工程师</p>
-                  </div>
-                </div>
-              </div>
-              <div class="testimonial-card">
-                <p class="text-gray-300">"使用Fugatto后，我们的音频制作效率提升了300%，质量也更有保障。"</p>
-                <div class="testimonial-author">
-                  <div class="testimonial-avatar"></div>
-                  <div class="testimonial-info">
-                    <p class="testimonial-name">Maria Garcia</p>
-                    <p class="testimonial-role">制作总监</p>
-                  </div>
+          <h2 class="section-title" data-i18n="testimonials.title">用户评价</h2>
+          <p class="section-description" data-i18n="testimonials.description">
+            来自全球各地的用户分享他们使用 Fugatto AI 的成功故事和体验，展现我们如何帮助他们实现创意和提升效率。
+          </p>
+          
+          <!-- 第一行 - 向左滚动 -->
+          <div class="testimonials-track">
+            <!-- 第一个评价 -->
+            <div class="testimonial-card">
+              <p class="testimonial-content" data-i18n="testimonials.reviews.0.content"></p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150')"></div>
+                <div class="testimonial-info">
+                  <p class="testimonial-name" data-i18n="testimonials.reviews.0.name"></p>
+                  <p class="testimonial-role" data-i18n="testimonials.reviews.0.role"></p>
                 </div>
               </div>
             </div>
-            
-            <!-- Bottom row - scrolling right -->
-            <div class="testimonials-track testimonials-track-reverse">
-              <div class="testimonial-card">
-                <p class="text-gray-300">"语音克隆功能太棒了，让我们能够快速制作多语言内容。"</p>
-                <div class="testimonial-author">
-                  <div class="testimonial-avatar"></div>
-                  <div class="testimonial-info">
-                    <p class="testimonial-name">Sarah Chen</p>
-                    <p class="testimonial-role">产品经理</p>
-                  </div>
+
+            <!-- 第二个评价 -->
+            <div class="testimonial-card">
+              <p class="testimonial-content" data-i18n="testimonials.reviews.1.content"></p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150')"></div>
+                <div class="testimonial-info">
+                  <p class="testimonial-name" data-i18n="testimonials.reviews.1.name"></p>
+                  <p class="testimonial-role" data-i18n="testimonials.reviews.1.role"></p>
                 </div>
               </div>
-              <div class="testimonial-card">
-                <p class="text-gray-300">"AI模型的准确度和自然度都非常出色，完全超出了我们的预期。"</p>
-                <div class="testimonial-author">
-                  <div class="testimonial-avatar"></div>
-                  <div class="testimonial-info">
-                    <p class="testimonial-name">David Kim</p>
-                    <p class="testimonial-role">技术总监</p>
-                  </div>
+            </div>
+
+            <!-- 第三个评价 -->
+            <div class="testimonial-card">
+              <p class="testimonial-content" data-i18n="testimonials.reviews.2.content"></p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150')"></div>
+                <div class="testimonial-info">
+                  <p class="testimonial-name" data-i18n="testimonials.reviews.2.name"></p>
+                  <p class="testimonial-role" data-i18n="testimonials.reviews.2.role"></p>
                 </div>
               </div>
-              <div class="testimonial-card">
-                <p class="text-gray-300">"Fugatto的多语言支持让我们的全球化战略实施变得更加简单。"</p>
-                <div class="testimonial-author">
-                  <div class="testimonial-avatar"></div>
-                  <div class="testimonial-info">
-                    <p class="testimonial-name">Emma Wilson</p>
-                    <p class="testimonial-role">国际业务总监</p>
-                  </div>
+            </div>
+
+            <!-- 第四个评价 -->
+            <div class="testimonial-card">
+              <p class="testimonial-content" data-i18n="testimonials.reviews.3.content"></p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150')"></div>
+                <div class="testimonial-info">
+                  <p class="testimonial-name" data-i18n="testimonials.reviews.3.name"></p>
+                  <p class="testimonial-role" data-i18n="testimonials.reviews.3.role"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第五个评价 -->
+            <div class="testimonial-card">
+              <p class="testimonial-content" data-i18n="testimonials.reviews.4.content"></p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150')"></div>
+                <div class="testimonial-info">
+                  <p class="testimonial-name" data-i18n="testimonials.reviews.4.name"></p>
+                  <p class="testimonial-role" data-i18n="testimonials.reviews.4.role"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 第二行 - 向右滚动 -->
+          <div class="testimonials-track testimonials-track-reverse">
+            <!-- 第六个评价 -->
+            <div class="testimonial-card">
+              <p class="testimonial-content" data-i18n="testimonials.reviews.5.content"></p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150')"></div>
+                <div class="testimonial-info">
+                  <p class="testimonial-name" data-i18n="testimonials.reviews.5.name"></p>
+                  <p class="testimonial-role" data-i18n="testimonials.reviews.5.role"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第七个评价 -->
+            <div class="testimonial-card">
+              <p class="testimonial-content" data-i18n="testimonials.reviews.6.content"></p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1554151228-14d9def656e4?w=150')"></div>
+                <div class="testimonial-info">
+                  <p class="testimonial-name" data-i18n="testimonials.reviews.6.name"></p>
+                  <p class="testimonial-role" data-i18n="testimonials.reviews.6.role"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第八个评价 -->
+            <div class="testimonial-card">
+              <p class="testimonial-content" data-i18n="testimonials.reviews.7.content"></p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150')"></div>
+                <div class="testimonial-info">
+                  <p class="testimonial-name" data-i18n="testimonials.reviews.7.name"></p>
+                  <p class="testimonial-role" data-i18n="testimonials.reviews.7.role"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第九个评价 -->
+            <div class="testimonial-card">
+              <p class="testimonial-content" data-i18n="testimonials.reviews.8.content"></p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1507152832244-10d45c7eda57?w=150')"></div>
+                <div class="testimonial-info">
+                  <p class="testimonial-name" data-i18n="testimonials.reviews.8.name"></p>
+                  <p class="testimonial-role" data-i18n="testimonials.reviews.8.role"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第十个评价 -->
+            <div class="testimonial-card">
+              <p class="testimonial-content" data-i18n="testimonials.reviews.9.content"></p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150')"></div>
+                <div class="testimonial-info">
+                  <p class="testimonial-name" data-i18n="testimonials.reviews.9.name"></p>
+                  <p class="testimonial-role" data-i18n="testimonials.reviews.9.role"></p>
                 </div>
               </div>
             </div>
@@ -243,118 +380,140 @@
       <!-- Pricing -->
       <section class="py-20 px-4">
         <div class="container mx-auto max-w-6xl">
-          <h2 class="text-4xl font-bold text-center mb-12">价格方案</h2>
+          <h2 class="section-title" data-i18n="pricing.title">价格方案</h2>
+          <p class="section-description" data-i18n="pricing.description">
+            选择最适合您需求的方案，享受 Fugatto AI 带来的强大功能。我们提供灵活的定价选项，满足不同规模的需求。
+          </p>
           <div class="grid md:grid-cols-2 gap-8">
             <div class="price-card">
-              <h3 class="text-2xl font-bold mb-2">基础版</h3>
-              <p class="text-4xl font-bold mb-6">¥99<span class="text-lg font-normal text-gray-400">/月</span></p>
+              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.starter.title"></h3>
+              <p class="text-4xl font-bold mb-6">
+                <span data-i18n="pricing.starter.price"></span>
+              </p>
               <ul class="space-y-4 mb-8">
                 <li class="flex items-center">
                   <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  每月10小时语音生成
+                  <span data-i18n="pricing.starter.features.0"></span>
                 </li>
                 <li class="flex items-center">
                   <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  5个声音克隆名额
+                  <span data-i18n="pricing.starter.features.1"></span>
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span data-i18n="pricing.starter.features.2"></span>
                 </li>
               </ul>
-              <button class="btn-primary w-full">选择方案</button>
+              <button class="btn-primary w-full" data-i18n="pricing.starter.cta"></button>
             </div>
             <div class="price-card border-white/20">
-              <h3 class="text-2xl font-bold mb-2">专业版</h3>
-              <p class="text-4xl font-bold mb-6">¥299<span class="text-lg font-normal text-gray-400">/月</span></p>
+              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.pro.title"></h3>
+              <p class="text-4xl font-bold mb-6">
+                <span data-i18n="pricing.pro.price"></span>
+              </p>
               <ul class="space-y-4 mb-8">
                 <li class="flex items-center">
                   <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  无限语音生成
+                  <span data-i18n="pricing.pro.features.0"></span>
                 </li>
                 <li class="flex items-center">
                   <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  无限声音克隆
+                  <span data-i18n="pricing.pro.features.1"></span>
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span data-i18n="pricing.pro.features.2"></span>
                 </li>
               </ul>
-              <button class="btn-primary w-full">选择方案</button>
+              <button class="btn-primary w-full" data-i18n="pricing.pro.cta"></button>
             </div>
           </div>
         </div>
       </section>
 
       <!-- FAQ -->
-      <section class="py-20 px-4 bg-black/30">
-        <div class="container mx-auto max-w-3xl">
-          <h2 class="text-4xl font-bold text-center mb-12">常见问题</h2>
+      <section class="py-20 px-4">
+        <div class="container mx-auto max-w-6xl">
+          <h2 class="section-title" data-i18n="faq.title">常见问题</h2>
+          <p class="section-description" data-i18n="faq.description">
+            我们收集了用户最常见的问题和详细解答，帮助您更好地了解 Fugatto AI 的功能和使用方法。
+          </p>
           <div class="space-y-4">
             <div class="faq-item">
               <button class="faq-question">
-                <span>什么是NVIDIA Fugatto AI？</span>
+                <span data-i18n="faq.q1">什么是NVIDIA Fugatto AI？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300">
+              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a1">
                 Fugatto是NVIDIA的生成式AI音频模型，能够根据文本提示创建音乐、音效和语音，特别适合创意产业使用。
               </div>
             </div>
             <div class="faq-item">
               <button class="faq-question">
-                <span>Fugatto是如何工作的？</span>
+                <span data-i18n="faq.q2">Fugatto是如何工作的？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300">
+              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a2">
                 它使用经过大量音频数据集训练的先进算法，根据用户输入动态生成或修改声音。
               </div>
             </div>
             <div class="faq-item">
               <button class="faq-question">
-                <span>哪些行业可以受益于Fugatto？</span>
+                <span data-i18n="faq.q3">哪些行业可以受益于Fugatto？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300">
+              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a3">
                 音乐制作、游戏、广告和电影行业可以使用它来创建独特的音频内容并增强体验。
               </div>
             </div>
             <div class="faq-item">
               <button class="faq-question">
-                <span>Fugatto能复制人声吗？</span>
+                <span data-i18n="faq.q4">Fugatto能复制人声吗？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300">
+              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a4">
                 是的，它可以生成和调整具有不同口音、情感和语调的声音。
               </div>
             </div>
             <div class="faq-item">
               <button class="faq-question">
-                <span>Fugatto支持实时声音编辑吗？</span>
+                <span data-i18n="faq.q5">Fugatto支持实时声音编辑吗？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300">
+              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a5">
                 是的，它允许根据输入变化动态修改音频。
               </div>
             </div>
             <div class="faq-item">
               <button class="faq-question">
-                <span>是什么让Fugatto与其他AI音频工具与众不同？</span>
+                <span data-i18n="faq.q6">是什么让Fugatto与其他AI音频工具与众不同？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300">
+              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a6">
                 它在生成多样化、高质量声音输出的灵活性，以及处理复杂提示的能力使其独特。
               </div>
             </div>
@@ -369,56 +528,41 @@
           <!-- Logo and Copyright -->
           <div class="md:col-span-1">
             <div class="flex items-center gap-2 mb-4">
-              <div class="text-xl font-bold text-white">Fugatto AI</div>
+              <div class="text-xl font-bold text-white" data-i18n="nav.brand">Fugatto AI</div>
               <svg class="w-4 h-4 text-green-500" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M11.3,0.7c-0.4-0.4-1-0.4-1.4,0l-9.6,9.6c-0.4,0.4-0.4,1,0,1.4l9.6,9.6c0.4,0.4,1,0.4,1.4,0l9.6-9.6 c0.4-0.4,0.4-1,0-1.4L11.3,0.7z"/>
               </svg>
             </div>
-            <p class="text-sm text-gray-400">© 2024 Fugatto AI Inc. All rights reserved.</p>
-            <div class="flex gap-4 mt-6">
-              <a href="#" class="text-gray-400 hover:text-white">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
-              <a href="#" class="text-gray-400 hover:text-white">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                </svg>
-              </a>
-              <a href="#" class="text-gray-400 hover:text-white">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-                </svg>
-              </a>
-            </div>
+            <p class="text-sm text-gray-400" data-i18n="footer.copyright"></p>
+            <p class="text-sm text-gray-400" data-i18n="footer.contact"></p>
+            <p class="text-sm text-gray-400" data-i18n="footer.owner"></p>
           </div>
           
           <!-- Resources -->
           <div class="md:col-span-1">
-            <h3 class="text-lg font-semibold mb-4">资源</h3>
+            <h3 class="text-lg font-semibold mb-4" data-i18n="footer.resources.title"></h3>
             <ul class="space-y-2">
-              <li><a href="#" class="text-gray-400 hover:text-white">指南</a></li>
-              <li><a href="#" class="text-gray-400 hover:text-white">API 参考</a></li>
-              <li><a href="#" class="text-gray-400 hover:text-white">支持</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.resources.guides"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.resources.api"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.resources.support"></a></li>
             </ul>
           </div>
           
           <!-- Products -->
           <div class="md:col-span-1">
-            <h3 class="text-lg font-semibold mb-4">产品</h3>
+            <h3 class="text-lg font-semibold mb-4" data-i18n="footer.products.title"></h3>
             <ul class="space-y-2">
-              <li><a href="#" class="text-gray-400 hover:text-white">文本转语音</a></li>
-              <li><a href="#" class="text-gray-400 hover:text-white">语音转文本</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.products.items.0"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.products.items.1"></a></li>
             </ul>
           </div>
           
           <!-- Company -->
           <div class="md:col-span-1">
-            <h3 class="text-lg font-semibold mb-4">公司</h3>
+            <h3 class="text-lg font-semibold mb-4" data-i18n="footer.company.title"></h3>
             <ul class="space-y-2">
-              <li><a href="#" class="text-gray-400 hover:text-white">博客</a></li>
-              <li><a href="#" class="text-gray-400 hover:text-white">GitHub</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.company.items.0"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.company.items.1"></a></li>
             </ul>
           </div>
         </div>
@@ -426,9 +570,9 @@
         <!-- Bottom Links -->
         <div class="mt-12 pt-8 border-t border-white/10">
           <div class="flex flex-wrap gap-4 text-sm text-gray-400">
-            <a href="#" class="hover:text-white">隐私政策</a>
-            <a href="#" class="hover:text-white">服务条款</a>
-            <a href="#" class="hover:text-white">报告问题</a>
+            <a href="#" class="hover:text-white" data-i18n="footer.legal.privacy"></a>
+            <a href="#" class="hover:text-white" data-i18n="footer.legal.terms"></a>
+            <a href="#" class="hover:text-white" data-i18n="footer.legal.report"></a>
           </div>
         </div>
       </div>
