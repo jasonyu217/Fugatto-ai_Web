@@ -1,6 +1,7 @@
 // 导入样式
 import '../css/styles.css';
 import i18next from './i18n-config.js';
+import { TTSService } from './tts-service';
 
 // 更新所有带有 data-i18n 属性的元素文本
 function updateContent() {
@@ -184,6 +185,76 @@ function initVoiceSelector() {
   updateAvailableVoices(languageSelect.value);
 }
 
+function initTTSFeature() {
+  const ttsService = new TTSService();
+  const generateButton = document.getElementById('generateButton');
+  const downloadButton = document.getElementById('downloadButton');
+  const textInput = document.getElementById('textInput');
+  const languageSelect = document.getElementById('languageSelect');
+  const voiceSelect = document.getElementById('voiceSelect');
+  const audioOutput = document.getElementById('audioOutput');
+  const audioStatus = document.getElementById('audioStatus');
+
+  let currentAudioUrl = null;
+
+  generateButton.addEventListener('click', async () => {
+    try {
+      // 显示加载状态
+      audioStatus.textContent = i18next.t('status.generating');
+      generateButton.disabled = true;
+      downloadButton.classList.add('hidden');
+
+      // 获取输入
+      const text = textInput.value;
+      const language = languageSelect.value;
+      const voice = voiceSelect.value;
+
+      // 清理之前的音频 URL
+      if (currentAudioUrl) {
+        URL.revokeObjectURL(currentAudioUrl);
+      }
+
+      // 生成音频
+      const audioUrl = await ttsService.generateSpeech(text, language, voice);
+      currentAudioUrl = audioUrl;
+      
+      // 更新音频播放器
+      audioOutput.src = audioUrl;
+      audioOutput.style.display = 'block';
+      
+      // 显示下载按钮
+      downloadButton.classList.remove('hidden');
+      
+      // 更新状态
+      audioStatus.textContent = i18next.t('status.success');
+    } catch (error) {
+      console.error('Error generating speech:', error);
+      audioStatus.textContent = i18next.t('errors.apiError');
+    } finally {
+      generateButton.disabled = false;
+    }
+  });
+
+  // 下载按钮点击事件
+  downloadButton.addEventListener('click', () => {
+    if (currentAudioUrl) {
+      const link = document.createElement('a');
+      link.href = currentAudioUrl;
+      link.download = 'speech.mp3'; // 设置下载文件名
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  });
+
+  // 清理函数
+  return () => {
+    if (currentAudioUrl) {
+      URL.revokeObjectURL(currentAudioUrl);
+    }
+  };
+}
+
 // 在 DOM 加载完成后初始化
 document.addEventListener('DOMContentLoaded', () => {
   initLanguageDropdown();
@@ -191,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initVideoPlayer();
   updateContent();
   initVoiceSelector();
+  initTTSFeature();
 });
 
 // 监听语言变化

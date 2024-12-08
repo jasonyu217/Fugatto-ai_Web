@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Fugatto - Advanced AI Audio Generation</title>
     <link rel="stylesheet" href="/src/css/styles.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://127.0.0.1:8002; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline';">
   </head>
   <body class="bg-black">
     <header class="fixed w-full bg-black/50 backdrop-blur-md z-50">
@@ -138,8 +139,14 @@
               <div class="output-area">
                 <h2 class="area-title" data-i18n="output.textToSpeech.title">音频输出</h2>
                 <div class="audio-player-container">
-                  <audio id="audioOutput" controls></audio>
-                  <div id="audioStatus" class="status-text"></div>
+                  <audio id="audioOutput" controls class="w-full mb-4"></audio>
+                  <div id="audioStatus" class="text-sm text-gray-400 mb-4"></div>
+                  <button id="downloadButton" class="btn-secondary w-full hidden">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    <span data-i18n="output.textToSpeech.download">下载音频</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -251,7 +258,7 @@
           
           <!-- 第一行 - 向左滚动 -->
           <div class="testimonials-track">
-            <!-- 第一个评价 -->
+            <!-- 第一个���价 -->
             <div class="testimonial-card">
               <p class="testimonial-content" data-i18n="testimonials.reviews.0.content"></p>
               <div class="testimonial-author">

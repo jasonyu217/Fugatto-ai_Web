@@ -123,7 +123,8 @@ export default {
     textToSpeech: {
       title: "Audio Output",
       processing: "Generating audio...",
-      ready: "Audio is ready"
+      ready: "Audio is ready",
+      download: "Download Audio"
     },
     speechToText: {
       title: "Text Output",

@@ -1,3 +1,9 @@
-flask==2.0.1
-requests==2.25.1
-numpy==1.21.0
+flask==2.3.2
+requests==2.28.2
+numpy==1.24.2
+setuptools==65.5.1
+edge-tts==6.1.9
+fastapi==0.95.0
+uvicorn==0.21.1
+pydantic==1.10.7
+python-multipart==0.0.6

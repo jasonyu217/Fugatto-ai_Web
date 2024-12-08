@@ -151,7 +151,8 @@ export default {
     textToSpeech: {
       title: "音频输出",
       processing: "正在生成音频...",
-      ready: "音频已就绪"
+      ready: "音频已就绪",
+      download: "下载音频"
     },
     speechToText: {
       title: "文本输出",

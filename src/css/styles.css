@@ -83,12 +83,20 @@ textarea {
 
 /* 音频播放器样式 */
 .audio-player-container {
-  @apply flex-1 flex flex-col justify-center items-center;
+  @apply bg-black/20 backdrop-blur-sm rounded-lg p-4;
 }
 
 audio {
-  @apply w-full mb-4 rounded;
-  height: 40px;
+  @apply w-full h-12 rounded-lg;
+}
+
+/* 自定义音频播放器样式 */
+audio::-webkit-media-controls-panel {
+  @apply bg-black/20;
+}
+
+audio::-webkit-media-controls-play-button {
+  @apply text-white;
 }
 
 /* 录音按钮样式 */
@@ -207,4 +215,10 @@ audio {
   @apply text-xl text-gray-400 text-center max-w-3xl mx-auto;
   margin-top: 1rem;  /* 减小标题和描述的距离 */
   margin-bottom: 3rem; /* 调整描述和内容的距离 */
+}
+
+.btn-secondary {
+  @apply flex items-center justify-center px-4 py-2 bg-white/10 hover:bg-white/20 
+         text-white rounded-lg transition-colors duration-200 disabled:opacity-50 
+         disabled:cursor-not-allowed;
 }
