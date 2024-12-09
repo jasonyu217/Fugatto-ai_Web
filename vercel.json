@@ -1,17 +1,29 @@
 {
     "builds": [
-      {
-        "src": "requirements.txt",
-        "use": "@vercel/python",
-        "config": {
-          "runtime": "vercel-python@3.9",
-          "installCommand": "pip install --upgrade pip setuptools wheel && pip install -r requirements.txt"
+        {
+            "src": "src/server/app/main.py",
+            "use": "@vercel/python"
+        },
+        {
+            "src": "package.json",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "dist"
+            }
         }
-      },
-      {
-        "src": "*.py",
-        "use": "@vercel/python"
-      }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "src/server/app/main.py"
+        },
+        {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/index.html"
+        }
     ]
-  }
+}
   

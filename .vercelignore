@@ -1,5 +1,11 @@
-.git
 __pycache__
+*.pyc
+.env
+.env.local
 .venv
+venv/
+node_modules/
+.git/
+.gitignore
+README.md
 *.log
-node_modules
