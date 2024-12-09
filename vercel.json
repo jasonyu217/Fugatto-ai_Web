@@ -4,7 +4,8 @@
         "src": "requirements.txt",
         "use": "@vercel/python",
         "config": {
-          "installCommand": "apt-get update && apt-get install -y python3-distutils && pip3 install --upgrade pip setuptools wheel && pip3 install -r requirements.txt"
+          "runtime": "vercel-python@3.9",
+          "installCommand": "pip install --upgrade pip setuptools wheel && pip install -r requirements.txt"
         }
       },
       {
