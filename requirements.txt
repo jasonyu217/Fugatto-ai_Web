@@ -7,3 +7,5 @@ fastapi==0.95.0
 uvicorn==0.21.1
 pydantic==1.10.7
 python-multipart==0.0.6
+setuptools>=65.5.1
+wheel
