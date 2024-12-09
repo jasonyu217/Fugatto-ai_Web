@@ -3,7 +3,8 @@ node_modules/
 
 # Python virtual environment
 venv/
-newvenv/
+newenv/
+创建新的虚拟环境/
 
 # Build artifacts
 dist/
