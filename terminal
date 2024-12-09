@@ -1,5 +1,0 @@
-# 安装主要依赖
-npm install vite tailwindcss postcss autoprefixer
-
-# 安装开发依赖
-npm install -D @vitejs/plugin-react 
