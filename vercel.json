@@ -1,13 +1,19 @@
 {
     "functions": {
         "api/*.py": {
-            "runtime": "python3.9"
+            "runtime": "vercel-python@0.2.1"
         }
     },
     "routes": [
         {
             "src": "/api/(.*)",
             "dest": "/api/$1"
+        }
+    ],
+    "builds": [
+        {
+            "src": "api/*.py",
+            "use": "@vercel/python"
         }
     ]
 }
