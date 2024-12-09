@@ -1,8 +1,7 @@
 {
-    "builds": [
-        {
-            "src": "api/*.py",
-            "use": "vercel-python@3.9"  // 请根据 Vercel 文档确认最新的有效版本
+    "functions": {
+        "api/*.py": {
+            "runtime": "vercel-python@3.9"  // 请根据 Vercel 文档确认最新的有效版本
         }
-    ]
+    }
 }
