@@ -3,6 +3,8 @@ node_modules/
 
 # Python virtual environment
 创建新的虚拟环境/
+venv/
+newvenv/
 
 # Build artifacts
 dist/
@@ -14,6 +16,7 @@ dist/
 # System files
 .DS_Store
 Thumbs.db
+dist/
 
 # Python cache and compiled files
 __pycache__/
