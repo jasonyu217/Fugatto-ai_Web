@@ -1,19 +1,8 @@
 {
-    "functions": {
-        "api/*.py": {
-            "runtime": "vercel-python@0.2.1"
-        }
-    },
-    "routes": [
-        {
-            "src": "/api/(.*)",
-            "dest": "/api/$1"
-        }
-    ],
     "builds": [
         {
             "src": "api/*.py",
-            "use": "@vercel/python"
+            "use": "vercel-python@3.9"  // 请根据 Vercel 文档确认最新的有效版本
         }
     ]
 }
