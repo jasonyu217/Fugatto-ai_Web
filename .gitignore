@@ -19,9 +19,13 @@ Thumbs.db
 
 # Python cache and compiled files
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+.env
+.venv
 
 # Logs
 *.log
