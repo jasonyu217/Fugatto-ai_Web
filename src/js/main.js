@@ -296,7 +296,7 @@ function closeWaitlistModal() {
 // 绑定点击事件
 document.getElementById('openWaitlistBtn').addEventListener('click', openWaitlistModal);
 
-// 修改表单提交处理
+// 处理表单提交
 document.getElementById('waitlistForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const submitButton = e.target.querySelector('button[type="submit"]');
@@ -307,38 +307,19 @@ document.getElementById('waitlistForm').addEventListener('submit', async (e) => 
     loadingSpinner.classList.remove('hidden');
     
     const formData = new FormData(e.target);
-    console.log('Submitting form data:', {
-      name: formData.get('entry.276476973'),
-      email: formData.get('entry.1846138449'),
-      company: formData.get('entry.758142325'),
-      scenario: formData.get('entry.1411681852')
-    });
-    
-    const response = await fetch('http://127.0.0.1:8002/api/waitlist', {
+    const response = await fetch('https://formspree.io/f/xnnqydkp', {
       method: 'POST',
+      body: formData,
       headers: {
-        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: JSON.stringify({
-        name: formData.get('entry.276476973'),
-        email: formData.get('entry.1846138449'),
-        company: formData.get('entry.758142325'),
-        scenario: formData.get('entry.1411681852')
-      })
+      mode: 'no-cors'
     });
-
-    console.log('Response status:', response.status);
-    const result = await response.json();
-    console.log('Response data:', result);
     
-    if (result.status === 'success') {
-      alert('感谢您的注册！我们会尽快与您联系。');
-      closeWaitlistModal();
-      e.target.reset();
-    } else {
-      throw new Error(result.message);
-    }
-
+    alert('感谢您的注册！我们会尽快与您联系。');
+    closeWaitlistModal();
+    e.target.reset();
   } catch (error) {
     console.error('Error:', error);
     alert('提交失败，请稍后重试。');
@@ -398,51 +379,6 @@ function initModal() {
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       closeModal();
-    }
-  });
-
-  // 表单提交后关闭
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const submitButton = e.target.querySelector('button[type="submit"]');
-    const loadingSpinner = submitButton.querySelector('.loading-spinner');
-    
-    try {
-      submitButton.disabled = true;
-      loadingSpinner.classList.remove('hidden');
-      
-      const formData = new FormData(e.target);
-      
-      // 通过我们的后端 API 提交
-      const response = await fetch('http://127.0.0.1:8002/api/waitlist', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.get('entry.276476973'),
-          email: formData.get('entry.1846138449'),
-          company: formData.get('entry.758142325'),
-          scenario: formData.get('entry.1411681852')
-        })
-      });
-
-      const result = await response.json();
-      
-      if (result.status === 'success') {
-        alert('感谢您的注册！我们会尽快与您联系。');
-        closeModal();
-        e.target.reset();
-      } else {
-        throw new Error(result.message);
-      }
-
-    } catch (error) {
-      console.error('Error:', error);
-      alert('提交失败，请稍后重试。');
-    } finally {
-      submitButton.disabled = false;
-      loadingSpinner.classList.add('hidden');
     }
   });
 }

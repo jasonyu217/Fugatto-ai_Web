@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11013199747"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-11013199747');
+    </script>
+    
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +18,8 @@
     <link rel="stylesheet" href="/src/css/styles.css">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://127.0.0.1:8002; 
     script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline';
-    connect-src 'self' http://127.0.0.1:8002 https://docs.google.com/forms/;
+    connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://formspree.io/f/xnnqydkp;
+    form-action 'self' https://formspree.io/ https://formspree.io/f/xnnqydkp;
     ">
   </head>
   <body class="bg-black">
@@ -245,7 +256,7 @@
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">✨</div>
               <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.5.title">无创意可能</h3>
-              <p class="text-gray-400" data-i18n="features.cards.5.description">作为强大的基础模型，赋予用户无限的音频创作能力</p>
+              <p class="text-gray-400" data-i18n="features.cards.5.description">作为强大的基础模型，赋予用户无限的音创作能力</p>
             </div>
           </div>
         </div>
@@ -256,7 +267,7 @@
         <div class="container mx-auto max-w-6xl">
           <h2 class="section-title" data-i18n="testimonials.title">用户评价</h2>
           <p class="section-description" data-i18n="testimonials.description">
-            来自全球各地的用户分享他们使用 Fugatto AI 的成功故事和体验，展现我们如何帮助他们实现创意和提升效率。
+            来自球各地的用户分享他们使用 Fugatto AI 的成功故事和体验，展现我们如何帮助他们实现创意和提升效率。
           </p>
           
           <!-- 第一行 - 向左滚动 -->
@@ -593,16 +604,17 @@
       <div class="bg-white/10 backdrop-blur-md p-8 rounded-xl max-w-md w-full mx-4">
         <h3 class="text-2xl font-bold mb-4">加入 API 等待列表</h3>
         <form id="waitlistForm" 
-          onsubmit="return false;"
+          action="https://formspree.io/f/xnnqydkp" 
+          method="POST"
         >
           <div class="space-y-4">
             <div>
               <label class="block text-sm mb-2">姓名</label>
-              <input type="text" name="entry.276476973" required class="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white">
+              <input type="text" name="name" required class="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white">
             </div>
             <div>
               <label class="block text-sm mb-2">邮箱</label>
-              <input type="email" name="entry.1846138449" required 
+              <input type="email" name="_replyto" required 
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                 title="请输入有效的邮箱地址"
                 class="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white">
@@ -610,11 +622,11 @@
             </div>
             <div>
               <label class="block text-sm mb-2">公司/组织</label>
-              <input type="text" name="entry.758142325" class="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white">
+              <input type="text" name="company" class="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white">
             </div>
             <div>
               <label class="block text-sm mb-2">使用场景</label>
-              <textarea name="entry.1411681852" class="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white h-24"></textarea>
+              <textarea name="message" class="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white h-24"></textarea>
             </div>
           </div>
           <div class="flex gap-4 mt-6">
