@@ -10,6 +10,24 @@
 
       gtag('config', 'AW-11013199747');
     </script>
+
+    <!-- 添加转化跟踪代码 -->
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-11013199747/VJaqCJmr8_MZEIOvwIMp',
+          'value': 1.0,
+          'currency': 'CNY',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
     
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -35,11 +53,11 @@
           </div>
         </div>
         <div class="flex items-center gap-4">
-          <a href="#" class="nav-link" data-i18n="nav.discover">发现</a>
-          <a href="#" class="nav-link" data-i18n="nav.synthesis">语音合成</a>
-          <a href="#" class="nav-link" data-i18n="nav.build">构建声音</a>
-          <a href="#" class="nav-link" data-i18n="nav.myVoices">我的声音</a>
-          <a href="#" class="nav-link" data-i18n="nav.manage">管理会员</a>
+          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.discover">发现</a>
+          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.synthesis">语音合成</a>
+          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.build">构建声音</a>
+          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.myVoices">我的声音</a>
+          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.manage">管理会员</a>
           <div class="relative group border-r border-white/10 pr-4 mr-4">
             <button id="language-button" class="flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:text-white transition-colors">
               <span id="current-language">English</span>
@@ -51,7 +69,7 @@
               <!-- Language options will be inserted here by JavaScript -->
             </div>
           </div>
-          <button id="login-button" class="btn-primary" data-i18n="nav.signIn">Sign In</button>
+          <button id="login-button" class="btn-primary" onclick="gtag_report_conversion()" data-i18n="nav.signIn">Sign In</button>
         </div>
       </nav>
     </header>
@@ -69,7 +87,7 @@
                 </svg>
                 阅读文档
               </a>
-              <button id="openWaitlistBtn" class="btn-primary flex items-center gap-2">
+              <button id="openWaitlistBtn" class="btn-primary flex items-center gap-2" onclick="gtag_report_conversion()">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
@@ -145,7 +163,7 @@
                   class="w-full h-32 bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg p-4 text-white placeholder-gray-500 resize-none hover:border-white/20 focus:border-white/30 focus:outline-none transition-colors"
                   data-i18n-placeholder="input.textToSpeech.placeholder"
                 ></textarea>
-                <button id="generateButton" class="btn-primary w-full mt-4">
+                <button id="generateButton" class="btn-primary w-full mt-4" onclick="gtag_report_conversion()">
                   <span data-i18n="input.textToSpeech.generate">生成音频</span>
                 </button>
               </div>
@@ -431,7 +449,7 @@
                   <span data-i18n="pricing.starter.features.2"></span>
                 </li>
               </ul>
-              <button class="btn-primary w-full" data-i18n="pricing.starter.cta"></button>
+              <button class="btn-primary w-full" onclick="gtag_report_conversion()" data-i18n="pricing.starter.cta"></button>
             </div>
             <div class="price-card border-white/20">
               <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.pro.title"></h3>
@@ -458,7 +476,7 @@
                   <span data-i18n="pricing.pro.features.2"></span>
                 </li>
               </ul>
-              <button class="btn-primary w-full" data-i18n="pricing.pro.cta"></button>
+              <button class="btn-primary w-full" onclick="gtag_report_conversion()" data-i18n="pricing.pro.cta"></button>
             </div>
           </div>
         </div>

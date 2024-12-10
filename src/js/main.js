@@ -386,3 +386,39 @@ function initModal() {
 if (import.meta.hot) {
   import.meta.hot.accept()
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  // 生成音频按钮点击事件
+  document.getElementById('generateButton')?.addEventListener('click', function() {
+    gtag_report_conversion();
+  });
+
+  // 等待列表按钮点击事件
+  document.getElementById('openWaitlistBtn')?.addEventListener('click', function() {
+    gtag_report_conversion();
+  });
+
+  // 登录按钮点击事件
+  document.getElementById('login-button')?.addEventListener('click', function() {
+    gtag_report_conversion();
+  });
+  
+  // 等待列表表单提交事件
+  document.getElementById('waitlistForm')?.addEventListener('submit', function() {
+    gtag_report_conversion();
+  });
+
+  // 添加导航菜单链接的点击事件
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function() {
+      gtag_report_conversion();
+    });
+  });
+
+  // 添加付费计划按钮的点击事件
+  document.querySelectorAll('[data-i18n="pricing.starter.cta"], [data-i18n="pricing.pro.cta"]').forEach(button => {
+    button.addEventListener('click', function() {
+      gtag_report_conversion();
+    });
+  });
+});
