@@ -6,7 +6,17 @@ export default {
     build: "إنشاء الصوت",
     myVoices: "أصواتي",
     manage: "إدارة",
-    signIn: "تسجيل الدخول"
+    signIn: "تسجيل الدخول",
+    aiVoice: 'مولد الصوت بالذكاء الاصطناعي',
+    aiVoiceMenu: {
+      textToSpeech: 'تحويل النص إلى كلام',
+      speechToText: 'تحويل الكلام إلى نص',
+      speechToSpeech: 'تحويل الكلام إلى كلام',
+      voiceCloning: 'استنساخ الصوت'
+    },
+    audioCreation: 'إنشاء الصوت بالذكاء الاصطناعي',
+    community: 'مجتمع الصوت',
+    pricing: 'التسعير'
   },
   hero: {
     title: "Fugatto AI - أكثر الأصوات مرونة في العالم",
@@ -152,20 +162,28 @@ export default {
   footer: {
     copyright: "© 2024 AI Fugatto. جميع الحقوق محفوظة",
     contact: "للتواصل: jasonkui217@gmail.com",
-    owner: "تم إنشاؤه بواسطة Jason Yu",
+    owner: "تم إنشاؤه بواسطة Fugatto AI",
+    aiVoice: {
+      title: "مولد الصوت بالذكاء الاصطناعي",
+      textToSpeech: "تحويل النص إلى كلام",
+      speechToText: "تحويل الكلام إلى نص",
+      speechToSpeech: "تحويل الكلام إلى كلام",
+      voiceCloning: "استنساخ الصوت"
+    },
+    audioCreation: {
+      title: "إنشاء الصوت بالذكاء الاصطناعي",
+      soundEffects: "مؤثرات صوتية بالذكاء الاصطناعي",
+      music: "توليد الموسيقى بالذكاء الاصطناعي"
+    },
     resources: {
       title: "الموارد",
-      guides: "الأدلة",
-      api: "واجهة برمجة التطبيقات",
-      support: "الدعم"
+      community: "مجتمع الصوت",
+      blog: "المدونة"
     },
-    products: {
-      title: "المنتجات",
-      items: ["تحويل النص إلى كلام", "تحويل الكلام إلى نص"]
-    },
-    company: {
-      title: "الشركة",
-      items: ["المدونة", "GitHub"]
+    pricing: {
+      title: "الأسعار",
+      starter: "الخطة المبتدئة",
+      pro: "الخطة الاحترافية"
     },
     legal: {
       privacy: "سياسة الخصوصية",
@@ -175,7 +193,8 @@ export default {
   },
   tabs: {
     textToSpeech: "النص إلى كلام",
-    speechToText: "الكلام إلى نص"
+    speechToText: "الكلام إلى نص",
+    speechToSpeech: "الكلام إلى كلام"
   },
   input: {
     textToSpeech: {
@@ -188,6 +207,13 @@ export default {
       record: "بدء التسجيل",
       recording: "جاري التسجيل...",
       stop: "إيقاف التسجيل"
+    },
+    speechToSpeech: {
+      title: "إدخال الصوت",
+      dropHint: "اسحب ملف الصوت هنا أو",
+      browse: "تصفح الملفات",
+      targetVoice: "الصوت المستهدف",
+      convert: "تحويل الصوت"
     }
   },
   output: {
@@ -200,6 +226,12 @@ export default {
       title: "مخرج النص",
       processing: "جاري التحويل...",
       placeholder: "سيظهر النص المحول هنا"
+    },
+    speechToSpeech: {
+      title: "نتيجة التحويل",
+      processing: "جاري التحويل...",
+      ready: "اكتمل التحويل",
+      download: "تحميل الصوت المحول"
     }
   },
   status: {

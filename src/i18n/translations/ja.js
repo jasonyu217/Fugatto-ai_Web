@@ -6,7 +6,17 @@ export default {
     build: "音声構築",
     myVoices: "マイボイス",
     manage: "管理",
-    signIn: "ログイン"
+    signIn: "ログイン",
+    aiVoice: 'AI 音声ジェネレーター',
+    aiVoiceMenu: {
+      textToSpeech: 'テキストから音声',
+      speechToText: '音声からテキスト',
+      speechToSpeech: '音声から音声',
+      voiceCloning: '音声クローン'
+    },
+    audioCreation: 'AI オーディオ制作',
+    community: '音声コミュニティ',
+    pricing: '料金プラン'
   },
   hero: {
     title: "Fugatto AI - 世界最高の柔軟な音声",
@@ -146,21 +156,28 @@ export default {
   },
   footer: {
     copyright: "© 2024 AI Fugatto. All rights reserved.",
-    contact: "連絡先: jasonkui217@gmail.com",
-    owner: "Created by Jason Yu",
+    owner: "Created by Fugatto AI",
+    aiVoice: {
+      title: "AI 音声ジェネレーター",
+      textToSpeech: "テキストから音声",
+      speechToText: "音声からテキスト",
+      speechToSpeech: "音声から音声",
+      voiceCloning: "音声クローン"
+    },
+    audioCreation: {
+      title: "AI オーディオ制作",
+      soundEffects: "AI 効果音生成",
+      music: "AI 音楽生成"
+    },
     resources: {
       title: "リソース",
-      guides: "ガイド",
-      api: "APIリファレンス",
-      support: "サポート"
+      community: "音声コミュニティ",
+      blog: "ブログ"
     },
-    products: {
-      title: "製品",
-      items: ["テキストから音声へ", "音声からテキストへ"]
-    },
-    company: {
-      title: "会社",
-      items: ["ブログ", "GitHub"]
+    pricing: {
+      title: "料金プラン",
+      starter: "スタータープラン",
+      pro: "プロフェッショナルプラン"
     },
     legal: {
       privacy: "プライバシーポリシー",
@@ -169,8 +186,9 @@ export default {
     }
   },
   tabs: {
-    textToSpeech: "テキストから音声へ",
-    speechToText: "音声からテキストへ"
+    textToSpeech: "テキストから音声",
+    speechToText: "音声からテキスト",
+    speechToSpeech: "音声から音声"
   },
   input: {
     textToSpeech: {
@@ -183,6 +201,13 @@ export default {
       record: "録音を開始",
       recording: "録音中...",
       stop: "録音を停止"
+    },
+    speechToSpeech: {
+      title: "音声入力",
+      dropHint: "音声ファイルをドロップ、または",
+      browse: "ファイルを選択",
+      targetVoice: "目標の声",
+      convert: "音声を変換"
     }
   },
   output: {
@@ -195,6 +220,12 @@ export default {
       title: "テキスト出力",
       processing: "変換中...",
       placeholder: "変換されたテキストがここに表示されます"
+    },
+    speechToSpeech: {
+      title: "変換結果",
+      processing: "変換中...",
+      ready: "変換完了",
+      download: "変換した音声をダウンロード"
     }
   },
   status: {

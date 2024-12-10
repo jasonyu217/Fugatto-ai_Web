@@ -1,5 +1,15 @@
 export default {
   nav: {
+    aiVoice: 'AI Voice Generator',
+    aiVoiceMenu: {
+      textToSpeech: 'Text to Speech',
+      speechToText: 'Speech to Text',
+      speechToSpeech: 'Speech to Speech',
+      voiceCloning: 'Voice Cloning'
+    },
+    audioCreation: 'AI Audio Creation',
+    community: 'Voice Community',
+    pricing: 'Pricing',
     brand: "Fugatto AI",
     discover: "Discover",
     synthesis: "Voice Synthesis",
@@ -74,21 +84,28 @@ export default {
   },
   footer: {
     copyright: "© 2024 AI Fugatto. All rights reserved.",
-    contact: "Contact: jasonkui217@gmail.com",
-    owner: "Created by Jason Yu",
+    owner: "Created by Fugatto AI",
+    aiVoice: {
+      title: "AI Voice Generator",
+      textToSpeech: "Text to Speech",
+      speechToText: "Speech to Text",
+      speechToSpeech: "Speech to Speech",
+      voiceCloning: "Voice Cloning"
+    },
+    audioCreation: {
+      title: "AI Audio Creation",
+      soundEffects: "AI Sound Effects",
+      music: "AI Music Generation"
+    },
     resources: {
-      title: "Resources",
-      guides: "Guides",
-      api: "API Reference",
-      support: "Support"
+      title: "Resource",
+      community: "Voice Community",
+      blog: "Blog"
     },
-    products: {
-      title: "Products",
-      items: ["Text to Speech", "Speech to Text"]
-    },
-    company: {
-      title: "Company",
-      items: ["Blog", "GitHub"]
+    pricing: {
+      title: "Pricing",
+      starter: "Starter Plan",
+      pro: "Professional Plan"
     },
     legal: {
       privacy: "Privacy Policy",
@@ -117,6 +134,13 @@ export default {
       record: "Click to Record",
       recording: "Recording...",
       stop: "Stop Recording"
+    },
+    speechToSpeech: {
+      title: "Voice Input",
+      dropHint: "Drop audio file here or",
+      browse: "Browse Files",
+      targetVoice: "Target Voice",
+      convert: "Convert Voice"
     }
   },
   output: {
@@ -130,11 +154,18 @@ export default {
       title: "Text Output",
       processing: "Converting...",
       placeholder: "Transcribed text will appear here"
+    },
+    speechToSpeech: {
+      title: "Conversion Result",
+      processing: "Converting...",
+      ready: "Conversion Complete",
+      download: "Download Converted Audio"
     }
   },
   tabs: {
     textToSpeech: "Text to Speech",
-    speechToText: "Speech to Text"
+    speechToText: "Speech to Text",
+    speechToSpeech: "Speech to Speech"
   },
   testimonials: {
     title: "Testimonials",

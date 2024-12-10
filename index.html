@@ -34,10 +34,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Fugatto - Advanced AI Audio Generation</title>
     <link rel="stylesheet" href="/src/css/styles.css">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://127.0.0.1:8002; 
-    script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline';
-    connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://formspree.io/f/xnnqydkp;
-    form-action 'self' https://formspree.io/ https://formspree.io/f/xnnqydkp;
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self' http://127.0.0.1:8002 https://www.googletagmanager.com; 
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com;
+      style-src 'self' 'unsafe-inline';
+      connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://formspree.io/f/xnnqydkp https://www.google-analytics.com;
+      form-action 'self' https://formspree.io/ https://formspree.io/f/xnnqydkp;
+      img-src 'self' data: https://images.unsplash.com;
     ">
   </head>
   <body class="bg-black">
@@ -52,24 +55,68 @@
             <span class="text-xs font-medium text-green-500 ml-1" data-i18n="nav.nvidia">NVIDIA</span>
           </div>
         </div>
-        <div class="flex items-center gap-4">
-          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.discover">发现</a>
-          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.synthesis">语音合成</a>
-          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.build">构建声音</a>
-          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.myVoices">我的声音</a>
-          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.manage">管理会员</a>
-          <div class="relative group border-r border-white/10 pr-4 mr-4">
-            <button id="language-button" class="flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:text-white transition-colors">
-              <span id="current-language">English</span>
-              <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        <div class="flex items-center gap-8">
+          <!-- AI Voice Generator 下拉菜单 -->
+          <div class="relative group">
+            <a href="#" class="nav-link-dropdown group" onclick="gtag_report_conversion()" data-i18n="nav.aiVoice">
+              <span>AI Voice Generator</span>
+              <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
               </svg>
-            </button>
-            <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md rounded-lg shadow-lg py-2 border border-white/10 z-50">
-              <!-- Language options will be inserted here by JavaScript -->
+            </a>
+            <!-- 下拉菜单 -->
+            <div class="dropdown-menu">
+              <a href="#" class="dropdown-item" onclick="gtag_report_conversion()" data-i18n="nav.aiVoiceMenu.textToSpeech">
+                文本转语音
+              </a>
+              <a href="#" class="dropdown-item" onclick="gtag_report_conversion()" data-i18n="nav.aiVoiceMenu.speechToText">
+                语音转文本
+              </a>
+              <a href="#" class="dropdown-item" onclick="gtag_report_conversion()" data-i18n="nav.aiVoiceMenu.speechToSpeech">
+                语音转语音
+              </a>
+              <a href="#" class="dropdown-item" onclick="gtag_report_conversion()" data-i18n="nav.aiVoiceMenu.voiceCloning">
+                语音克隆
+              </a>
             </div>
           </div>
-          <button id="login-button" class="btn-primary" onclick="gtag_report_conversion()" data-i18n="nav.signIn">Sign In</button>
+
+          <!-- AI Audio Creation -->
+          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.audioCreation">
+            AI Audio Creation
+          </a>
+
+          <!-- Voice Community -->
+          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.community">
+            Voice Community
+          </a>
+
+          <!-- Pricing -->
+          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.pricing">
+            Pricing
+          </a>
+
+          <!-- 语言选择器 -->
+          <div class="flex items-center gap-4">
+            <!-- 语言选择器 -->
+            <div class="relative group">
+              <button id="language-button" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5">
+                <img id="current-flag" src="/flags/en.svg" alt="English" class="w-5 h-5 rounded-sm object-cover">
+                <span id="current-language">English</span>
+                <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md rounded-lg shadow-lg border border-white/10 overflow-hidden">
+                <!-- 语言选项将由 JavaScript 动态插入 -->
+              </div>
+            </div>
+
+            <!-- 登录按钮 -->
+            <button id="login-button" class="btn-primary" onclick="gtag_report_conversion()" data-i18n="nav.signIn">
+              Sign In
+            </button>
+          </div>
         </div>
       </nav>
     </header>
@@ -105,6 +152,9 @@
                 </button>
                 <button class="tab-button" data-tab="speech-to-text">
                   <span data-i18n="tabs.speechToText">语音转文本</span>
+                </button>
+                <button class="tab-button" data-tab="speech-to-speech">
+                  <span data-i18n="tabs.speechToSpeech">语音转语音</span>
                 </button>
               </div>
             </div>
@@ -170,15 +220,44 @@
 
               <div class="output-area">
                 <h2 class="area-title" data-i18n="output.textToSpeech.title">音频输出</h2>
-                <div class="audio-player-container">
-                  <audio id="audioOutput" controls class="w-full mb-4"></audio>
-                  <div id="audioStatus" class="text-sm text-gray-400 mb-4"></div>
-                  <button id="downloadButton" class="btn-secondary w-full hidden">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                    </svg>
-                    <span data-i18n="output.textToSpeech.download">下载音频</span>
-                  </button>
+                <div class="audio-output-container">
+                  <!-- 音频可视化区域 -->
+                  <div class="audio-visualization bg-black/20 backdrop-blur-md rounded-xl p-6 mb-6 flex items-center justify-center min-h-[120px]">
+                    <div class="waveform-placeholder flex items-center gap-2">
+                      <div class="wave-bar"></div>
+                      <div class="wave-bar"></div>
+                      <div class="wave-bar"></div>
+                      <div class="wave-bar"></div>
+                      <div class="wave-bar"></div>
+                    </div>
+                  </div>
+
+                  <!-- 音频控制区域 -->
+                  <div class="audio-controls bg-black/20 backdrop-blur-md rounded-xl p-6">
+                    <!-- 状态指示器 -->
+                    <div class="status-indicator flex items-center gap-3 mb-4">
+                      <div class="status-dot"></div>
+                      <span id="audioStatus" class="text-sm font-medium text-gray-300"></span>
+                    </div>
+
+                    <!-- 音频播放器 -->
+                    <div class="player-container mb-4">
+                      <audio id="audioOutput" controls class="w-full custom-audio-player"></audio>
+                    </div>
+
+                    <!-- 下载按钮 -->
+                    <button id="downloadButton" class="download-button hidden w-full">
+                      <div class="btn-content">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        <span data-i18n="output.textToSpeech.download">下载音频</span>
+                      </div>
+                      <div class="download-info text-xs text-gray-400 mt-2">
+                        MP3 格式 • 高品质音频
+                      </div>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -203,18 +282,120 @@
                 </div>
               </div>
             </div>
+
+            <!-- Speech to Speech View -->
+            <div class="input-output-container hidden" id="speech-to-speech-view">
+              <div class="input-area">
+                <h2 class="area-title" data-i18n="input.speechToSpeech.title">语音输入</h2>
+                <div class="flex flex-col gap-6">
+                  <!-- 音频上传区域 -->
+                  <div class="audio-upload-container" onclick="document.getElementById('audioFileInput').click()">
+                    <input type="file" id="audioFileInput" accept="audio/*" class="hidden">
+                    <div class="upload-content">
+                      <!-- 上传图标 -->
+                      <div class="upload-icon-wrapper">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 13h6m-3-3v6m-6-3a9 9 0 1118 0 9 9 0 01-18 0z"/>
+                        </svg>
+                      </div>
+                      
+                      <!-- 上传提示文本 -->
+                      <div class="upload-text">
+                        <p class="text-base" data-i18n="input.speechToSpeech.dropHint">
+                          将音频文件拖放到此处或点击上传
+                        </p>
+                        <p class="format-hint">支持 MP3, WAV, M4A 格式</p>
+                      </div>
+                    </div>
+
+                    <!-- 预览区域 -->
+                    <div class="preview-area">
+                      <audio id="sourceAudio" controls class="w-full hidden"></audio>
+                    </div>
+                  </div>
+
+                  <!-- 声音选择 -->
+                  <div class="voice-selection">
+                    <label class="block text-sm text-gray-400 mb-2" data-i18n="input.speechToSpeech.targetVoice">目标声音</label>
+                    <div class="relative">
+                      <select id="targetVoiceSelect" class="w-full bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 text-white appearance-none hover:border-white/20 focus:border-white/30 focus:outline-none transition-colors">
+                        <option value="energetic-male">Energetic Male</option>
+                        <option value="professional-female">Professional Female</option>
+                        <option value="friendly-male">Friendly Male</option>
+                        <option value="warm-female">Warm Female</option>
+                        <option value="news-anchor">News Anchor</option>
+                        <option value="storyteller">Storyteller</option>
+                      </select>
+                      <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 转换按钮 -->
+                  <button id="convertButton" class="btn-primary w-full" onclick="gtag_report_conversion()">
+                    <span data-i18n="input.speechToSpeech.convert">转换语音</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="output-area">
+                <h2 class="area-title" data-i18n="output.speechToSpeech.title">转换结果</h2>
+                <div class="audio-output-container">
+                  <!-- 音频可视化区域 -->
+                  <div class="audio-visualization bg-black/20 backdrop-blur-md rounded-xl p-6 mb-6 flex items-center justify-center min-h-[120px]">
+                    <div class="waveform-placeholder flex items-center gap-2">
+                      <div class="wave-bar"></div>
+                      <div class="wave-bar"></div>
+                      <div class="wave-bar"></div>
+                      <div class="wave-bar"></div>
+                      <div class="wave-bar"></div>
+                    </div>
+                  </div>
+
+                  <!-- 音频控制区域 -->
+                  <div class="audio-controls bg-black/20 backdrop-blur-md rounded-xl p-6">
+                    <!-- 状态指示器 -->
+                    <div class="status-indicator flex items-center gap-3 mb-4">
+                      <div class="status-dot"></div>
+                      <span id="conversionStatus" class="text-sm font-medium text-gray-300"></span>
+                    </div>
+
+                    <!-- 音频播放器 -->
+                    <div class="player-container mb-4">
+                      <audio id="convertedAudio" controls class="w-full custom-audio-player"></audio>
+                    </div>
+
+                    <!-- 下载按钮 -->
+                    <button id="downloadConvertedButton" class="download-button hidden w-full">
+                      <div class="btn-content">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        <span data-i18n="output.speechToSpeech.download">下载转换后的音频</span>
+                      </div>
+                      <div class="download-info text-xs text-gray-400 mt-2">
+                        MP3 格式 • 高品质音频
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- Video Section -->
       <section class="py-20 px-4">
-        <div class="container mx-auto max-w-4xl">
+        <div class="container mx-auto max-w-7xl">
           <h2 class="text-4xl font-bold text-center mb-12" data-i18n="about.title">了解 AI Fugatto</h2>
           <div class="relative aspect-video rounded-xl overflow-hidden bg-white/5 backdrop-blur-md">
             <video
               id="promo-video"
-              class="w-full h-full absolute inset-0"
+              class="w-full h-full absolute inset-0 object-cover"
               controls
               preload="metadata"
             >
@@ -222,8 +403,8 @@
               您的浏览器不支持视频播放。
             </video>
             <div id="video-overlay" class="absolute inset-0 flex items-center justify-center bg-black/50 cursor-pointer hover:bg-black/60 transition-all duration-300">
-              <button class="play-button p-6 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all duration-300">
-                <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <button class="play-button p-8 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all duration-300">
+                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
               </button>
@@ -237,7 +418,7 @@
         <div class="container mx-auto max-w-6xl">
           <h2 class="section-title" data-i18n="features.title">功能特点</h2>
           <p class="section-description" data-i18n="features.description">
-            Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐及语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创意可能。
+            Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐及语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创意可能
           </p>
           
           <div class="grid md:grid-cols-3 gap-8">
@@ -509,7 +690,7 @@
                 </svg>
               </button>
               <div class="hidden mt-4 text-gray-300" data-i18n="faq.a2">
-                它使用经过大量音频数据集训练的先进算法，根据用户输入动态生成或修改声音。
+                它使用经过大量音频数据训练的先进算法，根据用户输入动态生成或修改声音。
               </div>
             </div>
             <div class="faq-item">
@@ -563,45 +744,54 @@
 
     <footer class="bg-black/50 backdrop-blur-md text-white py-16">
       <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
           <!-- Logo and Copyright -->
           <div class="md:col-span-1">
             <div class="flex items-center gap-2 mb-4">
               <div class="text-xl font-bold text-white" data-i18n="nav.brand">Fugatto AI</div>
               <svg class="w-4 h-4 text-green-500" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.3,0.7c-0.4-0.4-1-0.4-1.4,0l-9.6,9.6c-0.4,0.4-0.4,1,0,1.4l9.6,9.6c0.4,0.4,1,0.4,1.4,0l9.6-9.6 c0.4-0.4,0.4-1,0-1.4L11.3,0.7z"/>
+                <path d="M11.3,0.7c-0.4-0.4-1-0.4-1.4,0l-9.6,9.6c-0.4,0.4-0.4,1,0,1.4l9.6,9.6c0.4,0.4,1,0.4,1.4,0l9.6-9.6 c0.4-0.4,0.4-1,0-1.4L11.3,0.7z M16.2,12l-2.8,2.8L10.6,12l2.8-2.8L16.2,12z"/>
               </svg>
             </div>
             <p class="text-sm text-gray-400" data-i18n="footer.copyright"></p>
-            <p class="text-sm text-gray-400" data-i18n="footer.contact"></p>
             <p class="text-sm text-gray-400" data-i18n="footer.owner"></p>
           </div>
           
-          <!-- Resources -->
+          <!-- AI Voice Generator -->
+          <div class="md:col-span-1">
+            <h3 class="text-lg font-semibold mb-4" data-i18n="footer.aiVoice.title"></h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.aiVoice.textToSpeech"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.aiVoice.speechToText"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.aiVoice.speechToSpeech"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.aiVoice.voiceCloning"></a></li>
+            </ul>
+          </div>
+          
+          <!-- AI Audio Creation -->
+          <div class="md:col-span-1">
+            <h3 class="text-lg font-semibold mb-4" data-i18n="footer.audioCreation.title"></h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.audioCreation.soundEffects"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.audioCreation.music"></a></li>
+            </ul>
+          </div>
+          
+          <!-- Resource -->
           <div class="md:col-span-1">
             <h3 class="text-lg font-semibold mb-4" data-i18n="footer.resources.title"></h3>
             <ul class="space-y-2">
-              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.resources.guides"></a></li>
-              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.resources.api"></a></li>
-              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.resources.support"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.resources.community"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.resources.blog"></a></li>
             </ul>
           </div>
-          
-          <!-- Products -->
+
+          <!-- Pricing -->
           <div class="md:col-span-1">
-            <h3 class="text-lg font-semibold mb-4" data-i18n="footer.products.title"></h3>
+            <h3 class="text-lg font-semibold mb-4" data-i18n="footer.pricing.title"></h3>
             <ul class="space-y-2">
-              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.products.items.0"></a></li>
-              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.products.items.1"></a></li>
-            </ul>
-          </div>
-          
-          <!-- Company -->
-          <div class="md:col-span-1">
-            <h3 class="text-lg font-semibold mb-4" data-i18n="footer.company.title"></h3>
-            <ul class="space-y-2">
-              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.company.items.0"></a></li>
-              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.company.items.1"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.pricing.starter"></a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white" data-i18n="footer.pricing.pro"></a></li>
             </ul>
           </div>
         </div>

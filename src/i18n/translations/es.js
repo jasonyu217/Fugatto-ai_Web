@@ -6,7 +6,17 @@ export default {
     build: "Construir Voz",
     myVoices: "Mis Voces",
     manage: "Gestionar",
-    signIn: "Iniciar Sesión"
+    signIn: "Iniciar Sesión",
+    aiVoice: 'Generador de Voz IA',
+    aiVoiceMenu: {
+      textToSpeech: 'Texto a Voz',
+      speechToText: 'Voz a Texto',
+      speechToSpeech: 'Voz a Voz',
+      voiceCloning: 'Clonación de Voz'
+    },
+    audioCreation: 'Creación de Audio IA',
+    community: 'Comunidad de Voz',
+    pricing: 'Precios'
   },
   hero: {
     title: "Fugatto AI - El Sonido Más Flexible del Mundo",
@@ -145,14 +155,16 @@ export default {
     ]
   },
   footer: {
-    copyright: "© 2024 AI Fugatto. Todos los derechos reservados",
+    copyright: "© 2024 AI Fugatto. Todos los derechos reservados.",
     contact: "Contacto: jasonkui217@gmail.com",
-    owner: "Creado por Jason Yu",
+    owner: "Creado por Fugatto AI",
     resources: {
       title: "Recursos",
       guides: "Guías",
       api: "Referencia API",
-      support: "Soporte"
+      support: "Soporte",
+      community: "Comunidad de Voz",
+      blog: "Blog"
     },
     products: {
       title: "Productos",
@@ -165,12 +177,13 @@ export default {
     legal: {
       privacy: "Política de Privacidad",
       terms: "Términos de Servicio",
-      report: "Reportar un Problema"
+      report: "Reportar Problema"
     }
   },
   tabs: {
     textToSpeech: "Texto a Voz",
-    speechToText: "Voz a Texto"
+    speechToText: "Voz a Texto",
+    speechToSpeech: "Voz a Voz"
   },
   input: {
     textToSpeech: {
@@ -183,6 +196,13 @@ export default {
       record: "Comenzar grabación",
       recording: "Grabando...",
       stop: "Detener grabación"
+    },
+    speechToSpeech: {
+      title: "Entrada de Voz",
+      dropHint: "Suelta el archivo de audio aquí o",
+      browse: "Explorar Archivos",
+      targetVoice: "Voz Objetivo",
+      convert: "Convertir Voz"
     }
   },
   output: {
@@ -195,6 +215,12 @@ export default {
       title: "Salida de texto",
       processing: "Convirtiendo...",
       placeholder: "El texto transcrito aparecerá aquí"
+    },
+    speechToSpeech: {
+      title: "Resultado de Conversión",
+      processing: "Convirtiendo...",
+      ready: "Conversión Completada",
+      download: "Descargar Audio Convertido"
     }
   },
   status: {

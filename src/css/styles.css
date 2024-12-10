@@ -8,7 +8,7 @@ body {
 }
 
 .nav-link {
-  @apply text-gray-300 hover:text-white transition-colors;
+  @apply text-gray-300 hover:text-white transition-colors py-2;
 }
 
 .btn-primary {
@@ -49,12 +49,13 @@ body {
 /* 容器布局优化 */
 .conversion-container {
   @apply max-w-7xl mx-auto px-4 w-full;
+  width: 1200px;
 }
 
 /* 输入输出区域样式优化 */
 .input-output-container {
   @apply grid grid-cols-2 gap-8 w-full mt-8 mx-auto;
-  min-height: 400px;
+  height: 420px;
   max-width: 1200px;
 }
 
@@ -62,22 +63,21 @@ body {
   display: none;
 }
 
-/* 输入输出区域样式 */
+/* 输入输出区域基础样式 */
 .input-area, .output-area {
-  @apply bg-black/20 backdrop-blur-md rounded-xl p-8 border border-white/10 hover:border-white/20 transition-all duration-300;
+  @apply bg-black/20 backdrop-blur-md rounded-xl p-6 border border-white/10 
+    hover:border-white/20 transition-all duration-300;
   height: 100%;
   display: flex;
   flex-direction: column;
-  min-width: 480px;
 }
 
 /* 文本输入区域 */
 textarea {
-  @apply w-full p-4 rounded-lg bg-black/20 border border-white/10 text-white placeholder-white/50 
-    focus:outline-none focus:ring-1 focus:ring-white/30 mb-4 transition-all duration-300
-    hover:border-white/20;
-  flex: 1;
-  min-height: 200px;
+  @apply w-full p-4 rounded-lg bg-black/20 border border-white/10 text-white 
+    placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-white/30 
+    transition-all duration-300 hover:border-white/20;
+  height: 240px;
   resize: none;
 }
 
@@ -117,11 +117,9 @@ audio::-webkit-media-controls-play-button {
 
 /* 文本输出区域 */
 .text-output {
-  @apply p-4 bg-black/20 rounded-lg border border-white/10 transition-all duration-300
-    hover:border-white/20;
-  flex: 1;
-  min-height: 200px;
-  overflow-y: auto;
+  @apply p-4 bg-black/20 rounded-lg border border-white/10 
+    transition-all duration-300 hover:border-white/20 overflow-y-auto;
+  height: 280px;
 }
 
 /* 状态提示文本 */
@@ -225,4 +223,362 @@ audio::-webkit-media-controls-play-button {
 
 .loading-spinner {
   @apply w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin;
+}
+
+/* 下拉菜单动画 */
+.group:hover .group-hover\:block {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 确保下拉菜单有足够的 z-index */
+.group-hover\:block {
+  z-index: 100;
+}
+
+/* 带下拉菜单的导航项样式 */
+.nav-link-dropdown {
+  @apply flex items-center gap-2 px-4 py-2 rounded-lg 
+    text-gray-300 hover:text-white hover:bg-white/5 
+    transition-all duration-200;
+}
+
+/* 下拉菜单图标样式 */
+.dropdown-icon {
+  @apply w-4 h-4 transition-transform duration-300
+    text-gray-400 group-hover:text-white
+    transform group-hover:rotate-180;
+  margin-left: 4px;
+  display: inline-block;
+}
+
+/* 下拉菜单容器样式 */
+.dropdown-menu {
+  @apply invisible opacity-0 absolute left-0 mt-1 w-56 
+    bg-black/90 backdrop-blur-md rounded-lg shadow-lg 
+    border border-white/10 overflow-hidden
+    transition-all duration-300 transform -translate-y-2;
+}
+
+/* 显示下拉菜单时的样式 */
+.group:hover .dropdown-menu {
+  @apply visible opacity-100 translate-y-0;
+}
+
+/* 添加一个缓冲区，防止鼠标移动时菜单消失 */
+.dropdown-menu::before {
+  content: '';
+  @apply absolute -top-2 left-0 w-full h-2;
+}
+
+/* 下拉菜单项样式 */
+.dropdown-item {
+  @apply block w-full px-4 py-3 text-sm text-gray-300 
+    hover:text-white hover:bg-white/10 transition-colors
+    border-b border-white/5 last:border-none;
+}
+
+/* 移除旧的动画，使用新的过渡效果 */
+.animate-fadeIn {
+  @apply transition-all duration-300;
+}
+
+/* 语言选择器样式 */
+.language-button {
+  @apply flex items-center gap-2 px-4 py-2 text-sm 
+    text-gray-300 hover:text-white transition-colors 
+    rounded-lg hover:bg-white/5;
+}
+
+.language-option {
+  @apply w-full flex items-center gap-2 px-4 py-2.5 
+    text-gray-300 hover:text-white hover:bg-white/10 
+    transition-colors border-b border-white/5 last:border-none;
+}
+
+/* 国旗图标样式 */
+.flag-icon {
+  @apply w-5 h-5 rounded-sm object-cover;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+/* 音频上传区域样式 */
+.audio-upload-container {
+  @apply relative flex flex-col items-center justify-center bg-black/20 
+    border-2 border-dashed border-white/10 rounded-xl 
+    transition-all duration-300 cursor-pointer
+    hover:border-white/30 hover:bg-white/5;
+  height: 160px;
+  padding: 1rem;
+}
+
+/* 上传内容区域 */
+.upload-content {
+  @apply flex flex-col items-center justify-center text-center;
+}
+
+/* 上传图标包装器 */
+.upload-icon-wrapper {
+  @apply p-2.5 bg-white/5 rounded-full mb-3 
+    transition-all duration-300 
+    group-hover:bg-white/10;
+}
+
+/* 上传图标 */
+.upload-icon-wrapper svg {
+  @apply w-6 h-6 text-gray-400 
+    transition-all duration-300 
+    group-hover:text-white;
+}
+
+/* 上传提示文本 */
+.upload-text {
+  @apply space-y-1;
+}
+
+.upload-text p {
+  @apply text-sm text-gray-300 
+    transition-all duration-300;
+}
+
+.format-hint {
+  @apply text-xs text-gray-400;
+}
+
+/* 拖放状态 */
+.audio-upload-container.drag-over {
+  @apply border-white/40 bg-white/5;
+}
+
+/* 有音频文件时的状态 */
+.has-audio .upload-content {
+  @apply opacity-60 hover:opacity-100 
+    transition-all duration-300;
+}
+
+.has-audio .preview-area {
+  @apply mt-3;
+}
+
+/* 预览区域 */
+.preview-area {
+  @apply w-full transition-all duration-300;
+}
+
+/* 音频播放器样式优化 */
+audio {
+  @apply rounded-lg bg-black/20;
+}
+
+audio::-webkit-media-controls-panel {
+  @apply bg-black/20 hover:bg-black/30;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-mute-button {
+  @apply hover:bg-white/10 rounded-full;
+}
+
+/* 音频输出容器 */
+.audio-output-container {
+  @apply flex-1 bg-black/20 backdrop-blur-md rounded-xl p-6 border border-white/10 
+    hover:border-white/20 transition-all duration-300;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 音频可视化区域 */
+.audio-visualization {
+  @apply flex items-center justify-center mb-4;
+  height: 80px;
+}
+
+/* 波形动画容器 */
+.waveform-placeholder {
+  @apply flex items-center gap-3;
+}
+
+/* 单个波形条样式 */
+.wave-bar {
+  @apply w-1.5 rounded-full;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+  animation: wave 1.2s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+
+/* 波形动画延迟 */
+.wave-bar:nth-child(1) { animation-delay: -0.4s; }
+.wave-bar:nth-child(2) { animation-delay: -0.2s; }
+.wave-bar:nth-child(3) { animation-delay: 0s; }
+.wave-bar:nth-child(4) { animation-delay: 0.2s; }
+.wave-bar:nth-child(5) { animation-delay: 0.4s; }
+
+/* 波形动画 */
+@keyframes wave {
+  0%, 100% { 
+    transform: scaleY(0.3);
+    background: rgba(255,255,255,0.1);
+  }
+  50% { 
+    transform: scaleY(1);
+    background: rgba(255,255,255,0.3);
+  }
+}
+
+/* 音频控制区域 */
+.audio-controls {
+  @apply space-y-4;
+}
+
+/* 状态指示器 */
+.status-indicator {
+  @apply flex items-center gap-3 py-2;
+}
+
+.status-dot {
+  @apply w-2 h-2 rounded-full;
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+
+/* 自定义音频播放器 */
+.custom-audio-player {
+  @apply w-full rounded-lg transition-colors;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* 下载按钮样式 */
+.download-button {
+  @apply w-full px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 
+    transition-all duration-300 border border-white/10 hover:border-white/20;
+}
+
+.btn-content {
+  @apply flex items-center justify-center gap-2;
+}
+
+/* 处理中状态 */
+.processing .wave-bar {
+  animation-duration: 0.6s;
+}
+
+.processing .status-dot {
+  background: linear-gradient(45deg, #eab308, #ca8a04);
+  box-shadow: 0 0 8px rgba(234, 179, 8, 0.5);
+}
+
+/* 完成状态 */
+.completed .status-dot {
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+
+/* 错误状态 */
+.error .status-dot {
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+/* 上传图标包装器 */
+.upload-icon-wrapper {
+  @apply p-2 bg-white/5 rounded-full mb-2;
+}
+
+/* 上传图标 */
+.upload-icon-wrapper svg {
+  @apply w-6 h-6 text-gray-400;
+}
+
+/* 上传提示文本 */
+.upload-text {
+  @apply text-center mb-2;
+}
+
+.upload-text p:first-child {
+  @apply text-sm text-gray-300;
+}
+
+.upload-text p:last-child {
+  @apply text-xs text-gray-400 mt-1;
+}
+
+/* 上传按钮 */
+.upload-button {
+  @apply px-4 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg 
+    transition-colors flex items-center gap-2 text-sm;
+  margin-top: -0.25rem;
+}
+
+/* 声音选择区域 */
+.voice-selection {
+  @apply mt-4;
+}
+
+/* 转换按钮 */
+#convertButton {
+  @apply mt-4;
+}
+
+/* 视频区域样式优化 */
+.video-section {
+  @apply relative w-full;
+}
+
+/* 视频容器样式 */
+.video-container {
+  @apply relative aspect-video rounded-xl overflow-hidden 
+    bg-black/20 backdrop-blur-md border border-white/10 
+    hover:border-white/20 transition-all duration-300;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 视频播放按钮样式 */
+.play-button {
+  @apply p-8 rounded-full bg-white/10 backdrop-blur-md 
+    hover:bg-white/20 transition-all duration-300 
+    transform hover:scale-105;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.play-button svg {
+  @apply w-16 h-16 text-white 
+    transition-transform duration-300;
+}
+
+/* 视频覆盖层样式 */
+.video-overlay {
+  @apply absolute inset-0 flex items-center justify-center 
+    bg-black/50 cursor-pointer hover:bg-black/60 
+    transition-all duration-300;
+  backdrop-filter: blur(2px);
+}
+
+/* 视频标题样式 */
+.video-title {
+  @apply text-4xl font-bold text-center mb-12 
+    bg-clip-text text-transparent bg-gradient-to-r 
+    from-white to-gray-300;
+}
+
+/* 功能区域容器 */
+.conversion-container {
+  @apply max-w-7xl mx-auto px-4 w-full;
+  width: 1200px;
+}
+
+/* 视频区域容器 */
+.container.mx-auto.max-w-7xl {
+  width: 1200px;
 }

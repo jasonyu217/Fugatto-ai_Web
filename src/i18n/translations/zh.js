@@ -57,21 +57,28 @@ export default {
   },
   footer: {
     copyright: "© 2024 AI Fugatto. 保留所有权利。",
-    contact: "联系方式：jasonkui217@gmail.com",
-    owner: "由 Jason Yu 创建",
+    owner: "由 Fugatto AI 创建",
+    aiVoice: {
+      title: "AI 语音生成器",
+      textToSpeech: "文本转语音",
+      speechToText: "语音转文本",
+      speechToSpeech: "语音转语音",
+      voiceCloning: "语音克隆"
+    },
+    audioCreation: {
+      title: "AI 音频创作",
+      soundEffects: "AI 音效生成",
+      music: "AI 音乐生成"
+    },
     resources: {
       title: "资源",
-      guides: "使用指南",
-      api: "API 文档",
-      support: "技术支持"
+      community: "语音社区",
+      blog: "博客"
     },
-    products: {
-      title: "产品",
-      items: ["文本转语音", "语音转文本"]
-    },
-    company: {
-      title: "公司",
-      items: ["博客", "GitHub"]
+    pricing: {
+      title: "价格方案",
+      starter: "入门版",
+      pro: "专业版"
     },
     legal: {
       privacy: "隐私政策",
@@ -92,12 +99,16 @@ export default {
   },
   nav: {
     brand: "Fugatto AI",
-    discover: "发现",
-    synthesis: "语音合成",
-    build: "构建声音",
-    myVoices: "我的声音",
-    manage: "管理会员",
-    signIn: "登录"
+    aiVoice: 'AI 语音生成器',
+    aiVoiceMenu: {
+      textToSpeech: '文本转语音',
+      speechToText: '语音转文本',
+      speechToSpeech: '语音转语音',
+      voiceCloning: '语音克隆'
+    },
+    audioCreation: 'AI 音频创作',
+    community: '语音社区',
+    pricing: '价格方案'
   },
   faq: {
     title: "常见问题",
@@ -122,7 +133,8 @@ export default {
   },
   tabs: {
     textToSpeech: "文本转语音",
-    speechToText: "语音转文本"
+    speechToText: "语音转文本",
+    speechToSpeech: "语音转语音"
   },
   input: {
     textToSpeech: {
@@ -145,6 +157,13 @@ export default {
       record: "点击录音",
       recording: "正在录音...",
       stop: "停止录音"
+    },
+    speechToSpeech: {
+      title: "上传音频",
+      dropHint: "将音频文件拖放到此处或",
+      browse: "选择文件",
+      targetVoice: "目标声音",
+      convert: "转换语音"
     }
   },
   output: {
@@ -158,6 +177,12 @@ export default {
       title: "文本输出",
       processing: "正在转换...",
       placeholder: "转换后的文本将显示在这里"
+    },
+    speechToSpeech: {
+      title: "转换结果",
+      processing: "正在转换...",
+      ready: "转换完成",
+      download: "下载转换后的音频"
     }
   },
   testimonials: {

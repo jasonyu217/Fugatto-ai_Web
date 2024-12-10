@@ -29,38 +29,45 @@ function updateContent() {
   });
 }
 
+// 语言配置
+const languages = [
+  { code: 'en', name: 'English', flag: '/flags/en.svg' },
+  { code: 'zh', name: '中文', flag: '/flags/zh.svg' },
+  { code: 'ja', name: '日本語', flag: '/flags/ja.svg' },
+  { code: 'es', name: 'Español', flag: '/flags/es.svg' },
+  { code: 'ru', name: 'Русский', flag: '/flags/ru.svg' },
+  { code: 'ar', name: 'العربية', flag: '/flags/ar.svg' }
+];
+
 // 初始化语言下拉菜单
 function initLanguageDropdown() {
   const languageButton = document.getElementById('language-button');
   const languageDropdown = document.getElementById('language-dropdown');
   const currentLanguageSpan = document.getElementById('current-language');
-
-  const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'zh', name: '中文' },
-    { code: 'ja', name: '日本語' },
-    { code: 'es', name: 'Español' },
-    { code: 'ru', name: 'Русский' },
-    { code: 'ar', name: 'العربية' }
-  ];
+  const currentFlag = document.getElementById('current-flag');
 
   languages.forEach(lang => {
     const option = document.createElement('button');
-    option.className = 'w-full text-left px-4 py-2 hover:bg-white/10 transition-colors';
-    option.textContent = lang.name;
+    option.className = 'w-full flex items-center gap-2 px-4 py-2.5 text-gray-300 hover:text-white hover:bg-white/10 transition-colors';
+    option.innerHTML = `
+      <img src="${lang.flag}" alt="${lang.name}" class="w-5 h-5 rounded-sm object-cover">
+      <span>${lang.name}</span>
+    `;
     option.onclick = () => {
-      console.log('Changing language to:', lang.code);
       i18next.changeLanguage(lang.code).then(() => {
-        console.log('Language changed, new translations:', i18next.t('pricing.title'));
         currentLanguageSpan.textContent = lang.name;
+        currentFlag.src = lang.flag;
         languageDropdown.classList.add('hidden');
         updateContent();
-      }).catch(error => {
-        console.error('Error changing language:', error);
       });
     };
     languageDropdown.appendChild(option);
   });
+
+  // 初始化当前语言显示
+  const currentLang = languages.find(lang => lang.code === i18next.language) || languages[0];
+  currentLanguageSpan.textContent = currentLang.name;
+  currentFlag.src = currentLang.flag;
 
   // 切换下拉菜单显示/隐藏
   languageButton.addEventListener('click', () => {
@@ -73,11 +80,6 @@ function initLanguageDropdown() {
       languageDropdown.classList.add('hidden');
     }
   });
-
-  // 设置初始语言显示
-  currentLanguageSpan.textContent = languages.find(lang => 
-    lang.code === i18next.language
-  )?.name || 'English';
 }
 
 // Tab 切换功能
@@ -255,6 +257,84 @@ function initTTSFeature() {
   };
 }
 
+// 处理音频文件上传
+function initSpeechToSpeech() {
+  const audioFileInput = document.getElementById('audioFileInput');
+  const sourceAudio = document.getElementById('sourceAudio');
+  const convertButton = document.getElementById('convertButton');
+  const convertedAudio = document.getElementById('convertedAudio');
+  const conversionStatus = document.getElementById('conversionStatus');
+  const downloadConvertedButton = document.getElementById('downloadConvertedButton');
+  const dropZone = document.querySelector('.audio-upload-container');
+
+  // 文件拖放处理
+  dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('drag-over');
+  });
+
+  dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('drag-over');
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('audio/')) {
+      handleAudioFile(file);
+    }
+  });
+
+  // 文件选择处理
+  audioFileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      handleAudioFile(file);
+    }
+  });
+
+  function handleAudioFile(file) {
+    const container = document.querySelector('.audio-upload-container');
+    const url = URL.createObjectURL(file);
+    const sourceAudio = document.getElementById('sourceAudio');
+    
+    sourceAudio.src = url;
+    sourceAudio.classList.remove('hidden');
+    container.classList.add('has-audio');
+    
+    // 启用转换按钮
+    document.getElementById('convertButton').disabled = false;
+  }
+
+  // 转换处理
+  convertButton.addEventListener('click', async () => {
+    try {
+      conversionStatus.textContent = i18next.t('output.speechToSpeech.processing');
+      convertButton.disabled = true;
+      downloadConvertedButton.classList.add('hidden');
+
+      const targetVoice = document.getElementById('targetVoiceSelect').value;
+      
+      // TODO: 调用实际的转换 API
+      // const convertedUrl = await convertVoice(sourceAudio.src, targetVoice);
+      
+      // 模拟转换过程
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      convertedAudio.src = sourceAudio.src; // 临时使用源文件
+      convertedAudio.style.display = 'block';
+      downloadConvertedButton.classList.remove('hidden');
+      conversionStatus.textContent = i18next.t('output.speechToSpeech.ready');
+    } catch (error) {
+      console.error('Error converting audio:', error);
+      conversionStatus.textContent = i18next.t('errors.apiError');
+    } finally {
+      convertButton.disabled = false;
+    }
+  });
+}
+
 // 在 DOM 加载完成后初始化
 document.addEventListener('DOMContentLoaded', () => {
   initLanguageDropdown();
@@ -264,6 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initVoiceSelector();
   initTTSFeature();
   initModal();
+  initSpeechToSpeech();
 });
 
 // 监听语言变化
@@ -388,7 +469,7 @@ if (import.meta.hot) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  // 生成音频按钮点击事件
+  // 生���音频按钮点击事件
   document.getElementById('generateButton')?.addEventListener('click', function() {
     gtag_report_conversion();
   });
@@ -422,3 +503,44 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+function updateAudioOutputStatus(status, container) {
+  const statusText = container.querySelector('#audioStatus');
+  const audioControls = container.querySelector('.audio-controls');
+  
+  // 移除所有状态类
+  audioControls.classList.remove('processing', 'completed', 'error');
+  
+  switch(status) {
+    case 'processing':
+      statusText.textContent = i18next.t('output.textToSpeech.processing');
+      audioControls.classList.add('processing');
+      break;
+    case 'completed':
+      statusText.textContent = i18next.t('output.textToSpeech.ready');
+      audioControls.classList.add('completed');
+      break;
+    case 'error':
+      statusText.textContent = i18next.t('errors.apiError');
+      audioControls.classList.add('error');
+      break;
+  }
+}
+
+// 在生成/转换音频时调用
+async function handleAudioGeneration() {
+  const container = document.querySelector('.audio-output-container');
+  
+  try {
+    updateAudioOutputStatus('processing', container);
+    // ... 音频生成逻辑 ...
+    await generateAudio();
+    updateAudioOutputStatus('completed', container);
+    
+    // 显示下载按钮
+    const downloadButton = container.querySelector('.download-button');
+    downloadButton.classList.remove('hidden');
+  } catch (error) {
+    updateAudioOutputStatus('error', container);
+  }
+}

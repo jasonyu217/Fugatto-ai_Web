@@ -6,7 +6,17 @@ export default {
     build: "Создание голоса",
     myVoices: "Мои голоса",
     manage: "Управление",
-    signIn: "Войти"
+    signIn: "Войти",
+    aiVoice: 'ИИ Генератор Голоса',
+    aiVoiceMenu: {
+      textToSpeech: 'Текст в Речь',
+      speechToText: 'Речь в Текст',
+      speechToSpeech: 'Речь в Речь',
+      voiceCloning: 'Клонирование Голоса'
+    },
+    audioCreation: 'ИИ Создание Аудио',
+    community: 'Голосовое Сообщество',
+    pricing: 'Цены'
   },
   hero: {
     title: "Fugatto AI - Самый гибкий звук в мире",
@@ -143,14 +153,25 @@ export default {
     ]
   },
   footer: {
-    copyright: "© 2024 AI Fugatto. Все права защищены",
+    copyright: "© 2024 AI Fugatto. Все права защищены.",
     contact: "Контакт: jasonkui217@gmail.com",
-    owner: "Создано Jason Yu",
+    owner: "Создано Fugatto AI",
+    aiVoice: {
+      title: "ИИ Генератор Голоса",
+      textToSpeech: "Текст в Речь",
+      speechToText: "Речь в Текст",
+      speechToSpeech: "Речь в Речь",
+      voiceCloning: "Клонирование Голоса"
+    },
+    audioCreation: {
+      title: "ИИ Создание Аудио",
+      soundEffects: "ИИ Звуковые Эффекты",
+      music: "ИИ Генерация Музыки"
+    },
     resources: {
       title: "Ресурсы",
-      guides: "Руководства",
-      api: "API справочник",
-      support: "Поддержка"
+      community: "Голосовое Сообщество",
+      blog: "Блог"
     },
     products: {
       title: "Продукты",
@@ -161,14 +182,15 @@ export default {
       items: ["Блог", "GitHub"]
     },
     legal: {
-      privacy: "Политика конфиденциальности",
-      terms: "Условия использования",
-      report: "Сообщить о проблеме"
+      privacy: "Политика Конфиденциальности",
+      terms: "Условия Использования",
+      report: "Сообщить о Проблеме"
     }
   },
   tabs: {
-    textToSpeech: "Текст в речь",
-    speechToText: "Речь в текст"
+    textToSpeech: "Текст в Речь",
+    speechToText: "Речь в Текст",
+    speechToSpeech: "Речь в Речь"
   },
   input: {
     textToSpeech: {
@@ -181,6 +203,13 @@ export default {
       record: "Начать запись",
       recording: "Запись...",
       stop: "Остановить запись"
+    },
+    speechToSpeech: {
+      title: "Голосовой Ввод",
+      dropHint: "Перетащите аудиофайл сюда или",
+      browse: "Выбрать Файл",
+      targetVoice: "Целевой Голос",
+      convert: "Конвертировать Голос"
     }
   },
   output: {
@@ -193,6 +222,12 @@ export default {
       title: "Текстовый вывод",
       processing: "Преобразование...",
       placeholder: "Здесь появится преобразованный текст"
+    },
+    speechToSpeech: {
+      title: "Результат Конвертации",
+      processing: "Конвертация...",
+      ready: "Конвертация Завершена",
+      download: "Скачать Конвертированное Аудио"
     }
   },
   status: {
