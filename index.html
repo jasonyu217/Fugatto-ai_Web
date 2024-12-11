@@ -36,9 +36,9 @@
     <link rel="stylesheet" href="/src/css/styles.css">
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self' http://127.0.0.1:8002 https://www.googletagmanager.com; 
-      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com;
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://kodepay-global.zingfront.com;
       style-src 'self' 'unsafe-inline';
-      connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://formspree.io/f/xnnqydkp https://www.google-analytics.com;
+      connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://formspree.io/f/xnnqydkp https://www.google-analytics.com https://kodepay-global.zingfront.com https://api.kodepay.io;
       form-action 'self' https://formspree.io/ https://formspree.io/f/xnnqydkp;
       img-src 'self' data: https://images.unsplash.com;
     ">
@@ -418,7 +418,7 @@
         <div class="container mx-auto max-w-6xl">
           <h2 class="section-title" data-i18n="features.title">功能特点</h2>
           <p class="section-description" data-i18n="features.description">
-            Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐及语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创意可能
+            Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐及语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创作可能
           </p>
           
           <div class="grid md:grid-cols-3 gap-8">
@@ -606,9 +606,9 @@
           </p>
           <div class="grid md:grid-cols-2 gap-8">
             <div class="price-card">
-              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.starter.title"></h3>
+              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.starter.title">入门版</h3>
               <p class="text-4xl font-bold mb-6">
-                <span data-i18n="pricing.starter.price"></span>
+                <span data-i18n="pricing.starter.price">$9.99/month</span>
               </p>
               <ul class="space-y-4 mb-8">
                 <li class="flex items-center">
@@ -630,12 +630,17 @@
                   <span data-i18n="pricing.starter.features.2"></span>
                 </li>
               </ul>
-              <button class="btn-primary w-full" onclick="gtag_report_conversion()" data-i18n="pricing.starter.cta"></button>
+              <button 
+                class="btn-primary w-full" 
+                onclick="handleSubscription('prod_7ee16ea1e0934176', 'usd')"
+                data-i18n="pricing.starter.cta">
+                立即订阅
+              </button>
             </div>
             <div class="price-card border-white/20">
-              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.pro.title"></h3>
+              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.pro.title">专业版</h3>
               <p class="text-4xl font-bold mb-6">
-                <span data-i18n="pricing.pro.price"></span>
+                <span data-i18n="pricing.pro.price">$29.99/month</span>
               </p>
               <ul class="space-y-4 mb-8">
                 <li class="flex items-center">
@@ -657,7 +662,12 @@
                   <span data-i18n="pricing.pro.features.2"></span>
                 </li>
               </ul>
-              <button class="btn-primary w-full" onclick="gtag_report_conversion()" data-i18n="pricing.pro.cta"></button>
+              <button 
+                class="btn-primary w-full" 
+                onclick="handleSubscription('prod_2fa7ad055ab0490d', 'usd')"
+                data-i18n="pricing.pro.cta">
+                立即订阅
+              </button>
             </div>
           </div>
         </div>
@@ -850,5 +860,6 @@
         </form>
       </div>
     </div>
+    <script src="/src/js/payment.js"></script>
   </body>
 </html>

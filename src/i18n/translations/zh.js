@@ -41,18 +41,18 @@ export default {
   },
   pricing: {
     title: "价格方案",
-    description: "选择最适合您需求的方案，享受 Fugatto AI 带来的强大功能。我们提供灵活的定价选项，满足不同规模的需求。",
+    description: "选择最适合您需求的方案",
     starter: {
       title: "入门版",
-      price: "￥59/月",
-      features: ["基础音频生成", "5个声音克隆", "标准支持"],
-      cta: "选择方案"
+      price: "$9.99/月",
+      features: ["基础音频生成", "5个声音克隆位", "标准支持"],
+      cta: "立即订阅"
     },
     pro: {
       title: "专业版",
-      price: "￥199/月",
+      price: "$29.99/月",
       features: ["高级音频生成", "无限声音克隆", "优先支持"],
-      cta: "选择方案"
+      cta: "立即订阅"
     }
   },
   footer: {

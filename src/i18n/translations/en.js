@@ -1,5 +1,7 @@
 export default {
   nav: {
+    brand: 'Fugatto AI',
+    nvidia: 'NVIDIA',
     aiVoice: 'AI Voice Generator',
     aiVoiceMenu: {
       textToSpeech: 'Text to Speech',
@@ -10,13 +12,7 @@ export default {
     audioCreation: 'AI Audio Creation',
     community: 'Voice Community',
     pricing: 'Pricing',
-    brand: "Fugatto AI",
-    discover: "Discover",
-    synthesis: "Voice Synthesis",
-    build: "Build Voice",
-    myVoices: "My Voices",
-    manage: "Manage",
-    signIn: "Sign In"
+    signIn: 'Sign In'
   },
   hero: {
     title: "Fugatto AI - World's Most Flexible Sound",
@@ -55,31 +51,27 @@ export default {
     ]
   },
   pricing: {
-    title: "Pricing",
-    description: "Choose the plan that best fits your needs and enjoy the powerful features of Fugatto AI. We offer flexible pricing options to meet different scale requirements.",
+    title: 'Pricing',
+    description: 'Choose the plan that best fits your needs.',
     starter: {
-      title: "Starter",
-      price: "$9/month",
+      title: 'Starter',
+      price: '$9.99/month',
       features: [
-        "Basic audio generation",
-        "5 voice clone slots",
-        "Standard support",
-        "10 hours of voice generation per month"
+        'Basic audio generation',
+        '5 voice clone slots',
+        'Standard support'
       ],
-      cta: "Choose Plan"
+      cta: 'Choose Plan'
     },
     pro: {
-      title: "Professional",
-      price: "$299/month",
+      title: 'Professional',
+      price: '$29.99/month',
       features: [
-        "Advanced audio generation",
-        "Unlimited voice clones",
-        "Priority support",
-        "Unlimited voice generation",
-        "API access",
-        "Custom voice training"
+        'Advanced audio generation',
+        'Unlimited voice clones',
+        'Priority support'
       ],
-      cta: "Choose Plan"
+      cta: 'Choose Plan'
     }
   },
   footer: {

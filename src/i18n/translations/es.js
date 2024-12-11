@@ -67,13 +67,13 @@ export default {
     description: "Elija el plan que mejor se adapte a sus necesidades y disfrute de las potentes funciones de Fugatto AI. Ofrecemos opciones de precios flexibles para satisfacer diferentes requisitos de escala.",
     starter: {
       title: "Inicial",
-      price: "9€/mes",
+      price: "$9.99/mes",
       features: ["Generación básica de audio", "5 clones de voz", "Soporte estándar"],
       cta: "Elegir Plan"
     },
     pro: {
       title: "Profesional",
-      price: "29€/mes",
+      price: "$29.99/mes",
       features: ["Generación avanzada de audio", "Clones de voz ilimitados", "Soporte prioritario"],
       cta: "Elegir Plan"
     }
