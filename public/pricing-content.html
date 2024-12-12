@@ -1,0 +1,274 @@
+<!-- 价格页面主要内容 -->
+<section class="py-20 px-4 relative overflow-hidden">
+  <div class="container mx-auto max-w-6xl relative z-10">
+    <!-- 标题部分 -->
+    <div class="text-center mb-16 mt-20">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent" data-i18n="pricing.hero.title">
+        选择适合您的方案
+      </h1>
+      <p class="text-xl text-gray-400 max-w-3xl mx-auto" data-i18n="pricing.hero.description">
+        灵活的定价方案，满足您的所有需求。无论您是个人创作者还是企业用户，都能找到最适合的选择。
+      </p>
+    </div>
+
+    <!-- 价格卡片 -->
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- 基础版 -->
+      <div class="price-card group hover:scale-105 transition-transform duration-300">
+        <div>
+          <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.basic.title">基础版</h3>
+          <div class="price-amount">
+            <div class="flex items-baseline">
+              <span class="text-4xl font-bold">$9.99</span>
+              <span class="text-gray-400 ml-1">/<span data-i18n="pricing.basic.unit">月</span></span>
+            </div>
+          </div>
+          <p class="text-gray-400 mb-6" data-i18n="pricing.basic.description">适合个人创作者起步使用</p>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.basic.features.0">每月100分钟音频生成</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.basic.features.1">基础音色选择</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.basic.features.2">标准API访问</span>
+            </li>
+          </ul>
+          <button class="btn-secondary w-full group-hover:btn-primary transition-all duration-300" onclick="handleSubscription('basic')">
+            <span data-i18n="pricing.basic.cta">开始使用</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 专业版 -->
+      <div class="price-card pro group hover:scale-105 transition-transform duration-300">
+        <!-- 推荐标签 -->
+        <div class="pro-badge">
+          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+          </svg>
+          <span class="pro-badge-text" data-i18n="pricing.pro.badge">最受欢迎</span>
+        </div>
+        
+        <div>
+          <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.pro.title">专业版</h3>
+          <div class="price-amount">
+            <div class="flex items-baseline">
+              <span class="text-4xl font-bold">$29.99</span>
+              <span class="text-gray-400 ml-1">/<span data-i18n="pricing.pro.unit">月</span></span>
+            </div>
+          </div>
+          <p class="text-gray-400 mb-6" data-i18n="pricing.pro.description">适合专业创作者和小型团队</p>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.pro.features.0">每月500分钟音频生成</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.pro.features.1">高级音色库</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.pro.features.2">优先API访问</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.pro.features.3">高级技术支持</span>
+            </li>
+          </ul>
+          <button class="btn-primary w-full" onclick="handleSubscription('pro')">
+            <span data-i18n="pricing.pro.cta">立即升级</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 企业版 -->
+      <div class="price-card pro group hover:scale-105 transition-transform duration-300">
+        <div>
+          <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.enterprise.title">企业版</h3>
+          <div class="price-amount">
+            <div class="flex items-baseline">
+              <span class="text-4xl font-bold" data-i18n="pricing.enterprise.price">联系我们</span>
+            </div>
+          </div>
+          <p class="text-gray-400 mb-6" data-i18n="pricing.enterprise.description">为大型企业提供定制化解决方案</p>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.enterprise.features.0">无限制的API调用</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.enterprise.features.1">专属客户成功经理</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.enterprise.features.2">定制化培训与支持</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.enterprise.features.3">服务级别协议(SLA)保障</span>
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span data-i18n="pricing.enterprise.features.4">优先技术支持</span>
+            </li>
+          </ul>
+          <button class="btn-secondary w-full group-hover:btn-primary transition-all duration-300" onclick="handleSubscription('enterprise')">
+            <span data-i18n="pricing.enterprise.cta">联系我们</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 背景装饰 -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-full blur-3xl"></div>
+</section>
+
+<!-- 功能对比表格 -->
+<section class="py-20 px-4">
+  <div class="container mx-auto max-w-6xl">
+    <h2 class="text-3xl font-bold text-center mb-12" data-i18n="pricing.comparison.title">功能对比</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="py-4 px-6 text-left" data-i18n="pricing.comparison.headers.features">功能</th>
+            <th class="py-4 px-6 text-center" data-i18n="pricing.comparison.headers.basic">基础版</th>
+            <th class="py-4 px-6 text-center" data-i18n="pricing.comparison.headers.pro">专业版</th>
+            <th class="py-4 px-6 text-center" data-i18n="pricing.comparison.headers.enterprise">企业版</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+            <td class="py-4 px-6" data-i18n="pricing.comparison.features.textToSpeech">文本转语音</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.check">✓</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.check">✓</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.check">✓</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+            <td class="py-4 px-6" data-i18n="pricing.comparison.features.speechToSpeech">语音转语音</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.check">✓</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.check">✓</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.check">✓</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+            <td class="py-4 px-6" data-i18n="pricing.comparison.features.voiceCount">音色数量</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.voiceCount.basic">10+</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.voiceCount.pro">50+</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.voiceCount.enterprise">不限</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+            <td class="py-4 px-6" data-i18n="pricing.comparison.features.apiAccess">API访问</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.apiAccess.basic">基础</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.apiAccess.pro">高级</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.apiAccess.enterprise">企业级</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+            <td class="py-4 px-6" data-i18n="pricing.comparison.features.support">技术支持</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.support.basic">邮件</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.support.pro">优先响应</td>
+            <td class="py-4 px-6 text-center" data-i18n="pricing.comparison.features.values.support.enterprise">24/7专属</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ部分 -->
+<section class="py-20">
+  <div class="container mx-auto max-w-3xl">
+    <h2 class="text-3xl font-bold text-center mb-12" data-i18n="pricing.faq.title">常见问题</h2>
+    <div class="space-y-6">
+      <!-- FAQ 1 -->
+      <div class="bg-white/5 rounded-xl p-6">
+        <h3 class="text-xl font-semibold mb-4" data-i18n="pricing.faq.items.0.q">如何选择合适的方案？</h3>
+        <p class="text-gray-400 leading-relaxed" data-i18n="pricing.faq.items.0.a">
+          根据您的使用需求和预算选择最适合的方案：<br>
+          • 基础版适合个人创作者和小规模使用，每月提供100分钟的音频生成额度<br>
+          • 专业版适合小型团队和频繁使用者，提供更多额度和高级功能<br>
+          • 企业版为大型组织提供完全定制化的解决方案，包括专属支持和无限使用额度
+        </p>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="bg-white/5 rounded-xl p-6">
+        <h3 class="text-xl font-semibold mb-4" data-i18n="pricing.faq.items.1.q">支持哪些音频格式？</h3>
+        <p class="text-gray-400 leading-relaxed" data-i18n="pricing.faq.items.1.a">
+          我们支持多种常用音频格式：<br>
+          • 输入格式：MP3、WAV、M4A、AAC<br>
+          • 输出格式：MP3（高质量 320kbps）、WAV（16/24bit）<br>
+          • 专业版和企业版还支持无损音频格式<br>
+          所有音频均采用先进的AI算法处理，确保最佳音质
+        </p>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="bg-white/5 rounded-xl p-6">
+        <h3 class="text-xl font-semibold mb-4" data-i18n="pricing.faq.items.2.q">如何升级或降级套餐？</h3>
+        <p class="text-gray-400 leading-relaxed" data-i18n="pricing.faq.items.2.a">
+          您可以随时在账户设置中更改您的订阅计划：<br>
+          • 升级：立即生效，按剩余天数补差价<br>
+          • 降级：当前计划到期后生效<br>
+          • 企业版用户请联系您的客户经理进行调整
+        </p>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="bg-white/5 rounded-xl p-6">
+        <h3 class="text-xl font-semibold mb-4" data-i18n="pricing.faq.items.3.q">API集成是否有限制？</h3>
+        <p class="text-gray-400 leading-relaxed" data-i18n="pricing.faq.items.3.a">
+          API访问限制因方案而异：<br>
+          • 基础版：每分钟10次请求<br>
+          • 专业版：每分钟50次请求<br>
+          • 企业版：可根据需求定制限制<br>
+          所有方案都提供详细的API文档和技术支持
+        </p>
+      </div>
+
+      <!-- FAQ 5 -->
+      <div class="bg-white/5 rounded-xl p-6">
+        <h3 class="text-xl font-semibold mb-4" data-i18n="pricing.faq.items.4.q">是否提供退款？</h3>
+        <p class="text-gray-400 leading-relaxed" data-i18n="pricing.faq.items.4.a">
+          我们的退款政策如下：<br>
+          • 首次订购后7天内可申���全额退款<br>
+          • 如遇重大技术问题可申请部分退款<br>
+          • 未使用的额度可以结转到下个月<br>
+          具体退款事宜请联系客服处理
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+</rewritten_file> 

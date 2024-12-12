@@ -40,20 +40,113 @@ export default {
     ]
   },
   pricing: {
-    title: "价格方案",
-    description: "选择最适合您需求的方案",
-    starter: {
-      title: "入门版",
-      price: "$9.99/月",
-      features: ["基础音频生成", "5个声音克隆位", "标准支持"],
-      cta: "立即订阅"
+    hero: {
+      title: "选择最适合您的方案",
+      description: "无论您是个人创作者还是企业用户，我们都为您提供灵活的定价方案"
+    },
+    billing: {
+      monthly: "月付",
+      yearly: "年付",
+      discount: "省20%"
+    },
+    basic: {
+      title: "基础版",
+      price: "$9.99",
+      description: "适合个人创作者起步使用",
+      features: [
+        "每月100分钟音频生成",
+        "基础音色选择",
+        "标准API访问",
+        "邮件支持"
+      ],
+      cta: "开始使用"
     },
     pro: {
+      badge: "最受欢迎",
       title: "专业版",
-      price: "$29.99/月",
-      features: ["高级音频生成", "无限声音克隆", "优先支持"],
-      cta: "立即订阅"
-    }
+      price: "$29.99",
+      description: "适合专业创作者和小型团队",
+      features: [
+        "每月500分钟音频生成",
+        "高级音色库",
+        "优先API访问",
+        "高级技术支持"
+      ],
+      cta: "立即升级"
+    },
+    enterprise: {
+      title: "企业版",
+      description: "为大型企业提供定制化解决方案",
+      features: [
+        "无限制的API调用",
+        "专属客户成功经理",
+        "定制化培训与支持",
+        "服务级别协议(SLA)保障",
+        "优先技术支持"
+      ],
+      cta: "联系我们"
+    },
+    comparison: {
+      title: "功能对比",
+      headers: {
+        features: "功能",
+        basic: "基础版",
+        pro: "专业版",
+        enterprise: "企业版"
+      },
+      features: {
+        textToSpeech: "文本转语音",
+        speechToSpeech: "语音转语音",
+        voiceCount: "音色数量",
+        apiAccess: "API访问",
+        support: "技术支持",
+        values: {
+          check: "✓",
+          voiceCount: {
+            basic: "10+",
+            pro: "50+",
+            enterprise: "不限"
+          },
+          apiAccess: {
+            basic: "基础",
+            pro: "高级",
+            enterprise: "企业级"
+          },
+          support: {
+            basic: "邮件",
+            pro: "优先响应",
+            enterprise: "24/7专属"
+          }
+        }
+      }
+    },
+    faq: {
+      title: "定价常见问题",
+      items: [
+        {
+          q: "如何选择合适的方案?",
+          a: "根据您的使用需求选择 - 个人用户建议选择基础版,企业用户可以选择专业版或企业版获得更多功能支持。"
+        },
+        {
+          q: "可以随时更改订阅计划吗?",
+          a: "是的,您可以随时升级或降级您的订阅计划。费用会按比例计算。"
+        },
+        {
+          q: "是否提供免费试用?",
+          a: "我们为所有新用户提供14天的免费试用期,让您充分体验产品功能。"
+        },
+        {
+          q: "如何计费?",
+          a: "我们采用月度订阅制,支持支付宝和微信支付。企业版采用年付模式。"
+        },
+        {
+          q: "是否提供退款？",
+          a: "我们的退款政策如下：\n• 首次订购后7天内可申请全额退款\n• 如遇重大技术问题可申请部分退款\n• 未使用的额度可以结转到下个月\n• 具体退款事宜请联系客服处理"
+        }
+      ]
+    },
+    title: "定价方案",
+    description: "选择最适合您需求的方案"
   },
   footer: {
     copyright: "© 2024 AI Fugatto. 保留所有权利。",
@@ -225,20 +318,65 @@ export default {
         role: "VisualVibe 创意总监"
       },
       {
-        content: "多语言支持让我们的全球业务拓展变得更加顺畅。",
-        name: "张国际",
-        role: "国际业务总监"
+        content: "实时音频处理功能让我们的直播效果提升了一个档次。",
+        name: "赵阳",
+        role: "LiveTech 技术主管"
       },
       {
-        content: "语音合成质量令人难以置信，我们的有声书听起来比以往更加自然。",
+        content: "AI 音效生成为我们的游戏开发节省了大量时间和成本。",
+        name: "孙杰",
+        role: "GameStudio 音效总监"
+      },
+      {
+        content: "多语言配音功能帮助我们快速完成了全球本地化工作。",
         name: "刘芳",
-        role: "出版总监"
+        role: "全球化项目经理"
       },
       {
-        content: "客户支持团队非常专业，帮助我们充分发挥了平台的潜力。",
-        name: "赵技",
-        role: "技术主管"
+        content: "音频修复功能非常强大，完美解决了我们的老旧音频修复需求。",
+        name: "郑华",
+        role: "音频修复专家"
+      },
+      {
+        content: "批量处理功能极大提高了我们的工作效率，节省了大量人力。",
+        name: "黄磊",
+        role: "音频工程总监"
+      },
+      {
+        content: "自定义模型训练让我们能够创建完全符合品牌调性的音频内容。",
+        name: "张雯",
+        role: "品牌营销总监"
+      },
+      {
+        content: "云端协作功能让远程工作变得如此简单，团队配合更加默契。",
+        name: "吴强",
+        role: "远程团队负责人"
       }
     ]
+  },
+  waitlist: {
+    title: "加入 API 等待列表",
+    form: {
+      name: "姓名",
+      email: "邮箱",
+      company: "公司/组织",
+      useCase: "使用场景",
+      submit: "提交",
+      cancel: "取消"
+    },
+    success: {
+      title: "感谢您的加入！",
+      message: "我们已收到您的请求，将尽快与您联系。",
+      close: "确定"
+    },
+    error: {
+      title: "提交失败",
+      message: "请稍后重试或联系支持。",
+      retry: "重试"
+    },
+    validation: {
+      email: "请输入有效的邮箱地址",
+      required: "此字段为必填项"
+    }
   }
 }

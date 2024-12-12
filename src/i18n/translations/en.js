@@ -17,7 +17,7 @@ export default {
   hero: {
     title: "Fugatto AI - World's Most Flexible Sound",
     subtitle: "Using text and audio as input, Fugatto AI's models can create any combination of music, voice, and sound effects",
-    docs: "Read Docs",
+    docs: "Documentation",
     apiWaitlist: "Join API Waitlist"
   },
   features: {
@@ -50,29 +50,163 @@ export default {
       }
     ]
   },
-  pricing: {
-    title: 'Pricing',
-    description: 'Choose the plan that best fits your needs.',
-    starter: {
-      title: 'Starter',
-      price: '$9.99/month',
+  homePagePricing: {
+    title: "Choose the Right Plan for You",
+    subtitle: "Start with a 14-day free trial. No credit card required.",
+    monthly: "Monthly",
+    yearly: "Yearly",
+    saveText: "Save 20%",
+    basic: {
+      title: "Basic Plan",
+      price: "$9.99",
+      unit: "mo",
+      description: "Perfect for individuals and small teams",
       features: [
-        'Basic audio generation',
-        '5 voice clone slots',
-        'Standard support'
-      ],
-      cta: 'Choose Plan'
+        "100 minutes/month audio generation",
+        "Basic voice library",
+        "Standard API access",
+        "Community support"
+      ]
     },
     pro: {
-      title: 'Professional',
-      price: '$29.99/month',
+      title: "Professional Plan",
+      price: "$29.99",
+      unit: "mo",
+      description: "Ideal for professional creators and small teams",
       features: [
-        'Advanced audio generation',
-        'Unlimited voice clones',
-        'Priority support'
-      ],
-      cta: 'Choose Plan'
+        "500 minutes/month audio generation",
+        "Premium voice library",
+        "Priority API access",
+        "Priority support"
+      ]
+    },
+    enterprise: {
+      title: "Enterprise Plan",
+      price: "Custom",
+      description: "For large organizations",
+      features: [
+        "Unlimited audio generation",
+        "Custom voice development",
+        "Dedicated API resources",
+        "24/7 dedicated support"
+      ]
+    },
+    cta: {
+      free: "Start Free Trial",
+      contact: "Contact Sales"
     }
+  },
+  pricing: {
+    hero: {
+      title: "Choose the Right Plan for You",
+      description: "Whether you're an individual creator or an enterprise, we offer flexible pricing options for everyone"
+    },
+    billing: {
+      monthly: "Monthly",
+      yearly: "Yearly",
+      discount: "Save 20%"
+    },
+    basic: {
+      title: "Basic",
+      price: "$9.99",
+      unit: "mo",
+      description: "Perfect for individual creators",
+      features: [
+        "100 minutes/month audio generation",
+        "Basic voice library",
+        "Standard API access",
+        "Email support"
+      ],
+      cta: "Get Started"
+    },
+    pro: {
+      badge: "Most Popular",
+      title: "Professional",
+      price: "$29.99",
+      unit: "mo",
+      description: "Ideal for professional creators and small teams",
+      features: [
+        "500 minutes/month audio generation",
+        "Premium voice library",
+        "Priority API access",
+        "Premium technical support"
+      ],
+      cta: "Upgrade Now"
+    },
+    enterprise: {
+      title: "Enterprise",
+      description: "Custom solutions for large organizations",
+      price: "Contact Us",
+      features: [
+        "Unlimited API calls",
+        "Dedicated customer success manager",
+        "Custom training and support",
+        "Service Level Agreement (SLA)",
+        "Priority technical support"
+      ],
+      cta: "Contact Us"
+    },
+    comparison: {
+      title: "Compare Plans",
+      headers: {
+        features: "Features",
+        basic: "Basic",
+        pro: "Professional",
+        enterprise: "Enterprise"
+      },
+      features: {
+        textToSpeech: "Text to Speech",
+        speechToSpeech: "Speech to Speech",
+        voiceCount: "Voice Models",
+        apiAccess: "API Access",
+        support: "Technical Support",
+        values: {
+          check: "✓",
+          voiceCount: {
+            basic: "10+",
+            pro: "50+",
+            enterprise: "Unlimited"
+          },
+          apiAccess: {
+            basic: "Basic",
+            pro: "Advanced",
+            enterprise: "Enterprise"
+          },
+          support: {
+            basic: "Email",
+            pro: "Priority",
+            enterprise: "24/7 Dedicated"
+          }
+        }
+      }
+    },
+    faq: {
+      title: "Pricing FAQ",
+      items: [
+        {
+          q: "How do I choose the right plan?",
+          a: "Choose based on your usage needs - Basic for individuals, Pro or Enterprise for businesses requiring more features and support."
+        },
+        {
+          q: "Can I change my subscription plan?",
+          a: "Yes, you can upgrade or downgrade your subscription at any time. Charges will be prorated accordingly."
+        },
+        {
+          q: "Is there a free trial?",
+          a: "We offer a 14-day free trial for all new users to fully experience our product features."
+        },
+        {
+          q: "How does billing work?",
+          a: "We bill monthly for subscriptions, accepting major credit cards. Enterprise plans are billed annually."
+        },
+        {
+          q: "Do you offer refunds?",
+          a: "Yes, we offer full refunds within 7 days of first purchase. Partial refunds may be available for technical issues. Unused credits can be rolled over to the next month. Contact support for specific refund requests."
+        }
+      ]
+    },
+    title: "Pricing Plans",
+    description: "Choose the plan that best fits your needs"
   },
   footer: {
     copyright: "© 2024 AI Fugatto. All rights reserved.",
@@ -160,58 +294,78 @@ export default {
     speechToSpeech: "Speech to Speech"
   },
   testimonials: {
-    title: "Testimonials",
+    title: "User Reviews",
     description: "Users from around the world share their success stories and experiences with Fugatto AI",
     reviews: [
       {
-        content: "This platform has been pivotal in enhancing our product development cycle and collaborative efforts.",
-        name: "Nina Tucker",
-        role: "Co-founder of Infinituma"
+        content: "Fugatto AI has significantly improved our product development cycle and team collaboration.",
+        name: "Michael Chen",
+        role: "Co-founder at Infinituma"
       },
       {
-        content: "Nebula's collaboration software streamlined our dev process with seamless integrations.",
-        name: "Olivia Simmons",
-        role: "Engineer at DevTech"
+        content: "The collaboration features have made our development process smoother and integration is seamless.",
+        name: "Sarah Lee",
+        role: "DevTech Engineer"
       },
       {
-        content: "So happy our team moved to Nebula! It simplified our hiring process, making collaboration a breeze.",
-        name: "Sophia Johnson",
-        role: "Developer at Tinker"
+        content: "Choosing Fugatto was the best decision our team made this year. It has streamlined our workflow.",
+        name: "David Wang",
+        role: "Tinker Developer"
       },
       {
-        content: "The AI capabilities have transformed how we approach content creation. Simply amazing!",
-        name: "Marcus Chen",
+        content: "The AI capabilities have completely transformed how we create content. It's amazing!",
+        name: "James Zhang",
         role: "Content Director at MediaFlow"
       },
       {
-        content: "Best decision we made this year. The voice cloning feature is revolutionary!",
-        name: "Sarah Kim",
+        content: "The voice cloning feature is revolutionary and has opened up endless possibilities for our projects.",
+        name: "Emily Lin",
         role: "Audio Producer"
       },
       {
-        content: "The user interface is clean and simple to navigate. It's truly a designer's dream platform!",
-        name: "Ava Hill",
+        content: "Clean interface and intuitive operations - a designer's dream platform!",
+        name: "Lucy Wang",
         role: "UI Designer at Creatify"
       },
       {
-        content: "Our creative process has never been more fluid. The features are top-notch and so easy to use!",
-        name: "Emma López",
+        content: "Our creative process has never been smoother. Top-notch features and easy to use!",
+        name: "May Li",
         role: "Creative Director at VisualVibe"
       },
       {
-        content: "The multilingual support has made our global expansion so much smoother.",
-        name: "Liam O'Connor",
-        role: "International Operations"
+        content: "The real-time audio processing has taken our live streaming to the next level.",
+        name: "Tom Zhao",
+        role: "Technical Lead at LiveTech"
       },
       {
-        content: "Incredible voice synthesis quality. Our audiobooks sound more natural than ever.",
-        name: "Maya Patel",
-        role: "Publishing Director"
+        content: "AI sound effect generation has saved us tremendous time and cost in game development.",
+        name: "Jack Sun",
+        role: "Sound Director at GameStudio"
       },
       {
-        content: "The customer support team is exceptional. They've helped us maximize the platform's potential.",
-        name: "Alex Rivera",
-        role: "Technical Lead"
+        content: "The multilingual voiceover feature helped us complete global localization quickly.",
+        name: "Fiona Liu",
+        role: "Global Project Manager"
+      },
+      {
+        content: "The audio restoration feature is powerful and perfectly solved our legacy audio needs.",
+        name: "Howard Zheng",
+        role: "Audio Restoration Expert"
+      },
+      {
+        content: "Batch processing capability has greatly improved our efficiency, saving significant manpower.",
+        name: "Leo Huang",
+        role: "Audio Engineering Director"
+      },
+      {
+        content: "Custom model training allows us to create audio content that perfectly matches our brand voice.",
+        name: "Wendy Zhang",
+        role: "Brand Marketing Director"
+      },
+      {
+        content: "Cloud collaboration makes remote work so simple, and team coordination more seamless.",
+        name: "William Wu",
+        role: "Remote Team Lead"
       }
     ]
   },
@@ -239,5 +393,30 @@ export default {
   about: {
     title: "Discover Fugatto AI",
     description: "Experience the next generation of AI-powered audio generation"
+  },
+  waitlist: {
+    title: "Join API Waitlist",
+    form: {
+      name: "Name",
+      email: "Email",
+      company: "Company/Organization",
+      useCase: "Use Case",
+      submit: "Submit",
+      cancel: "Cancel"
+    },
+    success: {
+      title: "Thank you for joining!",
+      message: "We've received your request and will contact you soon.",
+      close: "Close"
+    },
+    error: {
+      title: "Submission Failed",
+      message: "Please try again or contact support.",
+      retry: "Retry"
+    },
+    validation: {
+      email: "Please enter a valid email address",
+      required: "This field is required"
+    }
   }
 }

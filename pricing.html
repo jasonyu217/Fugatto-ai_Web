@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'">
+    <title>定价方案 - Fugatto</title>
+    <link rel="stylesheet" href="/src/css/styles.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-lg border-b border-white/10">
+        <!-- 导航内容 -->
+    </nav>
+
+    <!-- 添加一个外层容器 -->
+    <div class="pricing-container mt-64">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4" data-i18n="pricing.title">定价方案</h2>
+            <p class="text-xl text-gray-400" data-i18n="pricing.description">选择最适合您需求的方案</p>
+        </div>
+        <div id="pricing-content"></div>
+        
+        <!-- FAQ部分的布局优化 -->
+        <div class="faq-section max-w-4xl mx-auto mt-24">
+            <h3 class="text-3xl font-bold text-center mb-12" data-i18n="pricing.faq.title">定价常见问题</h3>
+            <div class="space-y-6">
+                <!-- FAQ项目的样式优化 -->
+                <div class="faq-items divide-y divide-gray-700">
+                    <div class="py-6 first:pt-0 last:pb-0">
+                        <h4 class="text-xl font-semibold mb-4 pl-6" data-i18n="pricing.faq.items.0.q">如何选择合适的方案?</h4>
+                        <p class="text-gray-400 leading-relaxed pl-6" data-i18n="pricing.faq.items.0.a">根据您的使用需求选择 - 个人用户建议选择基础版,企业用户可以选择专业版或企业版获得更多功能支持。</p>
+                    </div>
+                    <!-- 其他FAQ项目将通过JavaScript动态加载 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 先加载主要的JavaScript文件 -->
+    <script src="/src/js/main.js"></script>
+    
+    <!-- 确保pricing.js作为模块加载 -->
+    <script type="module">
+        try {
+            const { initPricingPage } = await import('/src/js/pricing.js');
+            const { initFAQ } = await import('/src/js/faq.js');
+            
+            // 加载价格页面内容
+            const response = await fetch('/public/pricing-content.html');
+            const html = await response.text();
+            document.getElementById('pricing-content').innerHTML = html;
+            
+            // 初始化页面和FAQ功能
+            initPricingPage();
+            initFAQ();
+        } catch (error) {
+            console.error('Error initializing page:', error);
+        }
+    </script>
+</body>
+</html>

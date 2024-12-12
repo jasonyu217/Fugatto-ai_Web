@@ -65,17 +65,95 @@ export default {
   pricing: {
     title: "Precios",
     description: "Elija el plan que mejor se adapte a sus necesidades y disfrute de las potentes funciones de Fugatto AI. Ofrecemos opciones de precios flexibles para satisfacer diferentes requisitos de escala.",
-    starter: {
-      title: "Inicial",
-      price: "$9.99/mes",
+    basic: {
+      title: "Plan Básico",
+      price: "$9.99",
+      unit: "mes",
       features: ["Generación básica de audio", "5 clones de voz", "Soporte estándar"],
       cta: "Elegir Plan"
     },
     pro: {
-      title: "Profesional",
-      price: "$29.99/mes",
+      title: "Plan Profesional",
+      price: "$29.99",
+      unit: "mes",
       features: ["Generación avanzada de audio", "Clones de voz ilimitados", "Soporte prioritario"],
       cta: "Elegir Plan"
+    },
+    enterprise: {
+      title: "Empresarial",
+      description: "Soluciones personalizadas para grandes organizaciones",
+      price: "Contáctenos",
+      features: [
+        "Llamadas API ilimitadas",
+        "Gerente de éxito del cliente dedicado",
+        "Capacitación y soporte personalizado",
+        "Acuerdo de nivel de servicio (SLA)",
+        "Soporte técnico prioritario"
+      ],
+      cta: "Contáctenos"
+    },
+    faq: {
+      title: "Preguntas Frecuentes",
+      items: [
+        {
+          q: "¿Cómo elijo el plan adecuado?",
+          a: "Elija según sus necesidades de uso: Básico para individuos, Pro o Empresa para negocios que requieren más funciones y soporte."
+        },
+        {
+          q: "¿Puedo cambiar mi plan de suscripción?",
+          a: "Sí, puede actualizar o reducir su suscripción en cualquier momento. Los cargos se prorratearán según corresponda."
+        },
+        {
+          q: "¿Hay una prueba gratuita?",
+          a: "Ofrecemos una prueba gratuita de 14 días para todos los nuevos usuarios para experimentar completamente nuestras funciones."
+        },
+        {
+          q: "¿Cómo funciona la facturación?",
+          a: "Facturamos mensualmente las suscripciones, aceptando las principales tarjetas de crédito. Los planes empresariales se facturan anualmente."
+        },
+        {
+          q: "¿Ofrecen reembolsos?",
+          a: "Sí, ofrecemos reembolsos completos dentro de los 7 días posteriores a la primera compra. Los reembolsos parciales pueden estar disponibles por problemas técnicos. Los créditos no utilizados se pueden transferir al mes siguiente. Contacte a soporte para solicitudes específicas de reembolso."
+        }
+      ]
+    },
+    hero: {
+      title: "Elija el Plan Perfecto para Usted",
+      description: "Ya sea un creador individual o una empresa, ofrecemos opciones de precios flexibles para todos"
+    },
+    comparison: {
+      title: "Comparar Planes",
+      headers: {
+        features: "Características",
+        basic: "Básico",
+        pro: "Profesional",
+        enterprise: "Empresarial"
+      },
+      features: {
+        textToSpeech: "Texto a Voz",
+        speechToSpeech: "Voz a Voz",
+        voiceCount: "Modelos de Voz",
+        apiAccess: "Acceso API",
+        support: "Soporte Técnico",
+        values: {
+          check: "✓",
+          voiceCount: {
+            basic: "10+",
+            pro: "50+",
+            enterprise: "Ilimitado"
+          },
+          apiAccess: {
+            basic: "Básico",
+            pro: "Avanzado",
+            enterprise: "Empresarial"
+          },
+          support: {
+            basic: "Email",
+            pro: "Prioritario",
+            enterprise: "24/7 Dedicado"
+          }
+        }
+      }
     }
   },
   faq: {
@@ -99,58 +177,78 @@ export default {
     description: "Experimenta la próxima generación de generación de audio impulsada por IA"
   },
   testimonials: {
-    title: "Testimonios",
+    title: "Reseñas de Usuarios",
     description: "Usuarios de todo el mundo comparten sus historias de éxito y experiencias con Fugatto AI",
     reviews: [
       {
-        content: "Esta plataforma ha sido fundamental para mejorar nuestro ciclo de desarrollo de productos y esfuerzos colaborativos.",
-        name: "Ana García",
-        role: "Cofundadora de Infinituma"
+        content: "Fugatto AI ha mejorado significativamente nuestro ciclo de desarrollo de productos y la colaboración del equipo.",
+        name: "Miguel Chen",
+        role: "Cofundador de Infinituma"
       },
       {
-        content: "El software de colaboración de Fugatto optimizó nuestro proceso de desarrollo con integraciones perfectas.",
-        name: "Carlos Rodríguez",
-        role: "Ingeniero en DevTech"
+        content: "Las funciones de colaboración han hecho que nuestro proceso de desarrollo sea más fluido y la integración es perfecta.",
+        name: "Sara Lee",
+        role: "Ingeniera de DevTech"
       },
       {
-        content: "¡Muy feliz de que nuestro equipo se mudara a Fugatto! Simplificó nuestro proceso de contratación.",
-        name: "María Sánchez",
-        role: "Desarrolladora en Tinker"
+        content: "Elegir Fugatto fue la mejor decisión que tomó nuestro equipo este año. Ha optimizado nuestro flujo de trabajo.",
+        name: "David Wang",
+        role: "Desarrollador de Tinker"
       },
       {
-        content: "Las capacidades de IA han transformado nuestra forma de abordar la creación de contenido. ¡Increíble!",
-        name: "Diego Martínez",
+        content: "Las capacidades de IA han transformado completamente nuestra forma de crear contenido. ¡Es increíble!",
+        name: "Jaime Zhang",
         role: "Director de Contenido en MediaFlow"
       },
       {
-        content: "La mejor decisión que tomamos este año. ¡La función de clonación de voz es revolucionaria!",
-        name: "Laura Torres",
+        content: "La función de clonación de voz es revolucionaria y ha abierto infinitas posibilidades para nuestros proyectos.",
+        name: "Emily Lin",
         role: "Productora de Audio"
       },
       {
-        content: "La interfaz es limpia y simple de navegar. ¡Es verdaderamente la plataforma soñada de un diseñador!",
-        name: "Isabel López",
+        content: "Interfaz limpia y operaciones intuitivas - ¡la plataforma soñada por los diseñadores!",
+        name: "Lucía Wang",
         role: "Diseñadora UI en Creatify"
       },
       {
-        content: "Nuestro proceso creativo nunca ha sido más fluido. ¡Las características son excelentes y fáciles de usar!",
-        name: "Pablo Ruiz",
-        role: "Director Creativo en VisualVibe"
+        content: "Nuestro proceso creativo nunca ha sido más fluido. ¡Características de primera clase y fácil de usar!",
+        name: "María Li",
+        role: "Directora Creativa en VisualVibe"
       },
       {
-        content: "El soporte multilingüe ha hecho que nuestra expansión global sea mucho más sencilla.",
-        name: "Miguel Hernández",
-        role: "Operaciones Internacionales"
+        content: "El procesamiento de audio en tiempo real ha llevado nuestras transmisiones en vivo al siguiente nivel.",
+        name: "Tomás Zhao",
+        role: "Líder Técnico en LiveTech"
       },
       {
-        content: "Calidad de síntesis de voz increíble. Nuestros audiolibros suenan más naturales que nunca.",
-        name: "Carmen Jiménez",
-        role: "Directora de Publicación"
+        content: "La generación de efectos de sonido con IA nos ha ahorrado mucho tiempo y costos en el desarrollo de juegos.",
+        name: "Javier Sun",
+        role: "Director de Sonido en GameStudio"
       },
       {
-        content: "El equipo de soporte al cliente es excepcional. Nos han ayudado a maximizar el potencial de la plataforma.",
-        name: "Roberto Morales",
-        role: "Líder Técnico"
+        content: "La función de doblaje multilingüe nos ayudó a completar rápidamente la localización global.",
+        name: "Fernanda Liu",
+        role: "Gerente de Proyectos Globales"
+      },
+      {
+        content: "La función de restauración de audio es potente y resolvió perfectamente nuestras necesidades de audio antiguo.",
+        name: "Hugo Zheng",
+        role: "Experto en Restauración de Audio"
+      },
+      {
+        content: "La capacidad de procesamiento por lotes ha mejorado enormemente nuestra eficiencia, ahorrando recursos humanos significativos.",
+        name: "Leonardo Huang",
+        role: "Director de Ingeniería de Audio"
+      },
+      {
+        content: "El entrenamiento de modelos personalizados nos permite crear contenido de audio que coincide perfectamente con la voz de nuestra marca.",
+        name: "Wendy Zhang",
+        role: "Directora de Marketing de Marca"
+      },
+      {
+        content: "La colaboración en la nube hace que el trabajo remoto sea muy simple y la coordinación del equipo más fluida.",
+        name: "Guillermo Wu",
+        role: "Líder de Equipo Remoto"
       }
     ]
   },
@@ -233,5 +331,30 @@ export default {
     apiError: "Servicio temporalmente no disponible, intente más tarde",
     networkError: "Error de red, verifique su conexión",
     unknownError: "Error inesperado, intente nuevamente"
+  },
+  waitlist: {
+    title: "Unirse a la lista de espera de API",
+    form: {
+      name: "Nombre",
+      email: "Correo electrónico",
+      company: "Empresa/Organización",
+      useCase: "Caso de uso",
+      submit: "Enviar",
+      cancel: "Cancelar"
+    },
+    success: {
+      title: "¡Gracias por unirte!",
+      message: "Hemos recibido tu solicitud y nos pondremos en contacto pronto.",
+      close: "Cerrar"
+    },
+    error: {
+      title: "Error de envío",
+      message: "Por favor, inténtalo de nuevo o contacta con soporte.",
+      retry: "Reintentar"
+    },
+    validation: {
+      email: "Por favor, introduce un correo electrónico válido",
+      required: "Este campo es obligatorio"
+    }
   }
 }

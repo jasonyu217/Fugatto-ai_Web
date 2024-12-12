@@ -1,15 +1,19 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+  plugins: [],
   server: {
-    port: 3001,
-    host: true,
-    proxy: {
-      '/api': {
-        target: 'http://127.0.0.1:8002',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
-  }
+    port: 3000,
+  },
+  build: {
+    cssCodeSplit: false,
+  },
+  css: {
+    postcss: {
+      plugins: [
+        require('tailwindcss'),
+        require('autoprefixer'),
+      ],
+    },
+  },
 }) 

@@ -7,6 +7,7 @@ import { TTSService } from './tts-service';
 function updateContent() {
   console.log('Updating content with language:', i18next.language);
   document.querySelectorAll('[data-i18n]').forEach(element => {
+    if (element.hasAttribute('data-i18n-ignore')) return;
     const key = element.getAttribute('data-i18n');
     const translation = i18next.t(key);
     console.log('Translating key:', key, 'to:', translation);
@@ -206,7 +207,7 @@ function initTTSFeature() {
       generateButton.disabled = true;
       downloadButton.classList.add('hidden');
 
-      // 获取输入
+      // 入
       const text = textInput.value;
       const language = languageSelect.value;
       const voice = voiceSelect.value;
@@ -354,10 +355,21 @@ i18next.on('languageChanged', (lng) => {
 });
 
 // FAQ 交互
-document.querySelectorAll('.faq-question').forEach(question => {
-  question.addEventListener('click', () => {
-    const answer = question.nextElementSibling;
-    answer.classList.toggle('hidden');
+document.querySelectorAll('.faq-question').forEach(button => {
+  button.addEventListener('click', () => {
+    const faqItem = button.closest('.faq-item');
+    const answer = button.nextElementSibling;
+    
+    // 切换当前FAQ项的状态
+    faqItem.classList.toggle('active');
+    button.classList.toggle('active');
+    
+    // 显示/隐藏答案
+    if (answer.classList.contains('hidden')) {
+      answer.classList.remove('hidden');
+    } else {
+      answer.classList.add('hidden');
+    }
   });
 });
 
@@ -387,23 +399,40 @@ document.getElementById('waitlistForm').addEventListener('submit', async (e) => 
     submitButton.disabled = true;
     loadingSpinner.classList.remove('hidden');
     
-    const formData = new FormData(e.target);
-    const response = await fetch('https://formspree.io/f/xnnqydkp', {
+    const formData = new FormData(waitlistForm);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    const response = await fetch(waitlistForm.action, {
       method: 'POST',
-      body: formData,
+      body: JSON.stringify(data),
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      mode: 'no-cors'
+        'Content-Type': 'application/json'
+      }
     });
     
-    alert('感谢您的注册！我们会尽快与您联系。');
-    closeWaitlistModal();
-    e.target.reset();
+    if (response.ok) {
+      // 隐藏等待列表弹窗
+      waitlistModal.classList.add('hidden');
+      waitlistModal.classList.remove('flex');
+      // 显示反馈弹窗
+      feedbackModal.classList.remove('hidden');
+      feedbackModal.classList.add('flex');
+      // 重置表单
+      waitlistForm.reset();
+      // 触发转化追踪
+      gtag_report_conversion();
+    } else {
+      throw new Error('Submission failed');
+    }
   } catch (error) {
     console.error('Error:', error);
-    alert('提交失败，请稍后重试。');
+    // 显示错误信息
+    feedbackModal.querySelector('[data-i18n="waitlist.error.title"]').classList.remove('hidden');
+    feedbackModal.querySelector('[data-i18n="waitlist.error.message"]').classList.remove('hidden');
   } finally {
     submitButton.disabled = false;
     loadingSpinner.classList.add('hidden');
@@ -469,7 +498,7 @@ if (import.meta.hot) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  // 生���音频按钮点击事件
+  // 生成音频按钮点击事件
   document.getElementById('generateButton')?.addEventListener('click', function() {
     gtag_report_conversion();
   });
@@ -543,4 +572,151 @@ async function handleAudioGeneration() {
   } catch (error) {
     updateAudioOutputStatus('error', container);
   }
+}
+
+// 获取表单和弹窗元素
+const waitlistForm = document.getElementById('waitlistForm');
+const waitlistModal = document.getElementById('waitlistModal');
+const feedbackModal = document.getElementById('feedbackModal');
+const closeFeedbackButton = document.getElementById('closeFeedbackButton');
+const cancelButton = document.getElementById('cancelButton');
+
+// 处理表单提交
+waitlistForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  try {
+    const response = await fetch(waitlistForm.action, {
+      method: 'POST',
+      body: new FormData(waitlistForm)
+    });
+    
+    if (response.ok) {
+      // 隐藏等待列表弹窗
+      waitlistModal.classList.add('hidden');
+      // 显示反馈弹窗
+      feedbackModal.classList.remove('hidden');
+      feedbackModal.classList.add('flex');
+      // 重置表单
+      waitlistForm.reset();
+    } else {
+      throw new Error('Submission failed');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    // 显示错误信息
+    const errorTitle = document.querySelector('[data-i18n="waitlist.error.title"]');
+    const errorMessage = document.querySelector('[data-i18n="waitlist.error.message"]');
+    // 更新错误信息文本
+    updateTranslations();
+  }
+});
+
+// 关闭反馈弹窗
+closeFeedbackButton.addEventListener('click', () => {
+  feedbackModal.classList.add('hidden');
+  feedbackModal.classList.remove('flex');
+});
+
+// Cancel 按钮关闭弹窗
+cancelButton.addEventListener('click', () => {
+  waitlistModal.classList.add('hidden');
+  waitlistModal.classList.remove('flex');
+  waitlistForm.reset();
+});
+
+// 修改 loadPricingContent 函数
+async function loadPricingContent(event) {
+  // 始终阻止默认行为
+  event?.preventDefault();
+  
+  try {
+    const mainContent = document.querySelector('main');
+    
+    // 缩短过渡效果时间
+    mainContent.style.transition = 'opacity 0.15s ease';
+    mainContent.style.opacity = '0';
+    
+    // 缩短等待时间
+    await new Promise(resolve => setTimeout(resolve, 150));
+    
+    try {
+      // 预加载内容
+      const response = await fetch('/public/pricing-content.html');
+      if (!response.ok) throw new Error('Failed to load pricing content');
+      const content = await response.text();
+      
+      // 更新 URL (不触发页面刷新)
+      history.pushState({ page: 'pricing' }, '', '#pricing');
+      
+      // 更新内容
+      mainContent.innerHTML = content;
+      
+      // 重新初始化价格页面的功能
+      initPricingPage();
+      
+      // 重新应用翻译
+      updateContent();
+      
+      // 确保 DOM 更新完成后再显示
+      requestAnimationFrame(() => {
+        mainContent.style.opacity = '1';
+        // 滚动到顶部
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      
+    } catch (error) {
+      console.error('Error loading pricing content:', error);
+      mainContent.innerHTML = `
+        <div class="container mx-auto px-4 py-20 text-center">
+          <h2 class="text-2xl font-bold text-red-500 mb-4">加载失败</h2>
+          <p class="text-gray-400">请刷新页面重试</p>
+        </div>
+      `;
+      mainContent.style.opacity = '1';
+    }
+  } catch (error) {
+    console.error('Error in loadPricingContent:', error);
+  }
+}
+
+// 确保函数在全局范围内可用
+window.loadPricingContent = loadPricingContent;
+
+// 初始化价格页面的功能
+function initPricingPage() {
+  // 确保样式正确应用
+  const proCard = document.querySelector('.price-card.pro');
+  if (proCard) {
+    // 确保标签在正确的位置
+    const badge = proCard.querySelector('.pro-badge');
+    if (badge) {
+      // 可以在这里添加任何需要的动态样式调整
+      badge.style.transform = 'rotate(-12deg)';
+    }
+  }
+  
+  // 其他初始化代码...
+}
+
+// 修改浏览器历史记录处理
+window.addEventListener('popstate', async (event) => {
+  if (event.state?.page === 'pricing') {
+    await loadPricingContent();
+  } else {
+    // 如果不是pricing页面，平滑地返回首页
+    const mainContent = document.querySelector('main');
+    mainContent.style.transition = 'opacity 0.15s ease';
+    mainContent.style.opacity = '0';
+    await new Promise(resolve => setTimeout(resolve, 150));
+    window.location.href = '/';
+  }
+});
+
+// 检查初始 URL 是否为价格页面
+if (window.location.hash === '#pricing') {
+  // 使用 requestAnimationFrame 确保DOM完全加载
+  requestAnimationFrame(() => {
+    loadPricingContent();
+  });
 }

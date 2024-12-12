@@ -42,9 +42,15 @@
       form-action 'self' https://formspree.io/ https://formspree.io/f/xnnqydkp;
       img-src 'self' data: https://images.unsplash.com;
     ">
+    <script src="src/i18n/translations/en.js"></script>
+    <script src="src/i18n/translations/ja.js"></script>
+    <script src="src/i18n/translations/es.js"></script>
+    <script src="src/i18n/translations/ru.js"></script>
+    <script src="src/i18n/translations/ar.js"></script>
+    <script src="src/i18n/translations/zh.js"></script>
   </head>
-  <body class="bg-black">
-    <header class="fixed w-full bg-black/50 backdrop-blur-md z-50">
+  <body class="bg-gray-900">
+    <header class="fixed w-full bg-gray-900/50 backdrop-blur-md z-50">
       <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
         <div class="flex items-center gap-2">
           <div class="text-2xl font-bold text-white" data-i18n="nav.brand">Fugatto AI</div>
@@ -92,7 +98,7 @@
           </a>
 
           <!-- Pricing -->
-          <a href="#" class="nav-link" onclick="gtag_report_conversion()" data-i18n="nav.pricing">
+          <a href="#" class="nav-link" onclick="loadPricingContent(event); gtag_report_conversion()" data-i18n="nav.pricing">
             Pricing
           </a>
 
@@ -107,7 +113,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                 </svg>
               </button>
-              <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md rounded-lg shadow-lg border border-white/10 overflow-hidden">
+              <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-gray-900/90 backdrop-blur-md rounded-lg shadow-lg border border-white/10 overflow-hidden">
                 <!-- 语言选项将由 JavaScript 动态插入 -->
               </div>
             </div>
@@ -128,17 +134,19 @@
             <h1 class="text-5xl md:text-7xl font-bold mb-6" data-i18n="hero.title">Fugatto AI-World's Most Flexible Sound</h1>
             <p class="text-xl text-gray-400 mb-12" data-i18n="hero.subtitle">使用文本和音频作为输入，Fugatto AI 的模型可以创建音乐、声音和声效的任意组合</p>
             <div class="flex justify-center gap-4 mb-16">
+              <!-- 文档按钮 -->
               <a href="https://d1qx31qr3h6wln.cloudfront.net/publications/FUGATTO.pdf" target="_blank" class="btn-primary flex items-center gap-2 cursor-pointer">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM16 18H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
                 </svg>
-                阅读文档
+                <span data-i18n="hero.docs">Documentation</span>
               </a>
+              <!-- API 等待列表按钮 -->
               <button id="openWaitlistBtn" class="btn-primary flex items-center gap-2" onclick="gtag_report_conversion()">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
-                <span data-i18n="hero.apiWaitlist">加入API等待列表</span>
+                <span data-i18n="waitlist.title">加入 API 等待列表</span>
               </button>
             </div>
           </div>
@@ -421,41 +429,47 @@
             Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐及语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创作可能
           </p>
           
-          <div class="grid md:grid-cols-3 gap-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- AI驱动的音频生成 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎵</div>
-              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.0.title">AI驱动的音频生成</h3>
-              <p class="text-gray-400" data-i18n="features.cards.0.description">根据文本和音频输入创造声音、语音和音乐</p>
+              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.0.title">AI驱动的音频生成</h3>
+              <p class="text-gray-400" data-i18n="features.cards.0.description">通过文本和音频输入创造独特的声音、语音和音乐</p>
             </div>
-            
+
+            <!-- 创意声音效果 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎨</div>
-              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.1.title">创意声音效果</h3>
+              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.1.title">创意声音效果</h3>
               <p class="text-gray-400" data-i18n="features.cards.1.description">引导Fugatto创造意想不到的声音效果</p>
             </div>
-            
+
+            <!-- 沉浸式音景 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
-              <div class="text-3xl mb-4">🎨</div>
-              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.2.title">沉浸式音景</h3>
-              <p class="text-gray-400" data-i18n="features.cards.2.description">为电影或音频制作提供丰富多变的音景体验</p>
+              <div class="text-3xl mb-4">🎧</div>
+              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.2.title">沉浸式音景</h3>
+              <p class="text-gray-400" data-i18n="features.cards.2.description">为电影和音频制作提供丰富多变的声音体验</p>
             </div>
-            
+
+            <!-- 音频元素提取 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
-              <div class="text-3xl mb-4">🎨</div>
-              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.3.title">音频元素提取</h3>
+              <div class="text-3xl mb-4">🎼</div>
+              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.3.title">音频元素提取</h3>
               <p class="text-gray-400" data-i18n="features.cards.3.description">轻松从音乐中分离人声等音频元素</p>
             </div>
-            
+
+            <!-- 乐器实验 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
-              <div class="text-3xl mb-4">🎨</div>
-              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.4.title">乐器实验</h3>
-              <p class="text-gray-400" data-i18n="features.cards.4.description">音乐家可以在现有音频中添加新乐器</p>
+              <div class="text-3xl mb-4">🎸</div>
+              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.4.title">乐器实验</h3>
+              <p class="text-gray-400" data-i18n="features.cards.4.description">让音乐家在现有音频中添加新乐器</p>
             </div>
-            
+
+            <!-- 无限创意可能 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">✨</div>
-              <h3 class="text-xl font-bold mb-3" data-i18n="features.cards.5.title">无创意可能</h3>
-              <p class="text-gray-400" data-i18n="features.cards.5.description">作为强大的基础模型，赋予用户无限的音创作能力</p>
+              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.5.title">无限创意可能</h3>
+              <p class="text-gray-400" data-i18n="features.cards.5.description">作为强大的基础模型，为用户提供无限的音频创作能力</p>
             </div>
           </div>
         </div>
@@ -606,34 +620,34 @@
           </p>
           <div class="grid md:grid-cols-2 gap-8">
             <div class="price-card">
-              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.starter.title">入门版</h3>
+              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.basic.title">基础版</h3>
               <p class="text-4xl font-bold mb-6">
-                <span data-i18n="pricing.starter.price">$9.99/month</span>
+                <span data-i18n="pricing.basic.price">¥69/月</span>
               </p>
               <ul class="space-y-4 mb-8">
                 <li class="flex items-center">
                   <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span data-i18n="pricing.starter.features.0"></span>
+                  <span data-i18n="pricing.basic.features.0">每月10小时音频生成额度</span>
                 </li>
                 <li class="flex items-center">
                   <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span data-i18n="pricing.starter.features.1"></span>
+                  <span data-i18n="pricing.basic.features.1">支持基础音频编辑功能</span>
                 </li>
                 <li class="flex items-center">
                   <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span data-i18n="pricing.starter.features.2"></span>
+                  <span data-i18n="pricing.basic.features.2">标准客户支持服务</span>
                 </li>
               </ul>
               <button 
                 class="btn-primary w-full" 
-                onclick="handleSubscription('prod_7ee16ea1e0934176', 'usd')"
-                data-i18n="pricing.starter.cta">
+                onclick="handleSubscription('prod_basic', 'cny')"
+                data-i18n="pricing.basic.cta">
                 立即订阅
               </button>
             </div>
@@ -680,70 +694,70 @@
           <p class="section-description" data-i18n="faq.description">
             我们收集了用户最常见的问题和详细解答，帮助您更好地了解 Fugatto AI 的功能和使用方法。
           </p>
-          <div class="space-y-4">
+          <div class="space-y-6 max-w-4xl mx-auto mt-12">
             <div class="faq-item">
-              <button class="faq-question">
+              <button class="faq-question px-8 py-6 bg-white/5 hover:bg-white/10 w-full rounded-xl transition-all duration-300 [&.active]:rounded-b-none">
                 <span data-i18n="faq.q1">什么是NVIDIA Fugatto AI？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a1">
+              <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a1">
                 Fugatto是NVIDIA的生成式AI音频模型，能够根据文本提示创建音乐、音效和语音，特别适合创意产业使用。
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question">
+              <button class="faq-question px-8 py-6 bg-white/5 hover:bg-white/10 w-full rounded-xl transition-all duration-300 [&.active]:rounded-b-none">
                 <span data-i18n="faq.q2">Fugatto是如何工作的？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a2">
+              <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a2">
                 它使用经过大量音频数据训练的先进算法，根据用户输入动态生成或修改声音。
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question">
+              <button class="faq-question px-8 py-6 bg-white/5 hover:bg-white/10 w-full rounded-xl transition-all duration-300 [&.active]:rounded-b-none">
                 <span data-i18n="faq.q3">哪些行业可以受益于Fugatto？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a3">
+              <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a3">
                 音乐制作、游戏、广告和电影行业可以使用它来创建独特的音频内容并增强体验。
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question">
+              <button class="faq-question px-8 py-6 bg-white/5 hover:bg-white/10 w-full rounded-xl transition-all duration-300 [&.active]:rounded-b-none">
                 <span data-i18n="faq.q4">Fugatto能复制人声吗？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a4">
+              <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a4">
                 是的，它可以生成和调整具有不同口音、情感和语调的声音。
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question">
+              <button class="faq-question px-8 py-6 bg-white/5 hover:bg-white/10 w-full rounded-xl transition-all duration-300 [&.active]:rounded-b-none">
                 <span data-i18n="faq.q5">Fugatto支持实时声音编辑吗？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a5">
+              <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a5">
                 是的，它允许根据输入变化动态修改音频。
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question">
+              <button class="faq-question px-8 py-6 bg-white/5 hover:bg-white/10 w-full rounded-xl transition-all duration-300 [&.active]:rounded-b-none">
                 <span data-i18n="faq.q6">是什么让Fugatto与其他AI音频工具与众不同？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-              <div class="hidden mt-4 text-gray-300" data-i18n="faq.a6">
+              <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a6">
                 它在生成多样化、高质量声音输出的灵活性，以及处理复杂提示的能力使其独特。
               </div>
             </div>
@@ -752,7 +766,7 @@
       </section>
     </main>
 
-    <footer class="bg-black/50 backdrop-blur-md text-white py-16">
+    <footer class="bg-gray-900/50 backdrop-blur-md text-white py-16">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
           <!-- Logo and Copyright -->
@@ -820,30 +834,30 @@
     <script type="module" src="/src/js/main.js"></script>
     <div id="waitlistModal" class="fixed inset-0 bg-black/50 backdrop-blur-md hidden items-center justify-center z-50">
       <div class="bg-white/10 backdrop-blur-md p-8 rounded-xl max-w-md w-full mx-4">
-        <h3 class="text-2xl font-bold mb-4">加入 API 等待列表</h3>
+        <h3 class="text-2xl font-bold mb-4" data-i18n="waitlist.title">Join API Waitlist</h3>
         <form id="waitlistForm" 
           action="https://formspree.io/f/xnnqydkp" 
           method="POST"
         >
           <div class="space-y-4">
             <div>
-              <label class="block text-sm mb-2">姓名</label>
+              <label class="block text-sm mb-2" data-i18n="waitlist.form.name">Name</label>
               <input type="text" name="name" required class="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white">
             </div>
             <div>
-              <label class="block text-sm mb-2">邮箱</label>
+              <label class="block text-sm mb-2" data-i18n="waitlist.form.email">Email</label>
               <input type="email" name="_replyto" required 
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                title="请输入有效的邮箱地址"
+                title="Please enter a valid email address"
                 class="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white">
-              <span class="text-xs text-red-400 mt-1 hidden">请输入有效的邮箱地址</span>
+              <span class="text-xs text-red-400 mt-1 hidden" data-i18n="waitlist.validation.email">Please enter a valid email address</span>
             </div>
             <div>
-              <label class="block text-sm mb-2">公司/组织</label>
+              <label class="block text-sm mb-2" data-i18n="waitlist.form.company">Company/Organization</label>
               <input type="text" name="company" class="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white">
             </div>
             <div>
-              <label class="block text-sm mb-2">使用场景</label>
+              <label class="block text-sm mb-2" data-i18n="waitlist.form.useCase">Use Case</label>
               <textarea name="message" class="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white h-24"></textarea>
             </div>
           </div>
@@ -853,13 +867,75 @@
                 <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
               </svg>
               <span class="loading-spinner hidden"></span>
-              提交
+              <span data-i18n="waitlist.form.submit">Submit</span>
             </button>
-            <button type="button" class="btn-secondary flex-1" id="cancelButton">取消</button>
+            <button type="button" class="btn-secondary flex-1" id="cancelButton">
+              <span data-i18n="waitlist.form.cancel">Cancel</span>
+            </button>
           </div>
         </form>
       </div>
     </div>
+    <div id="feedbackModal" class="fixed inset-0 bg-black/50 backdrop-blur-md hidden items-center justify-center z-50">
+      <div class="bg-white/10 backdrop-blur-md p-8 rounded-xl max-w-md w-full mx-4 text-center">
+        <h3 class="text-2xl font-bold mb-4" data-i18n="waitlist.success.title">Thank you for joining!</h3>
+        <p class="text-gray-300 mb-6" data-i18n="waitlist.success.message">We've received your request and will contact you soon.</p>
+        <button class="btn-primary w-full" id="closeFeedbackButton">
+          <span data-i18n="waitlist.success.close">Close</span>
+        </button>
+      </div>
+    </div>
     <script src="/src/js/payment.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // 初始化i18next
+        i18next
+          .use(i18nextHttpBackend)
+          .init({
+            lng: 'zh', // 默认语言
+            fallbackLng: 'en',
+            debug: true,
+            resources: {
+              en: {
+                translation: enTranslations
+              },
+              ja: {
+                translation: jaTranslations
+              },
+              es: {
+                translation: esTranslations
+              },
+              ru: {
+                translation: ruTranslations
+              },
+              ar: {
+                translation: arTranslations
+              },
+              zh: {
+                translation: zhTranslations
+              }
+            }
+          }, function(err, t) {
+            // 初始化完成后更新所有带有data-i18n属性的元素
+            updateContent();
+          });
+      });
+
+      // 更新页面内容的函数
+      function updateContent() {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+          const key = element.getAttribute('data-i18n');
+          element.textContent = i18next.t(key);
+        });
+      }
+
+      // 语言切换函数
+      function changeLang(lang) {
+        i18next.changeLanguage(lang, (err, t) => {
+          if (err) return console.log('something went wrong loading', err);
+          updateContent();
+        });
+      }
+    </script>
   </body>
 </html>

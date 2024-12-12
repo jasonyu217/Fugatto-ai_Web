@@ -24,11 +24,43 @@ body {
 }
 
 .faq-question {
-  @apply w-full flex justify-between items-center p-4 bg-white/5 backdrop-blur-md rounded-lg text-left hover:bg-white/10 transition-colors;
+  @apply w-full text-left p-6 bg-white/5 hover:bg-white/10 
+         rounded-xl transition-all duration-300
+         flex justify-between items-center cursor-pointer;
+}
+
+.faq-answer {
+  @apply px-6 pb-6 text-gray-400;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease-in-out;
+  visibility: hidden;
+}
+
+.faq-answer.active {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.faq-question svg {
+  @apply transition-transform duration-300;
 }
 
 .price-card {
-  @apply p-8 bg-white/5 backdrop-blur-md rounded-xl border border-white/10;
+  @apply relative p-8 bg-black/20 backdrop-blur-md rounded-xl border border-white/10
+         flex flex-col h-full;
+}
+
+.price-card > div {
+  @apply flex-1 flex flex-col;
+}
+
+.price-card button {
+  @apply mt-auto;
 }
 
 /* Tab 样式优化 */
@@ -580,4 +612,85 @@ audio::-webkit-media-controls-mute-button {
 /* 视频区域容器 */
 .container.mx-auto {
   @apply max-w-7xl px-4 w-full;
+}
+
+/* 价格卡片样式 */
+.price-card {
+  @apply relative p-8 bg-black/20 backdrop-blur-md rounded-xl border border-white/10
+         flex flex-col h-full;
+}
+
+.price-card > div {
+  @apply flex-1 flex flex-col;
+}
+
+.price-card button {
+  @apply mt-auto;
+}
+
+/* 专业版卡片特殊样式 */
+.price-card.pro {
+  @apply relative;
+}
+
+/* 专业版标签样式 */
+.pro-badge {
+  @apply absolute -top-5 -left-4 
+         bg-gradient-to-r from-green-500 via-emerald-500 to-blue-500 
+         px-4 py-2 rounded-md text-sm z-20
+         shadow-[0_0_15px_rgba(34,197,94,0.5)]
+         flex items-center gap-2 transform -rotate-12;
+}
+
+.pro-badge-text {
+  @apply text-white font-bold tracking-wide;
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* FAQ样式 */
+.faq-item {
+  @apply mb-4 bg-white/5 rounded-xl overflow-hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-item button {
+  @apply w-full text-left flex justify-between items-center py-4 px-6;
+  transition: all 0.3s ease;
+}
+
+.faq-item button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.faq-answer {
+  @apply px-6 pb-4 text-gray-300;
+  transition: all 0.3s ease;
+}
+
+.arrow-icon {
+  transition: transform 0.3s ease;
+}
+
+/* FAQ列表项样式 */
+.faq-answer p {
+  @apply leading-relaxed;
+}
+
+.faq-answer br + br {
+  @apply hidden;
 }
