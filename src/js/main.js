@@ -642,7 +642,7 @@ async function loadPricingContent(event) {
     
     try {
       // 预加载内容
-      const response = await fetch('/public/pricing-content.html');
+      const response = await fetch('/pricing-content.html');
       if (!response.ok) throw new Error('Failed to load pricing content');
       const content = await response.text();
       
@@ -652,14 +652,15 @@ async function loadPricingContent(event) {
       // 更新内容
       mainContent.innerHTML = content;
       
-      // 重新初始化价格页面的功能
-      initPricingPage();
-      
-      // 重新应用翻译
-      updateContent();
-      
-      // 确保 DOM 更新完成后再显示
+      // 使用 requestAnimationFrame 确保 DOM 更新后再初始化功能
       requestAnimationFrame(() => {
+        // 重新初始化价格页面的功能
+        initPricingPage();
+        
+        // 重新应用翻译
+        updateContent();
+        
+        // 确保 DOM 更新完成后再显示
         mainContent.style.opacity = '1';
         // 滚动到顶部
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -691,12 +692,36 @@ function initPricingPage() {
     // 确保标签在正确的位置
     const badge = proCard.querySelector('.pro-badge');
     if (badge) {
-      // 可以在这里添加任何需要的动态样式调整
       badge.style.transform = 'rotate(-12deg)';
     }
   }
   
-  // 其他初始化代码...
+  // 初始化 tab 切换功能
+  initTabSwitching();
+}
+
+// Tab 切换功能初始化
+function initTabSwitching() {
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // 移除所有 active 类
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.add('hidden'));
+      
+      // 添加 active 类到当前按钮
+      button.classList.add('active');
+      
+      // 显示对应内容
+      const targetId = button.getAttribute('data-target');
+      const targetContent = document.getElementById(targetId);
+      if (targetContent) {
+        targetContent.classList.remove('hidden');
+      }
+    });
+  });
 }
 
 // 修改浏览器历史记录处理
