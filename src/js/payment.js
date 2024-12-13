@@ -1,6 +1,6 @@
 // KodePay 配置
-window.KODEPAY_APPLICATION_ID = '88fec018-b7ce-11ef-a86f-aa6962b9d5ea';
-window.KODEPAY_CLIENT_ID = '0d74e6ec-b7cf-11ef-a3bb-4a5bb4ed3f3b';
+window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
+window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
 window.KODEPAY_ENV = 'development';
 
 // 加载 KodePay SDK
