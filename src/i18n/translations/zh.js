@@ -1,7 +1,7 @@
 export default {
   hero: {
-    title: "Fugatto AI - AI音频创作工具",
-    subtitle: "利用先进的AI技术将文字转换为音频并克隆声音",
+    title: "AI - 世界上最灵活的声音",
+    subtitle: "使用文本和音频作为输入，Fugatto AI 的模型可以创建音乐、声音和声效的任意组合",
     docs: "阅读文档",
     apiWaitlist: "加入API等待列表"
   },

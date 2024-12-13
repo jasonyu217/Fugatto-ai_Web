@@ -12,49 +12,64 @@ window.KODEPAY_ENV = 'development';
     console.log('KodePay SDK loaded');
     // 确保 KodePay 对象存在
     if (window.KodePay) {
-      window.KodePay.init && window.KodePay.init();
-      console.log('KodePay initialized');
+      // 等待初始化完成
+      window.KodePay.init().then(() => {
+        console.log('KodePay initialized');
+      }).catch(error => {
+        console.error('KodePay initialization failed:', error);
+      });
     }
   };
   document.head.appendChild(script);
 })();
 
 // 处理订阅
-window.handleSubscription = function(priceId, currency) {
-  console.log('开始处理订阅:', { priceId, currency });
-  
-  // 等待 SDK 加载完成
-  if (!window.KodePay) {
-    console.error('KodePay SDK 未加载');
-    setTimeout(() => {
-      if (window.KodePay) {
-        handleSubscription(priceId, currency);
-      } else {
-        alert('支付服务未就绪，请刷新页面重试');
-      }
-    }, 1000);
-    return;
-  }
-
+function handleSubscription(productId, currency, priceId) {
   try {
-    console.log('正在打开支付页面...');
-    // 支付配置
-    const paymentConfig = {
+    console.log('Starting payment process:', { productId, currency, priceId });
+    // 防止重复点击
+    const button = event.currentTarget;
+    if (button.disabled) return;
+    button.disabled = true;
+    
+    // 检查 KodePay SDK 是否已加载
+    if (!window.KodePay) {
+      console.error('KodePay SDK not loaded yet');
+      throw new Error('KodePay SDK not loaded');
+    }
+    console.log('KodePay SDK status:', window.KodePay);
+    
+    // 使用 open_payment_choose_page 方法
+    console.log('Opening payment page with config:', {
+      productId,
+      currency,
       payment_channel: 'stripe',
       payment_method: 'card',
-      currency: 'usd',
-      redirect_url: 'https://fugatto-ai.com/payment/success'
-    };
+      redirect_url: window.location.origin + '/payment/success'
+    });
 
-    // 打开支付页面
-    window.KodePay.open_payment_page(priceId);
-    console.log('支付页面已打开');
-
+    window.KodePay.open_payment_choose_page(
+      productId,
+      currency,
+      {
+        payment_channel: 'stripe',
+        payment_method: 'card',
+        redirect_url: window.location.origin + '/payment/success',
+        price_id: priceId
+      }
+    );
+    
   } catch (error) {
-    console.error('支付初始化失败:', error);
-    alert('支付初始化失败，请重试');
+    console.error('Payment error:', error);
+    alert('支付初始化失败，请稍后重试');
+  } finally {
+    // 重新启用按钮
+    button.disabled = false;
   }
-};
+}
+
+// 确保函数在全局范围可用
+window.handleSubscription = handleSubscription;
 
 // 监听 DOM 加载完成
 document.addEventListener('DOMContentLoaded', function() {

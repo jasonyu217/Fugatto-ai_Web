@@ -131,8 +131,14 @@
       <section class="hero-section flex items-center justify-center pt-32">
         <div class="container mx-auto">
           <div class="text-center mb-12">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6" data-i18n="hero.title">Fugatto AI-World's Most Flexible Sound</h1>
-            <p class="text-xl text-gray-400 mb-12" data-i18n="hero.subtitle">使用文本和音频作为输入，Fugatto AI 的模型可以创建音乐、声音和声效的任意组合</p>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+              <span class="relative">
+                <span class="absolute -inset-1 blur-xl bg-green-500/30"></span>
+                <span class="relative text-green-400">Fugatto</span>
+              </span>
+              <span data-i18n="hero.title"></span>
+            </h1>
+            <p class="text-xl text-gray-400 mb-12" data-i18n="hero.subtitle"></p>
             <div class="flex justify-center gap-4 mb-16">
               <!-- 文档按钮 -->
               <a href="https://d1qx31qr3h6wln.cloudfront.net/publications/FUGATTO.pdf" target="_blank" class="btn-primary flex items-center gap-2 cursor-pointer">
@@ -172,7 +178,7 @@
               <div class="input-area">
                 <h2 class="area-title" data-i18n="input.textToSpeech.title">文本输入</h2>
                 
-                <!-- 语言和声音选择区域 -->
+                <!-- 语言和声音选择区 -->
                 <div class="flex gap-4 mb-4">
                   <!-- 语言选择 -->
                   <div class="flex-1">
@@ -274,16 +280,23 @@
             <div class="input-output-container hidden" id="speech-to-text-view">
               <div class="input-area">
                 <h2 class="area-title" data-i18n="input.speechToText.title">语音输入</h2>
-                <div class="audio-input-container">
-                  <button id="recordButton" class="record-button">
-                    <span class="record-icon">🎤</span>
+                <div class="audio-input-container flex items-center gap-4">
+                  <button id="recordButton" class="record-button flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-full hover:bg-green-600 transition duration-200">
+                    <span class="record-icon text-2xl">🎤</span>
                   </button>
-                  <audio id="audioInput" controls></audio>
-                  <div id="recordingStatus" class="status-text"></div>
+                  <div class="upload-container flex-1">
+                    <label class="block text-sm text-gray-400 mb-2" data-i18n="input.speechToText.upload">上传录音</label>
+                    <input type="file" id="audioFileInput" accept="audio/*" class="hidden" onchange="handleFileUpload(event)">
+                    <div class="flex items-center justify-center border border-dashed border-gray-400 rounded-lg p-4 cursor-pointer hover:bg-gray-800 transition duration-200" onclick="document.getElementById('audioFileInput').click()">
+                      <span class="text-gray-500">点击上传录音文件</span>
+                    </div>
+                  </div>
                 </div>
+                <audio id="audioInput" controls class="mt-4 w-full bg-black/20 border border-gray-600 rounded-lg"></audio>
+                <div id="recordingStatus" class="status-text mt-2 text-gray-300"></div>
               </div>
 
-              <div class="output-area">
+              <div class="output-area mt-6">
                 <h2 class="area-title" data-i18n="output.speechToText.title">文本输出</h2>
                 <div class="text-output">
                   <p id="transcriptionOutput" class="text-white/90"></p>
@@ -426,7 +439,7 @@
         <div class="container mx-auto max-w-6xl">
           <h2 class="section-title" data-i18n="features.title">功能特点</h2>
           <p class="section-description" data-i18n="features.description">
-            Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐及语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创作可能
+            Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐、语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创作可能
           </p>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -646,7 +659,7 @@
               </ul>
               <button 
                 class="btn-primary w-full" 
-                onclick="handleSubscription('prod_basic', 'cny')"
+                onclick="handleSubscription('prod_7ee16ea1e0934176', 'usd')"
                 data-i18n="pricing.basic.cta">
                 立即订阅
               </button>
@@ -692,7 +705,7 @@
         <div class="container mx-auto max-w-6xl">
           <h2 class="section-title" data-i18n="faq.title">常见问题</h2>
           <p class="section-description" data-i18n="faq.description">
-            我们收集了用户最常见的问题和详细解答，帮助您更好地了解 Fugatto AI 的功能和使用方法。
+            我们收集了用户最常见的问题和详细解答，帮助您更好地了解 Fugatto AI ��功能和使用方法。
           </p>
           <div class="space-y-6 max-w-4xl mx-auto mt-12">
             <div class="faq-item">

@@ -15,8 +15,8 @@ export default {
     signIn: 'Sign In'
   },
   hero: {
-    title: "Fugatto AI - World's Most Flexible Sound",
-    subtitle: "Using text and audio as input, Fugatto AI's models can create any combination of music, voice, and sound effects",
+    title: "AI - World's Most Flexible Sound",
+    subtitle: "Using text and audio as input, Fugatto AI models can create any combination of music, sound and sound effects",
     docs: "Documentation",
     apiWaitlist: "Join API Waitlist"
   },
