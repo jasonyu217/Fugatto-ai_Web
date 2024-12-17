@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 
 export const config = {
   runtime: 'edge',
-  regions: ['sin1'], // 指定新加坡区域
 };
 
 export default async function handler(request) {
@@ -35,10 +34,41 @@ export default async function handler(request) {
     const callbackData = await request.json();
     console.log('收到回调数据:', callbackData);
     
+    // 处理连通性检查消息
+    if (callbackData.Data && callbackData.Data.Test) {
+      console.log('收到连通性检查消息:', callbackData);
+      return new NextResponse(
+        JSON.stringify({ success: true }), 
+        { 
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+        }
+      );
+    }
+    
+    // 处理实际的语音识别结果
+    if (callbackData.Data && callbackData.Data.Result) {
+      console.log('语音识别结果:', callbackData.Data.Result);
+      
+      return new NextResponse(
+        JSON.stringify({ success: true }), 
+        { 
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+        }
+      );
+    }
+    
     return new NextResponse(
-      JSON.stringify({ success: true }), 
+      JSON.stringify({ success: false, message: '无效的回调数据' }), 
       { 
-        status: 200,
+        status: 400,
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'

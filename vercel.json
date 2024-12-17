@@ -17,27 +17,21 @@
             "src": "/api/speech-callback",
             "dest": "/api/speech-callback.js",
             "methods": ["POST", "OPTIONS"],
-            "continue": true
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Accept"
+            }
         },
         {
-            "src": "/((?!api/.*).*)",
-            "status": 308,
-            "headers": {
-                "Location": "https://www.fugatto-ai.com/$1"
-            },
-            "has": [
-                {
-                    "type": "host",
-                    "value": "fugatto-ai.com"
-                }
-            ],
-            "continue": false
+            "src": "/api/test-callback",
+            "dest": "/api/test-callback.js"
         },
         {
             "handle": "filesystem"
         },
         {
-            "src": "/(.*)",
+            "src": "/((?!api/.*).*)",
             "dest": "/index.html"
         }
     ],
@@ -61,5 +55,4 @@
         }
     ]
 }
-  
   
