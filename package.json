@@ -21,5 +21,13 @@
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.4.3",
     "@alicloud/pop-core": "^1.7.12"
+  },
+  "vercel": {
+    "rewrites": [
+      {
+        "source": "/api/:path*",
+        "destination": "/api/:path*"
+      }
+    ]
   }
 }
