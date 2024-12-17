@@ -14,14 +14,8 @@
     ],
     "rewrites": [
         {
-            "source": "/api/:path*",
-            "has": [
-                {
-                    "type": "host",
-                    "value": "fugatto-ai.com"
-                }
-            ],
-            "destination": "/api/:path*.js"
+            "source": "/api/:path",
+            "destination": "/api/:path.js"
         },
         {
             "source": "/((?!api/.*).*)",
