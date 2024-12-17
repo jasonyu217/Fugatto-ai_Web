@@ -1,12 +1,9 @@
-import { NextResponse } from 'next/server';
-
 export const config = {
-  runtime: 'edge',
-  regions: ['sin1']
+  runtime: 'edge'
 };
 
 export default async function handler(request) {
-  return new NextResponse(
+  return new Response(
     JSON.stringify({ message: 'API 工作正常' }), 
     { 
       status: 200,
