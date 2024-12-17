@@ -14,12 +14,14 @@
     ],
     "rewrites": [
         {
-            "source": "/api/speech-callback",
-            "destination": "/api/speech-callback.js"
-        },
-        {
-            "source": "/api/test-callback",
-            "destination": "/api/test-callback.js"
+            "source": "/api/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "fugatto-ai.com"
+                }
+            ],
+            "destination": "/api/:path*.js"
         },
         {
             "source": "/((?!api/.*).*)",
