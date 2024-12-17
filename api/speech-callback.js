@@ -4,12 +4,28 @@ export const config = {
 };
 
 export default async function handler(request) {
+  // 添加 CORS 头
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Content-Type': 'application/json'
+  };
+
+  // 处理 OPTIONS 请求
+  if (request.method === 'OPTIONS') {
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders
+    });
+  }
+
   if (request.method !== 'POST') {
     return new Response(
       JSON.stringify({ message: '只允许POST请求' }), 
       { 
         status: 405,
-        headers: { 'Content-Type': 'application/json' }
+        headers: corsHeaders
       }
     );
   }
@@ -25,7 +41,7 @@ export default async function handler(request) {
         JSON.stringify({ success: true }), 
         { 
           status: 200,
-          headers: { 'Content-Type': 'application/json' }
+          headers: corsHeaders
         }
       );
     }
@@ -38,7 +54,7 @@ export default async function handler(request) {
         JSON.stringify({ success: true }), 
         { 
           status: 200,
-          headers: { 'Content-Type': 'application/json' }
+          headers: corsHeaders
         }
       );
     }
@@ -47,7 +63,7 @@ export default async function handler(request) {
       JSON.stringify({ success: false, message: '无效的回调数据' }), 
       { 
         status: 400,
-        headers: { 'Content-Type': 'application/json' }
+        headers: corsHeaders
       }
     );
   } catch (error) {
@@ -56,7 +72,7 @@ export default async function handler(request) {
       JSON.stringify({ success: false, message: error.message }), 
       { 
         status: 500,
-        headers: { 'Content-Type': 'application/json' }
+        headers: corsHeaders
       }
     );
   }
