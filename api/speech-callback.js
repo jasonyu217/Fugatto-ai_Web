@@ -2,10 +2,16 @@ import { NextResponse } from 'next/server';
 
 export const config = {
   runtime: 'edge',
+  regions: ['sin1'], // 指定新加坡区域
 };
 
 export default async function handler(request) {
-  // 处理 OPTIONS 请求
+  // 检查请求的主机名
+  const url = new URL(request.url);
+  if (url.hostname === 'www.fugatto-ai.com') {
+    return NextResponse.redirect('https://fugatto-ai.com' + url.pathname, 301);
+  }
+
   if (request.method === 'OPTIONS') {
     return new NextResponse(null, {
       status: 204,
