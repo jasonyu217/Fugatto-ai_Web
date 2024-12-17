@@ -259,7 +259,54 @@ export default {
       title: "Voice Input",
       record: "Click to Record",
       recording: "Recording...",
-      stop: "Stop Recording"
+      stop: "Stop Recording",
+      uploadTitle: "Upload Local Audio/Video Files",
+      fileInfo: {
+        title: "Supported File Formats",
+        video: {
+          title: "Video Support",
+          formats: "mp4, wmv, m4v, flv, rmvb, dat, mov, mkv, webm, avi, mpeg, 3gp, ogg",
+          limit: "Max 6GB per file"
+        },
+        audio: {
+          title: "Audio Support",
+          formats: "mp3, wav, m4a, wma, aac, ogg, amr, flac, aiff",
+          limit: "Max 500MB per file"
+        }
+      },
+      language: "Audio/Video Language",
+      speakers: "Speaker Separation",
+      speakerOptions: {
+        none: "Not Now",
+        single: "Single Speaker",
+        two: "2 Speakers",
+        multi: "Multiple Speakers"
+      },
+      settings: "Audio/Video Settings",
+      translation: "Translation",
+      translationOptions: {
+        none: "No Translation",
+        toEn: "Translate to English",
+        toZh: "Translate to Chinese",
+        toJa: "Translate to Japanese",
+        unsupported: "Translation Not Supported",
+        "input.speechToText.translationOptions.fromZh.none": "No Translation",
+        "input.speechToText.translationOptions.fromZh.toEn": "Translate to English",
+        "input.speechToText.translationOptions.fromZh.toJa": "Translate to Japanese",
+        "input.speechToText.translationOptions.fromEn.none": "No Translation",
+        "input.speechToText.translationOptions.fromEn.toZh": "Translate to Chinese",
+        "input.speechToText.translationOptions.fromJa.none": "No Translation",
+        "input.speechToText.translationOptions.fromJa.toZh": "Translate to Chinese",
+        "input.speechToText.translationOptions.fromYue.unsupported": "Translation Not Supported",
+        "input.speechToText.translationOptions.fromZhEn.none": "No Translation",
+        "input.speechToText.translationOptions.fromZhEn.toZh": "Translate to Chinese",
+        "input.speechToText.translationOptions.fromZhEn.toEn": "Translate to English"
+      },
+      fileCount: "File Count",
+      addMore: "Add More",
+      startTranscribe: "Start Transcription",
+      cancel: "Cancel",
+      downloadInfo: "MP3 Format • High Quality Audio"
     },
     speechToSpeech: {
       title: "Voice Input",
@@ -418,5 +465,12 @@ export default {
       email: "Please enter a valid email address",
       required: "This field is required"
     }
+  },
+  languages: {
+    zh: "Chinese",
+    en: "English",
+    ja: "Japanese",
+    yue: "Cantonese",
+    zhEn: "Chinese-English Mixed"
   }
 }

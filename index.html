@@ -48,6 +48,8 @@
     <script src="src/i18n/translations/ru.js"></script>
     <script src="src/i18n/translations/ar.js"></script>
     <script src="src/i18n/translations/zh.js"></script>
+    <!-- 添加 Google Analytics -->
+    <include src="./src/partials/analytics.html"></include>
   </head>
   <body class="bg-gray-900">
     <header class="fixed w-full bg-gray-900/50 backdrop-blur-md z-50">
@@ -178,55 +180,59 @@
               <div class="input-area">
                 <h2 class="area-title" data-i18n="input.textToSpeech.title">文本输入</h2>
                 
-                <!-- 语言和声音选择区 -->
+                <!-- 顶部控制区 -->
                 <div class="flex gap-4 mb-4">
-                  <!-- 语言选择 -->
-                  <div class="flex-1">
-                    <label class="block text-sm text-gray-400 mb-2" data-i18n="input.textToSpeech.language">语言选择</label>
-                    <div class="relative">
-                      <select id="languageSelect" class="w-full bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 text-white appearance-none hover:border-white/20 focus:border-white/30 focus:outline-none transition-colors">
-                        <option value="en-US">English (US)</option>
-                        <option value="zh-CN">中文 (简体)</option>
-                        <option value="ja-JP">日本語</option>
-                        <option value="es-ES">Español</option>
-                        <option value="ru-RU">Русский</option>
-                        <option value="ar-SA">العربية</option>
-                      </select>
-                      <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                      </div>
-                    </div>
+                  <!-- 语言选择 - 小型下拉框 -->
+                  <div class="w-40">
+                    <select id="languageSelect" class="w-full bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white appearance-none hover:border-white/20 focus:border-white/30 focus:outline-none transition-colors">
+                      <option value="en-US">English</option>
+                      <option value="zh-CN">中文</option>
+                      <option value="ja-JP">日本語</option>
+                      <option value="es-ES">Español</option>
+                      <option value="ru-RU">Русский</option>
+                      <option value="ar-SA">العربية</option>
+                    </select>
                   </div>
 
                   <!-- 声音选择 -->
                   <div class="flex-1">
-                    <label class="block text-sm text-gray-400 mb-2" data-i18n="input.textToSpeech.voice">声音选择</label>
-                    <div class="relative">
-                      <select id="voiceSelect" class="w-full bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 text-white appearance-none hover:border-white/20 focus:border-white/30 focus:outline-none transition-colors">
-                        <option value="energetic-male">Energetic Male</option>
-                        <option value="professional-female">Professional Female</option>
-                        <option value="friendly-male">Friendly Male</option>
-                        <option value="warm-female">Warm Female</option>
-                        <option value="news-anchor">News Anchor</option>
-                        <option value="storyteller">Storyteller</option>
-                      </select>
-                      <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                      </div>
-                    </div>
+                    <select id="voiceSelect" class="w-full bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white appearance-none hover:border-white/20 focus:border-white/30 focus:outline-none transition-colors">
+                      <option value="professional-female">Professional Female</option>
+                      <option value="friendly-male">Friendly Male</option>
+                      <option value="warm-female">Warm Female</option>
+                      <option value="news-anchor">News Anchor</option>
+                      <option value="storyteller">Storyteller</option>
+                    </select>
                   </div>
                 </div>
 
+                <!-- 快捷模板按钮组 -->
+                <div class="flex gap-2 mb-4">
+                  <button onclick="insertTemplate('story')" class="px-3 py-1.5 text-sm bg-white/5 hover:bg-white/10 rounded-lg transition-colors">
+                    讲故事
+                  </button>
+                  <button onclick="insertTemplate('blog')" class="px-3 py-1.5 text-sm bg-white/5 hover:bg-white/10 rounded-lg transition-colors">
+                    介绍博客
+                  </button>
+                  <button onclick="insertTemplate('voiceover')" class="px-3 py-1.5 text-sm bg-white/5 hover:bg-white/10 rounded-lg transition-colors">
+                    视频画外音
+                  </button>
+                </div>
+
                 <!-- 文本输入区域 -->
-                <textarea 
-                  id="textInput"
-                  class="w-full h-32 bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg p-4 text-white placeholder-gray-500 resize-none hover:border-white/20 focus:border-white/30 focus:outline-none transition-colors"
-                  data-i18n-placeholder="input.textToSpeech.placeholder"
-                ></textarea>
+                <div class="relative">
+                  <textarea 
+                    id="textInput"
+                    class="w-full h-32 bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg p-4 text-white placeholder-gray-500 resize-none hover:border-white/20 focus:border-white/30 focus:outline-none transition-colors"
+                    data-i18n-placeholder="input.textToSpeech.placeholder"
+                    maxlength="500"
+                    onkeyup="updateCharCount(this)"
+                  ></textarea>
+                  <div class="absolute bottom-2 right-2 text-xs text-gray-400">
+                    <span id="charCount">0</span>/500
+                  </div>
+                </div>
+
                 <button id="generateButton" class="btn-primary w-full mt-4" onclick="gtag_report_conversion()">
                   <span data-i18n="input.textToSpeech.generate">生成音频</span>
                 </button>
@@ -276,30 +282,126 @@
               </div>
             </div>
 
-            <!-- Speech to Text View -->
-            <div class="input-output-container hidden" id="speech-to-text-view">
-              <div class="input-area">
-                <h2 class="area-title" data-i18n="input.speechToText.title">语音输入</h2>
-                <div class="audio-input-container flex items-center gap-4">
-                  <button id="recordButton" class="record-button flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-full hover:bg-green-600 transition duration-200">
-                    <span class="record-icon text-2xl">🎤</span>
-                  </button>
-                  <div class="upload-container flex-1">
-                    <label class="block text-sm text-gray-400 mb-2" data-i18n="input.speechToText.upload">上传录音</label>
-                    <input type="file" id="audioFileInput" accept="audio/*" class="hidden" onchange="handleFileUpload(event)">
-                    <div class="flex items-center justify-center border border-dashed border-gray-400 rounded-lg p-4 cursor-pointer hover:bg-gray-800 transition duration-200" onclick="document.getElementById('audioFileInput').click()">
-                      <span class="text-gray-500">点击上传录音文件</span>
+            <!-- Speech to Text View - 新设计 -->
+            <div class="hidden flex justify-center" id="speech-to-text-view">
+              <!-- 全宽背景容器 -->
+              <div class="w-full bg-white/5 backdrop-blur-md rounded-2xl">
+                <!-- 内容容器 -->
+                <div class="w-full max-w-[1200px] mx-auto px-8 py-8">
+                  <div class="flex gap-8">
+                    <!-- 左侧上传区域 -->
+                    <div class="w-1/2">
+                      <h2 class="text-xl font-bold mb-6" data-i18n="input.speechToText.uploadTitle">上传本地音视频文件</h2>
+                      
+                      <!-- 初始上传区域 -->
+                      <div id="initialUpload" class="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center cursor-pointer hover:border-gray-400 transition-colors h-[calc(100%-80px)] flex flex-col items-center justify-center group relative" 
+                        onclick="document.getElementById('fileInput').click()"
+                        ondrop="handleDrop(event)"
+                        ondragover="handleDragOver(event)"
+                        ondragleave="handleDragLeave(event)">
+                        <!-- 上传图标 - 优化图标 -->
+                        <div class="mb-4">
+                          <svg class="w-16 h-16 mx-auto text-gray-400 group-hover:text-gray-300 transition-colors" viewBox="0 0 24 24" fill="none">
+                            <path d="M7 8a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M11 22h5a2 2 0 002-2v-8.5a.5.5 0 00-.5-.5h-13a.5.5 0 00-.5.5V20a2 2 0 002 2h5" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M12 17v-7m0 0l-3 3m3-3l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                        <div class="text-gray-400 mb-2 group-hover:text-gray-300 transition-colors" data-i18n="input.speechToText.dragDropHint">点击 / 拖拽 本地音视频文件到这里</div>
+                        
+                        <!-- 文件限制信息 - 默认折叠 -->
+                        <div class="text-sm text-gray-500 hover:text-gray-400 cursor-help group-hover:text-gray-400 transition-colors">
+                          <button class="flex items-center gap-1" onclick="toggleFileInfo(event)" data-i18n="input.speechToText.viewSupportedFormats">查看支持的文件格式</button>
+                        </div>
+
+                        <!-- 文件信息弹出框 -->
+                        <div id="fileInfoPopup" class="hidden absolute top-0 left-0 mt-2 w-80 bg-black/90 backdrop-blur-lg rounded-xl p-4 shadow-lg border border-white/10">
+                          <h3 class="font-semibold mb-3" data-i18n="input.speechToText.fileInfo.title">支持的文件格式</h3>
+                          <div class="space-y-4">
+                            <div>
+                              <p class="text-sm font-medium mb-1" data-i18n="input.speechToText.fileInfo.video.title">视频支持:</p>
+                              <p class="text-xs text-gray-400" data-i18n="input.speechToText.fileInfo.video.formats">mp4, wmv, m4v, flv, rmvb, dat, mov, mkv, webm, avi, mpeg, 3gp, ogg</p>
+                              <p class="text-xs text-gray-400" data-i18n="input.speechToText.fileInfo.video.limit">单个文件最大6G</p>
+                            </div>
+                            <div>
+                              <p class="text-sm font-medium mb-1" data-i18n="input.speechToText.fileInfo.audio.title">音频支持:</p>
+                              <p class="text-xs text-gray-400" data-i18n="input.speechToText.fileInfo.audio.formats">mp3, wav, m4a, wma, aac, ogg, amr, flac, aiff</p>
+                              <p class="text-xs text-gray-400" data-i18n="input.speechToText.fileInfo.audio.limit">单个文件最大500M</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- 文件输入框 -->
+                        <input type="file" id="fileInput" class="hidden" 
+                          accept=".mp4,.wmv,.m4v,.flv,.rmvb,.dat,.mov,.mkv,.webm,.avi,.mpeg,.3gp,.ogg,.mp3,.wav,.m4a,.wma,.aac,.amr,.flac,.aiff" 
+                          multiple 
+                          onchange="handleFileUpload(event)">
+                      </div>
+
+                      <!-- 文件上传后的显示区域 -->
+                      <div id="uploadedFiles" class="hidden h-[calc(100%-80px)]">
+                        <div class="bg-black/20 backdrop-blur-sm rounded-lg p-6 h-full">
+                          <!-- 文件数量和继续添加按钮 -->
+                          <div class="flex justify-between items-center mb-4">
+                            <div class="text-gray-400">
+                              <span data-i18n="input.speechToText.fileCount">文件数量</span>：<span id="fileCount">0</span>/50
+                            </div>
+                            <button class="text-teal-500 hover:text-teal-400 transition-colors" data-i18n="input.speechToText.addMore">继续添加</button>
+                          </div>
+                          
+                          <!-- 文件列表 -->
+                          <div id="fileList" class="space-y-3 overflow-y-auto max-h-[calc(100%-3rem)]">
+                            <!-- 文件项会通过 JavaScript 动态添加 -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 右侧设置区域 -->
+                    <div class="w-[500px] shrink-0">
+                      <h3 class="text-lg font-medium mb-6" data-i18n="input.speechToText.settings">音视频设置</h3>
+                      
+                      <!-- 语言设置 -->
+                      <div class="mb-6">
+                        <div class="text-sm text-gray-400 mb-2" data-i18n="input.speechToText.language">音视频语言</div>
+                        <div class="flex flex-wrap gap-2" id="languageButtons">
+                          <button class="px-4 py-1.5 rounded-full bg-teal-500/20" data-lang="zh" data-i18n="languages.zh">中文</button>
+                          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10" data-lang="en" data-i18n="languages.en">英语</button>
+                          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10" data-lang="ja" data-i18n="languages.ja">日语</button>
+                          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10" data-lang="yue" data-i18n="languages.yue">粤语</button>
+                          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10" data-lang="zh-en" data-i18n="languages.zhEn">中英文自由说</button>
+                        </div>
+                      </div>
+
+                      <!-- 翻译设置 -->
+                      <div class="mb-6">
+                        <div class="text-sm text-gray-400 mb-2" data-i18n="input.speechToText.translation">翻译</div>
+                        <select id="translateSelect" class="w-full bg-black/20 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 text-white appearance-none hover:border-white/20 focus:border-teal-500/30 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                          <option value="none" data-i18n="input.speechToText.translationOptions.none">不翻译</option>
+                          <option value="en" data-i18n="input.speechToText.translationOptions.toEn">翻译成英语</option>
+                          <option value="zh" data-i18n="input.speechToText.translationOptions.toZh">翻译成中文</option>
+                          <option value="ja" data-i18n="input.speechToText.translationOptions.toJa">翻译成日语</option>
+                        </select>
+                      </div>
+
+                      <!-- 区分发言人 -->
+                      <div class="mb-8">
+                        <div class="text-sm text-gray-400 mb-2" data-i18n="input.speechToText.speakers">区分发言人</div>
+                        <div class="flex flex-wrap gap-2" id="speakerButtons">
+                          <button class="px-4 py-1.5 rounded-full bg-teal-500/20" data-speakers="none" data-i18n="input.speechToText.speakerOptions.none">暂不体验</button>
+                          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10" data-speakers="single" data-i18n="input.speechToText.speakerOptions.single">单人演讲</button>
+                          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10" data-speakers="two" data-i18n="input.speechToText.speakerOptions.two">2人对话</button>
+                          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10" data-speakers="multi" data-i18n="input.speechToText.speakerOptions.multi">多人讨论</button>
+                        </div>
+                      </div>
+
+                      <!-- ���作按钮 -->
+                      <div class="flex flex-col gap-3">
+                        <button id="startTranscribeBtn" class="w-full px-6 py-2 bg-teal-500/50 cursor-not-allowed rounded-lg transition-colors" disabled data-i18n="input.speechToText.startTranscribe">开始转写</button>
+                        <button class="w-full px-6 py-2 bg-white/5 hover:bg-white/10 rounded-lg transition-colors" data-i18n="input.speechToText.cancel">取消</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <audio id="audioInput" controls class="mt-4 w-full bg-black/20 border border-gray-600 rounded-lg"></audio>
-                <div id="recordingStatus" class="status-text mt-2 text-gray-300"></div>
-              </div>
-
-              <div class="output-area mt-6">
-                <h2 class="area-title" data-i18n="output.speechToText.title">文本输出</h2>
-                <div class="text-output">
-                  <p id="transcriptionOutput" class="text-white/90"></p>
                 </div>
               </div>
             </div>
@@ -397,9 +499,7 @@
                         </svg>
                         <span data-i18n="output.speechToSpeech.download">下载转换后的音频</span>
                       </div>
-                      <div class="download-info text-xs text-gray-400 mt-2">
-                        MP3 格式 • 高品质音频
-                      </div>
+                      <div class="download-info text-xs text-gray-400 mt-2" data-i18n="input.speechToText.downloadInfo">MP3 格式 • 高品质音频</div>
                     </button>
                   </div>
                 </div>
@@ -447,14 +547,14 @@
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎵</div>
               <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.0.title">AI驱动的音频生成</h3>
-              <p class="text-gray-400" data-i18n="features.cards.0.description">通过文本和音频输入创造独特的声音、语音和音乐</p>
+              <p class="text-gray-400" data-i18n="features.cards.0.description">通过文本和音频输入创造独特的声音、语音和�����乐</p>
             </div>
 
             <!-- 创意声音效果 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎨</div>
               <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.1.title">创意声音效果</h3>
-              <p class="text-gray-400" data-i18n="features.cards.1.description">引导Fugatto创造意想不到的声音效果</p>
+              <p class="text-gray-400" data-i18n="features.cards.1.description">引导Fugatto创造意想不���的声音效果</p>
             </div>
 
             <!-- 沉浸式音景 -->
@@ -493,7 +593,7 @@
         <div class="container mx-auto max-w-6xl">
           <h2 class="section-title" data-i18n="testimonials.title">用户评价</h2>
           <p class="section-description" data-i18n="testimonials.description">
-            来自球各地的用户分享他们使用 Fugatto AI 的成功故事和体验，展现我们如何帮助他们实现创意和提升效率。
+            来自球各地的用户分享他们使用 Fugatto AI 的成功故事和体，展现我们如何帮助他们实现创意和提升效率。
           </p>
           
           <!-- 第一行 - 向左滚动 -->
@@ -546,7 +646,7 @@
               </div>
             </div>
 
-            <!-- 第五个评价 -->
+            <!-- 第五个��价 -->
             <div class="testimonial-card">
               <p class="testimonial-content" data-i18n="testimonials.reviews.4.content"></p>
               <div class="testimonial-author">
@@ -585,7 +685,7 @@
               </div>
             </div>
 
-            <!-- 第八个评价 -->
+            <!-- 第���个评价 -->
             <div class="testimonial-card">
               <p class="testimonial-content" data-i18n="testimonials.reviews.7.content"></p>
               <div class="testimonial-author">
@@ -633,7 +733,7 @@
           </p>
           <div class="grid md:grid-cols-2 gap-8">
             <div class="price-card">
-              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.basic.title">基础版</h3>
+              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.basic.title">基础��</h3>
               <p class="text-4xl font-bold mb-6">
                 <span data-i18n="pricing.basic.price">¥69/月</span>
               </p>
@@ -705,7 +805,7 @@
         <div class="container mx-auto max-w-6xl">
           <h2 class="section-title" data-i18n="faq.title">常见问题</h2>
           <p class="section-description" data-i18n="faq.description">
-            我们收集了用户最常见的问题和详细解答，帮助您更好地了解 Fugatto AI ��功能和使用方法。
+            我们收集了用户最常见的问题和详细解答，帮助您更好地了解 Fugatto AI 的功能和使用方法。
           </p>
           <div class="space-y-6 max-w-4xl mx-auto mt-12">
             <div class="faq-item">
@@ -949,6 +1049,318 @@
           updateContent();
         });
       }
+    </script>
+    <script>
+    function updateCharCount(textarea) {
+      const count = textarea.value.length;
+      document.getElementById('charCount').textContent = count;
+    }
+
+    function insertTemplate(type) {
+      const templates = {
+        story: [
+          "Once upon a time in a small coastal town, there lived a curious young girl named Luna who discovered she could talk to seashells...",
+          "In the heart of an ancient forest, there stood a mysterious tree that glowed with a soft blue light every full moon...",
+          "Deep in the mountains, there was a tiny village where the inhabitants could control the weather with their musical instruments..."
+        ],
+        blog: [
+          "Welcome to my blog! Today, I'll be sharing my insights on how artificial intelligence is transforming the creative industry...",
+          "In this post, we'll explore the fascinating world of sustainable technology and its impact on our daily lives...",
+          "Let's dive into the future of digital communication and how it's reshaping our social connections..."
+        ],
+        voiceover: [
+          "Imagine a world where technology and nature work in perfect harmony. Where innovation meets sustainability...",
+          "In the fast-paced world of modern technology, one company stands out by putting human needs first...",
+          "Discover a revolutionary approach to digital creativity that's changing the way we think about content creation..."
+        ]
+      };
+
+      const randomIndex = Math.floor(Math.random() * templates[type].length);
+      const textarea = document.getElementById('textInput');
+      textarea.value = templates[type][randomIndex];
+      updateCharCount(textarea);
+    }
+
+    // 初始化字符计数
+    document.addEventListener('DOMContentLoaded', function() {
+      const textarea = document.getElementById('textInput');
+      updateCharCount(textarea);
+    });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取所有 tab 按钮和内容区域
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabContents = {
+        'text-to-speech': document.getElementById('text-to-speech-view'),
+        'speech-to-text': document.getElementById('speech-to-text-view'),
+        'speech-to-speech': document.getElementById('speech-to-speech-view')
+      };
+
+      // 为每个 tab 按钮添加点击事件
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const tabId = button.getAttribute('data-tab');
+          
+          // 更新按钮状态
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          // 更新内容显示
+          Object.values(tabContents).forEach(content => {
+            if (content) {
+              content.classList.add('hidden');
+            }
+          });
+          
+          if (tabContents[tabId]) {
+            tabContents[tabId].classList.remove('hidden');
+          }
+        });
+      });
+    });
+    </script>
+    <script>
+    // 文件信息弹出框控制
+    function toggleFileInfo(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const popup = document.getElementById('fileInfoPopup');
+      popup.classList.toggle('hidden');
+    }
+
+    // 文件上传处理
+    function handleFileUpload(event) {
+      const files = Array.from(event.target.files);
+      const initialUpload = document.getElementById('initialUpload');
+      const uploadedFiles = document.getElementById('uploadedFiles');
+      const fileList = document.getElementById('fileList');
+      const fileCount = document.getElementById('fileCount');
+      const startButton = document.getElementById('startTranscribeBtn');
+      
+      if (files.length > 0) {
+        // 获取当前文件数量
+        const currentFiles = fileList.children.length;
+        
+        // 验证总文件数量
+        if (currentFiles + files.length > 50) {
+          alert('文件总数不能超过50个');
+          return;
+        }
+
+        // 显示文件列表区域
+        initialUpload.classList.add('hidden');
+        uploadedFiles.classList.remove('hidden');
+        
+        // 添加文件到列表
+        files.forEach(file => {
+          const fileItem = document.createElement('div');
+          fileItem.className = 'flex items-center justify-between bg-black/20 rounded-lg p-3';
+          
+          const fileSize = formatFileSize(file.size);
+          const isAudio = /\.(mp3|wav|m4a|wma|aac|ogg|amr|flac|aiff)$/i.test(file.name);
+          
+          fileItem.innerHTML = `
+            <div class="flex items-center gap-3">
+              <div class="text-gray-400">
+                ${isAudio ? `
+                  <!-- 音频文件图标 -->
+                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18V5l12-2v13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="6" cy="18" r="3" stroke-width="1.5"/>
+                    <circle cx="21" cy="16" r="3" stroke-width="1.5"/>
+                  </svg>
+                ` : `
+                  <!-- 视频文件图标 -->
+                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <rect x="2" y="4" width="20" height="16" rx="2" stroke-width="1.5"/>
+                    <path d="M10 9l5 3-5 3V9z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                `}
+              </div>
+              <div>
+                <div class="text-white text-sm font-medium">${file.name}</div>
+                <div class="text-gray-500 text-xs">${fileSize}</div>
+              </div>
+            </div>
+            <button class="text-gray-400 hover:text-red-400 transition-colors" onclick="removeFile(this)">
+              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+          `;
+          
+          fileList.appendChild(fileItem);
+        });
+        
+        // 更新文件数量为总数
+        fileCount.textContent = fileList.children.length;
+
+        // 启用转写按钮
+        startButton.classList.remove('bg-teal-500/50', 'cursor-not-allowed');
+        startButton.classList.add('bg-teal-500', 'hover:bg-teal-600');
+        startButton.disabled = false;
+        
+        // 清空文件输入框,以便可以重复选择同一文件
+        event.target.value = '';
+      }
+    }
+
+    // 删除文件
+    function removeFile(button) {
+      const fileItem = button.closest('.flex');
+      const fileList = document.getElementById('fileList');
+      const fileCount = document.getElementById('fileCount');
+      const initialUpload = document.getElementById('initialUpload');
+      const uploadedFiles = document.getElementById('uploadedFiles');
+      const startButton = document.getElementById('startTranscribeBtn');
+      
+      fileItem.remove();
+      const remainingFiles = fileList.children.length;
+      fileCount.textContent = remainingFiles;
+      
+      if (remainingFiles === 0) {
+        uploadedFiles.classList.add('hidden');
+        initialUpload.classList.remove('hidden');
+        startButton.classList.add('bg-teal-500/50', 'cursor-not-allowed');
+        startButton.classList.remove('bg-teal-500', 'hover:bg-teal-600');
+        startButton.disabled = true;
+      }
+    }
+
+    // 格式化文件大小
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    </script>
+    <script>
+    // 语言按钮点击处理
+    document.querySelectorAll('#languageButtons button').forEach(button => {
+      button.addEventListener('click', () => {
+        // 移除其他按钮的激活状态
+        document.querySelectorAll('#languageButtons button').forEach(btn => {
+          btn.classList.remove('bg-teal-500/20');
+          btn.classList.add('bg-white/5', 'hover:bg-white/10', 'hover:bg-teal-500/10');
+        });
+        
+        // 激活当前按钮
+        button.classList.remove('bg-white/5', 'hover:bg-white/10', 'hover:bg-teal-500/10');
+        button.classList.add('bg-teal-500/20');
+        
+        // 更新翻译选项
+        const lang = button.getAttribute('data-lang');
+        updateTranslateOptions(lang);
+      });
+    });
+
+    // 区分发言人按钮点击处理
+    document.querySelectorAll('#speakerButtons button').forEach(button => {
+      button.addEventListener('click', () => {
+        // 移除其他按钮的激活状态
+        document.querySelectorAll('#speakerButtons button').forEach(btn => {
+          btn.classList.remove('bg-teal-500/20');
+          btn.classList.add('bg-white/5', 'hover:bg-white/10', 'hover:bg-teal-500/10');
+        });
+        
+        // 激活当前按钮
+        button.classList.remove('bg-white/5', 'hover:bg-white/10', 'hover:bg-teal-500/10');
+        button.classList.add('bg-teal-500/20');
+      });
+    });
+
+    // 更新翻译选项
+    function updateTranslateOptions(sourceLang) {
+      const translateSelect = document.getElementById('translateSelect');
+      translateSelect.innerHTML = ''; // 清空现有选项
+      
+      switch(sourceLang) {
+        case 'zh': // 中文
+          translateSelect.disabled = false;
+          addOptions(translateSelect, [
+            { value: 'none', i18nKey: 'input.speechToText.translationOptions.fromZh.none' },
+            { value: 'en', i18nKey: 'input.speechToText.translationOptions.fromZh.toEn' },
+            { value: 'ja', i18nKey: 'input.speechToText.translationOptions.fromZh.toJa' }
+          ]);
+          break;
+          
+        case 'en': // 英语
+          translateSelect.disabled = false;
+          addOptions(translateSelect, [
+            { value: 'none', i18nKey: 'input.speechToText.translationOptions.fromEn.none' },
+            { value: 'zh', i18nKey: 'input.speechToText.translationOptions.fromEn.toZh' }
+          ]);
+          break;
+          
+        case 'ja': // 日语
+          translateSelect.disabled = false;
+          addOptions(translateSelect, [
+            { value: 'none', i18nKey: 'input.speechToText.translationOptions.fromJa.none' },
+            { value: 'zh', i18nKey: 'input.speechToText.translationOptions.fromJa.toZh' }
+          ]);
+          break;
+          
+        case 'yue': // 粤语
+          translateSelect.disabled = true;
+          addOptions(translateSelect, [
+            { value: 'none', i18nKey: 'input.speechToText.translationOptions.fromYue.unsupported' }
+          ]);
+          break;
+          
+        case 'zh-en': // 中英文自由说
+          translateSelect.disabled = false;
+          addOptions(translateSelect, [
+            { value: 'none', i18nKey: 'input.speechToText.translationOptions.fromZhEn.none' },
+            { value: 'zh', i18nKey: 'input.speechToText.translationOptions.fromZhEn.toZh' },
+            { value: 'en', i18nKey: 'input.speechToText.translationOptions.fromZhEn.toEn' }
+          ]);
+          break;
+      }
+      
+      // 强制更新所有翻译选项的文本
+      Array.from(translateSelect.options).forEach(option => {
+        const key = option.getAttribute('data-i18n');
+        if (key) {
+          option.textContent = window.i18next.t(key);
+        }
+      });
+    }
+
+    // 辅助函数：添加选项
+    function addOptions(selectElement, options) {
+      options.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option.value;
+        optionElement.setAttribute('data-i18n', option.i18nKey);
+        // 设置翻译文本
+        if (window.i18next && window.i18next.isInitialized) {
+          optionElement.textContent = window.i18next.t(option.i18nKey);
+        } else {
+          optionElement.textContent = option.i18nKey;
+        }
+        selectElement.add(optionElement);
+      });
+      
+      // 强制更新所有翻译选项的文本
+      if (window.i18next && window.i18next.isInitialized) {
+        Array.from(selectElement.options).forEach(option => {
+          const key = option.getAttribute('data-i18n');
+          if (key) {
+            option.textContent = window.i18next.t(key);
+          }
+        });
+      }
+    }
+
+    // 初始化时设置默认选项（假设默认选中中文）
+    document.addEventListener('DOMContentLoaded', async function() {
+      // 等待 i18next 初始化完成
+      await initI18n();
+      updateTranslateOptions('zh');
+    });
     </script>
   </body>
 </html>

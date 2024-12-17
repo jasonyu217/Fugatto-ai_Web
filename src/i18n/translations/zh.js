@@ -247,9 +247,58 @@ export default {
     },
     speechToText: {
       title: "语音输入",
-      record: "点击录音",
-      recording: "正在录音...",
-      stop: "停止录音"
+      uploadTitle: "上传本地音视频文件",
+      fileInfo: {
+        title: "支持的文件格式",
+        video: {
+          title: "视频支持",
+          formats: "mp4, wmv, m4v, flv, rmvb, dat, mov, mkv, webm, avi, mpeg, 3gp, ogg",
+          limit: "单个文件最大6G"
+        },
+        audio: {
+          title: "音频支持",
+          formats: "mp3, wav, m4a, wma, aac, ogg, amr, flac, aiff",
+          limit: "单个文件最大500M"
+        }
+      },
+      language: "音视频语言",
+      speakers: "区分发言人",
+      speakerOptions: {
+        none: "暂不体验",
+        single: "单人演讲",
+        two: "2人对话",
+        multi: "多人讨论"
+      },
+      settings: "音视频设置",
+      translation: "翻译",
+      translationOptions: {
+        fromZh: {
+          none: "不翻译",
+          toEn: "翻译成英语",
+          toJa: "翻译成日语"
+        },
+        fromEn: {
+          none: "不翻译",
+          toZh: "翻译成中文"
+        },
+        fromJa: {
+          none: "不翻译",
+          toZh: "翻译成中文"
+        },
+        fromYue: {
+          unsupported: "不支持该翻译"
+        },
+        fromZhEn: {
+          none: "不翻译",
+          toZh: "翻译成中文",
+          toEn: "翻译成英语"
+        }
+      },
+      fileCount: "文件数量",
+      addMore: "继续添加",
+      startTranscribe: "开始转写",
+      cancel: "取消",
+      downloadInfo: "MP3 格式 • 高品质音频"
     },
     speechToSpeech: {
       title: "上传音频",
@@ -378,5 +427,12 @@ export default {
       email: "请输入有效的邮箱地址",
       required: "此字段为必填项"
     }
+  },
+  languages: {
+    zh: "中文",
+    en: "英语",
+    ja: "日语",
+    yue: "粤语",
+    zhEn: "中英文自由说"
   }
 }

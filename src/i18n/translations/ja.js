@@ -298,7 +298,30 @@ export default {
       title: "音声入力",
       record: "録音を開始",
       recording: "録音中...",
-      stop: "録音を停止"
+      stop: "録音を停止",
+      translationOptions: {
+        fromZh: {
+          none: "翻訳なし",
+          toEn: "英語に翻訳",
+          toJa: "日本語に翻訳"
+        },
+        fromEn: {
+          none: "翻訳なし",
+          toZh: "中国語に翻訳"
+        },
+        fromJa: {
+          none: "翻訳なし",
+          toZh: "中国語に翻訳"
+        },
+        fromYue: {
+          unsupported: "翻訳未対応"
+        },
+        fromZhEn: {
+          none: "翻訳なし",
+          toZh: "中国語に翻訳",
+          toEn: "英語に翻訳"
+        }
+      }
     },
     speechToSpeech: {
       title: "音声入力",

@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' kodepay-global.zingfront.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' kodepay-global.zingfront.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' kodepay-global.zingfront.com">
     <title>定价方案 - Fugatto</title>
     <link rel="stylesheet" href="/src/css/styles.css">
+    <script src="/src/js/payment.js" defer></script>
+    <include src="./src/partials/analytics.html"></include>
 </head>
 <body class="bg-gray-900 text-white min-h-screen">
     <!-- 导航栏 -->
