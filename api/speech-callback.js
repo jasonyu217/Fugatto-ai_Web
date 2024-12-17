@@ -1,30 +1,63 @@
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: '只允许POST请求' });
+// 使用 Edge Runtime 以获得更好的性能
+export const config = {
+  runtime: 'edge',
+};
+
+export default async function handler(request) {
+  if (request.method !== 'POST') {
+    return new Response(
+      JSON.stringify({ message: '只允许POST请求' }), 
+      { 
+        status: 405,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
   }
 
   try {
-    const callbackData = req.body;
+    const callbackData = await request.json();
+    console.log('收到回调数据:', callbackData);
     
     // 处理连通性检查消息
     if (callbackData.Data && callbackData.Data.Test) {
       console.log('收到连通性检查消息:', callbackData);
-      return res.status(200).json({ success: true });
+      return new Response(
+        JSON.stringify({ success: true }), 
+        { 
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
     }
     
     // 处理实际的语音识别结果
     if (callbackData.Data && callbackData.Data.Result) {
-      // 这里处理语音识别结果
       console.log('语音识别结果:', callbackData.Data.Result);
       
-      // TODO: 在这里添加您的业务逻辑
-      
-      return res.status(200).json({ success: true });
+      return new Response(
+        JSON.stringify({ success: true }), 
+        { 
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
     }
     
-    return res.status(400).json({ success: false, message: '无效的回调数据' });
+    return new Response(
+      JSON.stringify({ success: false, message: '无效的回调数据' }), 
+      { 
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
   } catch (error) {
     console.error('处理回调时出错:', error);
-    return res.status(500).json({ success: false, message: error.message });
+    return new Response(
+      JSON.stringify({ success: false, message: error.message }), 
+      { 
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
   }
 } 

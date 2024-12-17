@@ -1,16 +1,25 @@
 {
-    "version": 2,
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "dist"
+            }
+        }
+    ],
     "routes": [
         {
             "src": "/api/speech-callback",
             "dest": "/api/speech-callback"
+        },
+        {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/index.html"
         }
-    ],
-    "functions": {
-        "api/speech-callback.js": {
-            "memory": 1024,
-            "maxDuration": 10
-        }
-    }
+    ]
 }
   
