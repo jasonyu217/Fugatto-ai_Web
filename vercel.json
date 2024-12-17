@@ -11,14 +11,23 @@
     "routes": [
         {
             "src": "/api/speech-callback",
-            "dest": "/api/speech-callback",
-            "methods": ["POST", "OPTIONS"]
+            "dest": "api/speech-callback.js",
+            "methods": ["POST", "OPTIONS"],
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type"
+            }
+        },
+        {
+            "src": "/api/test-callback",
+            "dest": "api/test-callback.js"
         },
         {
             "handle": "filesystem"
         },
         {
-            "src": "/(.*)",
+            "src": "/((?!api/.*).*)",
             "dest": "/index.html"
         }
     ]
