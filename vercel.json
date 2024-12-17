@@ -3,11 +3,11 @@
     "routes": [
         {
             "src": "/api/speech-callback",
-            "dest": "/vercel/api/speech-callback"
+            "dest": "/api/speech-callback"
         }
     ],
     "functions": {
-        "vercel/api/speech-callback.js": {
+        "api/speech-callback.js": {
             "memory": 1024,
             "maxDuration": 10
         }
