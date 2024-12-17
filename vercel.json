@@ -6,30 +6,60 @@
             "config": {
                 "distDir": "dist"
             }
+        },
+        {
+            "src": "api/**/*.js",
+            "use": "@vercel/node"
         }
     ],
     "routes": [
         {
             "src": "/api/speech-callback",
-            "dest": "api/speech-callback.js",
+            "dest": "/api/speech-callback.js",
             "methods": ["POST", "OPTIONS"],
-            "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "POST, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type"
-            }
+            "continue": true
         },
         {
-            "src": "/api/test-callback",
-            "dest": "api/test-callback.js"
+            "src": "/((?!api/.*).*)",
+            "status": 308,
+            "headers": {
+                "Location": "https://www.fugatto-ai.com/$1"
+            },
+            "has": [
+                {
+                    "type": "host",
+                    "value": "fugatto-ai.com"
+                }
+            ],
+            "continue": false
         },
         {
             "handle": "filesystem"
         },
         {
-            "src": "/((?!api/.*).*)",
+            "src": "/(.*)",
             "dest": "/index.html"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/api/(.*)",
+            "headers": [
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "*"
+                },
+                {
+                    "key": "Access-Control-Allow-Methods",
+                    "value": "GET, POST, OPTIONS"
+                },
+                {
+                    "key": "Access-Control-Allow-Headers",
+                    "value": "Content-Type, Accept"
+                }
+            ]
         }
     ]
 }
+  
   
