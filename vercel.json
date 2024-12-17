@@ -1,29 +1,16 @@
 {
-    "builds": [
-        {
-            "src": "src/server/app/main.py",
-            "use": "@vercel/python"
-        },
-        {
-            "src": "package.json",
-            "use": "@vercel/static-build",
-            "config": {
-                "distDir": "dist"
-            }
-        }
-    ],
+    "version": 2,
     "routes": [
         {
-            "src": "/api/(.*)",
-            "dest": "src/server/app/main.py"
-        },
-        {
-            "handle": "filesystem"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/index.html"
+            "src": "/api/speech-callback",
+            "dest": "/vercel/api/speech-callback"
         }
-    ]
+    ],
+    "functions": {
+        "vercel/api/speech-callback.js": {
+            "memory": 1024,
+            "maxDuration": 10
+        }
+    }
 }
   
