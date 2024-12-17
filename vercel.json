@@ -12,23 +12,18 @@
             "use": "@vercel/node"
         }
     ],
-    "routes": [
+    "rewrites": [
         {
-            "src": "/api/speech-callback",
-            "dest": "/api/speech-callback.js",
-            "methods": ["POST", "OPTIONS"],
-            "check": true
+            "source": "/api/speech-callback",
+            "destination": "/api/speech-callback.js"
         },
         {
-            "src": "/api/test-callback",
-            "dest": "/api/test-callback.js"
+            "source": "/api/test-callback",
+            "destination": "/api/test-callback.js"
         },
         {
-            "handle": "filesystem"
-        },
-        {
-            "src": "/((?!api/.*).*)",
-            "dest": "/index.html"
+            "source": "/((?!api/.*).*)",
+            "destination": "/index.html"
         }
     ],
     "headers": [
@@ -51,12 +46,6 @@
         }
     ],
     "trailingSlash": false,
-    "cleanUrls": true,
-    "rewrites": [
-        {
-            "source": "/api/:path*",
-            "destination": "/api/:path*"
-        }
-    ]
+    "cleanUrls": true
 }
   
