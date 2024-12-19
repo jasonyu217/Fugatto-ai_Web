@@ -36,10 +36,10 @@
     <link rel="stylesheet" href="/src/css/styles.css">
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self' http://127.0.0.1:8002 https://www.googletagmanager.com; 
-      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://kodepay-global.zingfront.com;
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com;  <!-- 移除 kodepay-global.zingfront.com -->
       style-src 'self' 'unsafe-inline';
-      connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://formspree.io/f/xnnqydkp https://www.google-analytics.com https://kodepay-global.zingfront.com https://api.kodepay.io;
-      form-action 'self' https://formspree.io/ https://formspree.io/f/xnnqydkp;
+      connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://api.kodepay.io;  <!-- 保留 api.kodepay.io -->
+      form-action 'self' https://formspree.io/;
       img-src 'self' data: https://images.unsplash.com;
     ">
     <script src="src/i18n/translations/en.js"></script>
@@ -66,7 +66,7 @@
         <div class="flex items-center gap-8">
           <!-- AI Voice Generator 下拉菜单 -->
           <div class="relative group">
-            <a href="#" class="nav-link-dropdown group" onclick="gtag_report_conversion()" data-i18n="nav.aiVoice">
+            <a href="#" class="nav-link-dropdown group" data-i18n="nav.aiVoice">
               <span>AI Voice Generator</span>
               <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
@@ -74,16 +74,16 @@
             </a>
             <!-- 下拉菜单 -->
             <div class="dropdown-menu">
-              <a href="#" class="dropdown-item" onclick="gtag_report_conversion()" data-i18n="nav.aiVoiceMenu.textToSpeech">
+              <a href="/workspace.html#text-to-speech" class="dropdown-item" data-i18n="nav.aiVoiceMenu.textToSpeech">
                 文本转语音
               </a>
-              <a href="#" class="dropdown-item" onclick="gtag_report_conversion()" data-i18n="nav.aiVoiceMenu.speechToText">
+              <a href="/workspace.html#speech-to-text" class="dropdown-item" data-i18n="nav.aiVoiceMenu.speechToText">
                 语音转文本
               </a>
-              <a href="#" class="dropdown-item" onclick="gtag_report_conversion()" data-i18n="nav.aiVoiceMenu.speechToSpeech">
+              <a href="/workspace.html#speech-to-speech" class="dropdown-item" data-i18n="nav.aiVoiceMenu.speechToSpeech">
                 语音转语音
               </a>
-              <a href="#" class="dropdown-item" onclick="gtag_report_conversion()" data-i18n="nav.aiVoiceMenu.voiceCloning">
+              <a href="/workspace.html#voice-cloning" class="dropdown-item" data-i18n="nav.aiVoiceMenu.voiceCloning">
                 语音克隆
               </a>
             </div>
@@ -309,7 +309,7 @@
                         </div>
                         <div class="text-gray-400 mb-2 group-hover:text-gray-300 transition-colors" data-i18n="input.speechToText.dragDropHint">点击 / 拖拽 本地音视频文件到这里</div>
                         
-                        <!-- 文件限制信息 - 默认折叠 -->
+                        <!-- 文件���制信息 - 默认折叠 -->
                         <div class="text-sm text-gray-500 hover:text-gray-400 cursor-help group-hover:text-gray-400 transition-colors">
                           <button class="flex items-center gap-1" onclick="toggleFileInfo(event)" data-i18n="input.speechToText.viewSupportedFormats">查看支持的文件格式</button>
                         </div>
@@ -341,7 +341,7 @@
                       <!-- 文件上传后的显示区域 -->
                       <div id="uploadedFiles" class="hidden h-[calc(100%-80px)]">
                         <div class="bg-black/20 backdrop-blur-sm rounded-lg p-6 h-full">
-                          <!-- 文件数量和继续添加按钮 -->
+                          <!-- 文件数量和继续���加按钮 -->
                           <div class="flex justify-between items-center mb-4">
                             <div class="text-gray-400">
                               <span data-i18n="input.speechToText.fileCount">文件数量</span>：<span id="fileCount">0</span>/50
@@ -546,7 +546,7 @@
             <!-- AI驱动的音频生成 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎵</div>
-              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.0.title">AI驱动的音频生成</h3>
+              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.0.title">AI驱动的音频生���</h3>
               <p class="text-gray-400" data-i18n="features.cards.0.description">通过文本和音频输入创造独特的声音、语音和�����乐</p>
             </div>
 
@@ -759,7 +759,7 @@
               </ul>
               <button 
                 class="btn-primary w-full" 
-                onclick="handleSubscription('prod_7ee16ea1e0934176', 'usd')"
+                onclick="handleSubscription('prod_655649d5e1c2493f', 'usd')"
                 data-i18n="pricing.basic.cta">
                 立即订阅
               </button>
@@ -791,7 +791,7 @@
               </ul>
               <button 
                 class="btn-primary w-full" 
-                onclick="handleSubscription('prod_2fa7ad055ab0490d', 'usd')"
+                onclick="handleSubscription('prod_19a55e4a69304ab3', 'usd')"
                 data-i18n="pricing.pro.cta">
                 立即订阅
               </button>

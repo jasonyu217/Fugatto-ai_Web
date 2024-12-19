@@ -43,7 +43,7 @@ window.handleSubscription = function(productId, currency, priceId) {
 // 加载 KodePay SDK
 (function loadKodePaySDK() {
     const script = document.createElement('script');
-    script.src = 'https://kodepay-global.zingfront.com/common/kodepay-website.js';
+    script.src = '/src/js/vendor/kodepay-website.js';
     script.async = 1;
     script.onload = () => {
         console.log('KodePay SDK loaded');
