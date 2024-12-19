@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' kodepay-global.zingfront.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' kodepay-global.zingfront.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' kodepay-global.zingfront.com">
+    <meta http-equiv="Content-Security-Policy" content="
+-   default-src 'self' kodepay-global.zingfront.com;
++   default-src 'self' https://api.kodepay.io https://kodepay.io;
+-   script-src 'self' 'unsafe-inline' 'unsafe-eval' kodepay-global.zingfront.com;
++   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.kodepay.io;
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data:;
+-   connect-src 'self' kodepay-global.zingfront.com;
++   connect-src 'self' https://api.kodepay.io;
++   frame-src 'self' https://kodepay.io;
+">
     <title>定价方案 - Fugatto</title>
     <link rel="stylesheet" href="/src/css/styles.css">
+    <script src="/src/js/vendor/kodepay-website.js"></script>
     <script src="/src/js/payment.js" defer></script>
     <include src="./src/partials/analytics.html"></include>
     <!-- KodePay 配置 -->
@@ -95,6 +106,13 @@
             if (button.disabled) return;
             button.disabled = true;
             
+            // 等待 KodePay SDK 加载
+            let retries = 0;
+            while (!window.KodePay && retries < 10) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                retries++;
+            }
+            
             // 检查 KodePay SDK 是否已加载
             if (!window.KodePay) {
                 console.error('KodePay SDK not loaded yet');
@@ -103,7 +121,7 @@
             console.log('KodePay SDK status:', window.KodePay);
             
             // 使用 open_payment_choose_page 方法
-            window.KodePay.open_payment_choose_page(
+            await window.KodePay.open_payment_choose_page(
                 productId,
                 currency,
                 {
@@ -127,6 +145,11 @@
         console.log('DOM Content Loaded');
         console.log('Payment script status:', !!window.handleSubscription);
         console.log('KodePay status:', !!window.KodePay);
+        
+        // 检查 KodePay SDK 是否正确加载
+        if (!window.KodePay) {
+            console.warn('KodePay SDK not loaded on DOMContentLoaded');
+        }
     });
     </script>
 </body>

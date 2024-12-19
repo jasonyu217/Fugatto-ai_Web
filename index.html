@@ -35,13 +35,13 @@
     <title>AI Fugatto - Advanced AI Audio Generation</title>
     <link rel="stylesheet" href="/src/css/styles.css">
     <meta http-equiv="Content-Security-Policy" content="
-      default-src 'self' http://127.0.0.1:8002 https://www.googletagmanager.com https://t4.doubleclick.net https://www.google-analytics.com; 
+      default-src 'self' http://127.0.0.1:8002 https://www.googletagmanager.com https://api.kodepay.io https://kodepay.io; 
       script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com;
       style-src 'self' 'unsafe-inline';
-      connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://api.kodepay.io https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net;
+      connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://api.kodepay.io;
       frame-src 'self' https://kodepay.io;
       form-action 'self' https://formspree.io/;
-      img-src 'self' data: https://images.unsplash.com https://www.google-analytics.com https://www.googletagmanager.com;
+      img-src 'self' data: https://images.unsplash.com;
     ">
     <script src="src/i18n/translations/en.js"></script>
     <script src="src/i18n/translations/ja.js"></script>
@@ -57,6 +57,7 @@
         window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';      // 你的客户端ID
         window.KODEPAY_ENV = 'production';   // 切换到生产环境
     </script>
+    <script src="/src/js/vendor/kodepay-website.js"></script>
   </head>
   <body class="bg-gray-900">
     <header class="fixed w-full bg-gray-900/50 backdrop-blur-md z-50">
@@ -845,7 +846,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a3">
-                音乐���作、游戏、广告和电影行业可以使用它来创建独特的音频内容并增强体验。
+                音乐���作、游戏、广告和电影行业可以使用它来创建独特的音频内容��增强��验。
               </div>
             </div>
             <div class="faq-item">
@@ -1380,6 +1381,13 @@
             if (button.disabled) return;
             button.disabled = true;
             
+            // 等待 KodePay SDK 加载
+            let retries = 0;
+            while (!window.KodePay && retries < 10) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                retries++;
+            }
+            
             // 检查 KodePay SDK 是否已加载
             if (!window.KodePay) {
                 console.error('KodePay SDK not loaded yet');
@@ -1388,7 +1396,7 @@
             console.log('KodePay SDK status:', window.KodePay);
             
             // 使用 open_payment_choose_page 方法
-            window.KodePay.open_payment_choose_page(
+            await window.KodePay.open_payment_choose_page(
                 productId,
                 currency,
                 {
@@ -1412,6 +1420,11 @@
         console.log('DOM Content Loaded');
         console.log('Payment script status:', !!window.handleSubscription);
         console.log('KodePay status:', !!window.KodePay);
+        
+        // 检查 KodePay SDK 是否正确加载
+        if (!window.KodePay) {
+            console.warn('KodePay SDK not loaded on DOMContentLoaded');
+        }
     });
     </script>
   </body>
