@@ -35,13 +35,11 @@
     <title>AI Fugatto - Advanced AI Audio Generation</title>
     <link rel="stylesheet" href="/src/css/styles.css">
     <meta http-equiv="Content-Security-Policy" content="
-      default-src 'self' http://127.0.0.1:8002 https://www.googletagmanager.com https://t4.doubleclick.net https://www.google-analytics.com https://api.kodepay.io https://kodepay.io; 
-      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+      default-src 'self' api.kodepay.io; 
+      script-src 'self' 'unsafe-eval' 'unsafe-inline';
       style-src 'self' 'unsafe-inline';
-      connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://api.kodepay.io https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net;
-      frame-src 'self' https://kodepay.io;
-      form-action 'self' https://formspree.io/;
-      img-src 'self' data: https://images.unsplash.com https://www.google-analytics.com https://www.googletagmanager.com;
+      connect-src 'self' api.kodepay.io;
+      frame-src 'self' kodepay.io;
     ">
     <script src="src/i18n/translations/en.js"></script>
     <script src="src/i18n/translations/ja.js"></script>
@@ -51,14 +49,9 @@
     <script src="src/i18n/translations/zh.js"></script>
     <!-- 添加 Google Analytics -->
     <include src="./src/partials/analytics.html"></include>
-    <!-- 在 head 标签中添加 KodePay 配置 -->
-    <script>
-        window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687'; // 你的应用ID
-        window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';      // 你的客户端ID
-        window.KODEPAY_ENV = 'production';   // 切换到生产环境
-    </script>
-    <!-- 确保 SDK 在配置之后加载 -->
-    <script src="/src/js/vendor/kodepay-website.js" defer></script>
+    <!-- 在 head 标签中添加，注意顺序很重要 -->
+    <script src="/src/js/vendor/kodepay-website.js"></script>
+    <script src="/src/js/payment.js"></script>
   </head>
   <body class="bg-gray-900">
     <header class="fixed w-full bg-gray-900/50 backdrop-blur-md z-50">
@@ -293,7 +286,7 @@
 
             <!-- Speech to Text View - 新设计 -->
             <div class="hidden flex justify-center" id="speech-to-text-view">
-              <!-- 全宽背景容器 -->
+              <!-- 全���背景容器 -->
               <div class="w-full bg-white/5 backdrop-blur-md rounded-2xl">
                 <!-- 内容容器 -->
                 <div class="w-full max-w-[1200px] mx-auto px-8 py-8">
@@ -318,7 +311,7 @@
                         </div>
                         <div class="text-gray-400 mb-2 group-hover:text-gray-300 transition-colors" data-i18n="input.speechToText.dragDropHint">点击 / 拖拽 本地音视频文件到这里</div>
                         
-                        <!-- 文件���制信�� - 默认折叠 -->
+                        <!-- 文件限制信息 - 默认折叠 -->
                         <div class="text-sm text-gray-500 hover:text-gray-400 cursor-help group-hover:text-gray-400 transition-colors">
                           <button class="flex items-center gap-1" onclick="toggleFileInfo(event)" data-i18n="input.speechToText.viewSupportedFormats">查看支持的文件格式</button>
                         </div>
@@ -548,14 +541,14 @@
         <div class="container mx-auto max-w-6xl">
           <h2 class="section-title" data-i18n="features.title">功能特点</h2>
           <p class="section-description" data-i18n="features.description">
-            Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐、语音，支持声音效果��新、音频分离及风格变换，赋予创作者无限创作可能
+            Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐、语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创作可能
           </p>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- AI驱动的音频生成 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎵</div>
-              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.0.title">AI驱动的音频生���</h3>
+              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.0.title">AI驱动的音频生成</h3>
               <p class="text-gray-400" data-i18n="features.cards.0.description">通过文本和音频输入创造独特的声音、语音和�����乐</p>
             </div>
 
@@ -742,9 +735,9 @@
           </p>
           <div class="grid md:grid-cols-2 gap-8">
             <div class="price-card">
-              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.basic.title">基础��</h3>
+              <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.basic.title">基础版</h3>
               <p class="text-4xl font-bold mb-6">
-                <span data-i18n="pricing.basic.price">¥69/月</span>
+                <span data-i18n="pricing.basic.price">¥9.99/月</span>
               </p>
               <ul class="space-y-4 mb-8">
                 <li class="flex items-center">
@@ -766,6 +759,7 @@
                   <span data-i18n="pricing.basic.features.2">标准客户支持服务</span>
                 </li>
               </ul>
+              <!-- 基础版按钮 -->
               <button 
                 class="btn-primary w-full" 
                 onclick="handleSubscription('prod_655649d5e1c2493f', 'usd')"
@@ -776,7 +770,7 @@
             <div class="price-card border-white/20">
               <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.pro.title">专业版</h3>
               <p class="text-4xl font-bold mb-6">
-                <span data-i18n="pricing.pro.price">$29.99/month</span>
+                <span data-i18n="pricing.pro.price">$29.99/月</span>
               </p>
               <ul class="space-y-4 mb-8">
                 <li class="flex items-center">
@@ -798,6 +792,7 @@
                   <span data-i18n="pricing.pro.features.2"></span>
                 </li>
               </ul>
+              <!-- 专业版按钮 -->
               <button 
                 class="btn-primary w-full" 
                 onclick="handleSubscription('prod_19a55e4a69304ab3', 'usd')"
@@ -825,7 +820,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a1">
-                Fugatto是NVIDIA的生成式AI音频模型，能够根据文本提示���建音乐、音效和语音，特别适合创意产业使用。
+                Fugatto是NVIDIA的生成式AI音频模型，能够根据文本提示创建音乐、音效和语音，特别适合创意产业使用。
               </div>
             </div>
             <div class="faq-item">
@@ -847,7 +842,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a3">
-                音乐���作、游戏、广告和电影行业可以使用它来创建独特的音频内容��增强���验。
+                音乐制作、游戏、广告和电影行业可以使用它来创建独特的音频内容并增强体验。
               </div>
             </div>
             <div class="faq-item">
@@ -858,7 +853,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a4">
-                是的，它可以生成和调整具有不同口音、情感和语调的声音。
+                是的，它可以生成和调���具有���同口音、情感和语调的声音。
               </div>
             </div>
             <div class="faq-item">
@@ -869,7 +864,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a5">
-                是���，它允许根据输入变化动态修改音频。
+                是的，它允许根据输入变化动态修改音频。
               </div>
             </div>
             <div class="faq-item">
@@ -880,7 +875,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a6">
-                它在生成多样化、高质量声音输出的灵活性���以及处理复杂提示的能力使其独特。
+                它在生成多样化、高质量声音输出的灵活性，以及处理复杂提示的能力使其独特。
               </div>
             </div>
           </div>
@@ -1243,7 +1238,7 @@
       const k = 1024;
       const sizes = ['B', 'KB', 'MB', 'GB'];
       const i = Math.floor(Math.log(bytes) / Math.log(k));
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]);
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
     </script>
     <script>
@@ -1369,56 +1364,6 @@
       // 等待 i18next 初始化完成
       await initI18n();
       updateTranslateOptions('zh');
-    });
-    </script>
-    <script>
-    // 支付处理函数
-    async function handleSubscription(productId, currency) {
-        try {
-            console.log('Starting payment process:', { productId, currency });
-            
-            // 防止重复点击
-            const button = event.currentTarget;
-            if (button.disabled) return;
-            button.disabled = true;
-            
-            // 检查 KodePay SDK 是否已加载
-            if (!window.KodePay) {
-                console.error('KodePay SDK not loaded yet');
-                throw new Error('KodePay SDK not loaded');
-            }
-            
-            // 使用 open_payment_page 方法
-            await window.KodePay.open_payment_page(
-                productId,
-                currency,
-                {
-                    payment_channel: 'stripe',
-                    payment_method: 'card',
-                    currency: currency,
-                    redirect_url: window.location.origin + '/payment/success'
-                }
-            );
-            
-        } catch (error) {
-            console.error('Payment error:', error);
-            alert('支付初始化失败，请稍后重试');
-        } finally {
-            // 重新启用按钮
-            button.disabled = false;
-        }
-    }
-
-    // 添加页面加载完成后的检查
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM Content Loaded');
-        console.log('Payment script status:', !!window.handleSubscription);
-        console.log('KodePay status:', !!window.KodePay);
-        
-        // 检查 KodePay SDK 是否正确加载
-        if (!window.KodePay) {
-            console.warn('KodePay SDK not loaded on DOMContentLoaded');
-        }
     });
     </script>
   </body>

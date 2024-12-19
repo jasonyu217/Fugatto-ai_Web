@@ -3,28 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="
--   default-src 'self' kodepay-global.zingfront.com;
-+   default-src 'self' https://api.kodepay.io https://kodepay.io;
--   script-src 'self' 'unsafe-inline' 'unsafe-eval' kodepay-global.zingfront.com;
-+   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.kodepay.io;
-    style-src 'self' 'unsafe-inline';
-    img-src 'self' data:;
--   connect-src 'self' kodepay-global.zingfront.com;
-+   connect-src 'self' https://api.kodepay.io;
-+   frame-src 'self' https://kodepay.io;
-">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' kodepay-global.zingfront.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' kodepay-global.zingfront.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' kodepay-global.zingfront.com">
     <title>定价方案 - Fugatto</title>
     <link rel="stylesheet" href="/src/css/styles.css">
-    <script src="/src/js/vendor/kodepay-website.js"></script>
     <script src="/src/js/payment.js" defer></script>
     <include src="./src/partials/analytics.html"></include>
-    <!-- KodePay 配置 -->
-    <script>
-        window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
-        window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
-        window.KODEPAY_ENV = 'production';
-    </script>
 </head>
 <body class="bg-gray-900 text-white min-h-screen">
     <!-- 导航栏 -->
@@ -76,81 +59,6 @@
         } catch (error) {
             console.error('Error initializing page:', error);
         }
-    </script>
-
-    <!-- 基础版卡片的支付按钮 -->
-    <button 
-      class="btn-primary w-full" 
-      onclick="handleSubscription('prod_655649d5e1c2493f', 'usd')"
-      data-i18n="pricing.basic.cta">
-      立即订阅
-    </button>
-
-    <!-- 专业版卡片的支付按钮 -->
-    <button 
-      class="btn-primary w-full" 
-      onclick="handleSubscription('prod_19a55e4a69304ab3', 'usd')"
-      data-i18n="pricing.pro.cta">
-      立即订阅
-    </button>
-
-    <!-- 在 body 结束标签前添加支付处理函数 -->
-    <script>
-    // 支付处理函数
-    async function handleSubscription(productId, currency) {
-        try {
-            console.log('Starting payment process:', { productId, currency });
-            
-            // 防止重复点击
-            const button = event.currentTarget;
-            if (button.disabled) return;
-            button.disabled = true;
-            
-            // 等待 KodePay SDK 加载
-            let retries = 0;
-            while (!window.KodePay && retries < 10) {
-                await new Promise(resolve => setTimeout(resolve, 500));
-                retries++;
-            }
-            
-            // 检查 KodePay SDK 是否已加载
-            if (!window.KodePay) {
-                console.error('KodePay SDK not loaded yet');
-                throw new Error('KodePay SDK not loaded');
-            }
-            console.log('KodePay SDK status:', window.KodePay);
-            
-            // 使用 open_payment_choose_page 方法
-            await window.KodePay.open_payment_choose_page(
-                productId,
-                currency,
-                {
-                    payment_channel: 'stripe',
-                    payment_method: 'card',
-                    redirect_url: window.location.origin + '/payment/success'
-                }
-            );
-            
-        } catch (error) {
-            console.error('Payment error:', error);
-            alert('支付初始化失败，请稍后重试');
-        } finally {
-            // 重新启用按钮
-            button.disabled = false;
-        }
-    }
-    
-    // 添加页面加载完成后的检查
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM Content Loaded');
-        console.log('Payment script status:', !!window.handleSubscription);
-        console.log('KodePay status:', !!window.KodePay);
-        
-        // 检查 KodePay SDK 是否正确加载
-        if (!window.KodePay) {
-            console.warn('KodePay SDK not loaded on DOMContentLoaded');
-        }
-    });
     </script>
 </body>
 </html>

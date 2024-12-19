@@ -1,7 +1,7 @@
 // KodePay 配置
 window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
 window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
-window.KODEPAY_ENV = 'development';
+window.KODEPAY_ENV = 'production';
 
 // 确保在全局范围内定义 handleSubscription
 window.handleSubscription = function(productId, currency, priceId) {
@@ -40,24 +40,6 @@ window.handleSubscription = function(productId, currency, priceId) {
     }
 };
 
-// 加载 KodePay SDK
-(function loadKodePaySDK() {
-    const script = document.createElement('script');
-    script.src = '/src/js/vendor/kodepay-website.js';
-    script.async = 1;
-    script.onload = () => {
-        console.log('KodePay SDK loaded');
-        if (window.KodePay) {
-            window.KodePay.init().then(() => {
-                console.log('KodePay initialized');
-            }).catch(error => {
-                console.error('KodePay initialization failed:', error);
-            });
-        }
-    };
-    document.head.appendChild(script);
-})();
-
 // 添加调试日志
 console.log('Payment.js loaded');
 console.log('handleSubscription function:', window.handleSubscription);
@@ -66,5 +48,13 @@ console.log('handleSubscription function:', window.handleSubscription);
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded');
     console.log('Payment script status:', !!window.handleSubscription);
-    console.log('KodePay status:', !!window.KodePay);
+    if (window.KodePay) {
+        window.KodePay.init().then(() => {
+            console.log('KodePay initialized');
+        }).catch(error => {
+            console.error('KodePay initialization failed:', error);
+        });
+    } else {
+        console.error('KodePay not found');
+    }
 }); 
