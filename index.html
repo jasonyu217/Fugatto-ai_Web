@@ -35,12 +35,13 @@
     <title>AI Fugatto - Advanced AI Audio Generation</title>
     <link rel="stylesheet" href="/src/css/styles.css">
     <meta http-equiv="Content-Security-Policy" content="
-      default-src 'self' http://127.0.0.1:8002 https://www.googletagmanager.com; 
-      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com;  <!-- 移除 kodepay-global.zingfront.com -->
+      default-src 'self' http://127.0.0.1:8002 https://www.googletagmanager.com https://t4.doubleclick.net https://www.google-analytics.com; 
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com;
       style-src 'self' 'unsafe-inline';
-      connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://api.kodepay.io;  <!-- 保留 api.kodepay.io -->
+      connect-src 'self' http://127.0.0.1:8002 https://formspree.io/ https://api.kodepay.io https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net;
+      frame-src 'self' https://kodepay.io;
       form-action 'self' https://formspree.io/;
-      img-src 'self' data: https://images.unsplash.com;
+      img-src 'self' data: https://images.unsplash.com https://www.google-analytics.com https://www.googletagmanager.com;
     ">
     <script src="src/i18n/translations/en.js"></script>
     <script src="src/i18n/translations/ja.js"></script>
@@ -315,7 +316,7 @@
                         </div>
                         <div class="text-gray-400 mb-2 group-hover:text-gray-300 transition-colors" data-i18n="input.speechToText.dragDropHint">点击 / 拖拽 本地音视频文件到这里</div>
                         
-                        <!-- 文件���制信息 - 默认折叠 -->
+                        <!-- 文件���制信�� - 默认折叠 -->
                         <div class="text-sm text-gray-500 hover:text-gray-400 cursor-help group-hover:text-gray-400 transition-colors">
                           <button class="flex items-center gap-1" onclick="toggleFileInfo(event)" data-i18n="input.speechToText.viewSupportedFormats">查看支持的文件格式</button>
                         </div>
@@ -822,7 +823,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a1">
-                Fugatto是NVIDIA的生成式AI音频模型，能够根据文本提示创建音乐、音效和语音，特别适合创意产业使用。
+                Fugatto是NVIDIA的生成式AI音频模型，能够根据文本提示���建音乐、音效和语音，特别适合创意产业使用。
               </div>
             </div>
             <div class="faq-item">
@@ -844,7 +845,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a3">
-                音乐制作、游戏、广告和电影行业可以使用它来创建独特的音频内容并增强体验。
+                音乐���作、游戏、广告和电影行业可以使用它来创建独特的音频内容并增强体验。
               </div>
             </div>
             <div class="faq-item">
@@ -1366,6 +1367,51 @@
       // 等待 i18next 初始化完成
       await initI18n();
       updateTranslateOptions('zh');
+    });
+    </script>
+    <script>
+    // 支付处理函数
+    async function handleSubscription(productId, currency) {
+        try {
+            console.log('Starting payment process:', { productId, currency });
+            
+            // 防止重复点击
+            const button = event.currentTarget;
+            if (button.disabled) return;
+            button.disabled = true;
+            
+            // 检查 KodePay SDK 是否已加载
+            if (!window.KodePay) {
+                console.error('KodePay SDK not loaded yet');
+                throw new Error('KodePay SDK not loaded');
+            }
+            console.log('KodePay SDK status:', window.KodePay);
+            
+            // 使用 open_payment_choose_page 方法
+            window.KodePay.open_payment_choose_page(
+                productId,
+                currency,
+                {
+                    payment_channel: 'stripe',
+                    payment_method: 'card',
+                    redirect_url: window.location.origin + '/payment/success'
+                }
+            );
+            
+        } catch (error) {
+            console.error('Payment error:', error);
+            alert('支付初始化失败，请稍后重试');
+        } finally {
+            // 重新启用按钮
+            button.disabled = false;
+        }
+    }
+
+    // 添加页面加载完成后的检查
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM Content Loaded');
+        console.log('Payment script status:', !!window.handleSubscription);
+        console.log('KodePay status:', !!window.KodePay);
     });
     </script>
   </body>
