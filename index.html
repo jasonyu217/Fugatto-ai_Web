@@ -50,6 +50,12 @@
     <script src="src/i18n/translations/zh.js"></script>
     <!-- 添加 Google Analytics -->
     <include src="./src/partials/analytics.html"></include>
+    <!-- 在 head 标签中添加 KodePay 配置 -->
+    <script>
+        window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687'; // 你的应用ID
+        window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';      // 你的客户端ID
+        window.KODEPAY_ENV = 'development';  // 或 'production'
+    </script>
   </head>
   <body class="bg-gray-900">
     <header class="fixed w-full bg-gray-900/50 backdrop-blur-md z-50">
@@ -871,7 +877,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a6">
-                它在生成多样化、高质量声音输出的灵活性，以及处理复杂提示的能力使其独特。
+                它在生成多样化、高质量声音输出的灵活性���以及处理复杂提示的能力使其独特。
               </div>
             </div>
           </div>
