@@ -35,11 +35,19 @@
     <title>AI Fugatto - Advanced AI Audio Generation</title>
     <link rel="stylesheet" href="/src/css/styles.css">
     <meta http-equiv="Content-Security-Policy" content="
-      default-src 'self' api.kodepay.io; 
-      script-src 'self' 'unsafe-eval' 'unsafe-inline';
+      default-src 'self' api.kodepay.io *.kodepay.io kodepay-global.zingfront.com;
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' 
+        api.kodepay.io *.kodepay.io 
+        kodepay-global.zingfront.com
+        https://www.googleadservices.com 
+        https://www.google-analytics.com 
+        https://www.googletagmanager.com 
+        https://*.doubleclick.net;
       style-src 'self' 'unsafe-inline';
-      connect-src 'self' api.kodepay.io;
-      frame-src 'self' kodepay.io;
+      connect-src 'self' api.kodepay.io *.kodepay.io kodepay-global.zingfront.com;
+      frame-src 'self' kodepay.io *.kodepay.io kodepay-global.zingfront.com;
+      img-src 'self' data: https: *.google-analytics.com *.googletagmanager.com;
+      font-src 'self' data:;
     ">
     <script src="src/i18n/translations/en.js"></script>
     <script src="src/i18n/translations/ja.js"></script>
@@ -50,8 +58,43 @@
     <!-- 添加 Google Analytics -->
     <include src="./src/partials/analytics.html"></include>
     <!-- 在 head 标签中添加，注意顺序很重要 -->
-    <script src="/src/js/vendor/kodepay-website.js"></script>
-    <script src="/src/js/payment.js"></script>
+    <script src="https://cdn.kodepay.com/js/kodepay-website.js"></script>
+    <!-- 添加 SDK 加载事件监听 -->
+    <script>
+        function loadKodePaySDK() {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = 'https://kodepay-global.zingfront.com/resource/kodepay/2.1.4/kodepay-website.js';
+                script.async = true;
+                script.onload = () => {
+                    console.log('KodePay SDK loaded');
+                    resolve();
+                };
+                script.onerror = () => {
+                    reject(new Error('Failed to load KodePay SDK'));
+                };
+                document.head.appendChild(script);
+            });
+        }
+    </script>
+    <!-- 移除原有的 SDK 引用 -->
+    <!-- 我们的支付脚本 -->
+    <script defer src="/src/js/payment.js"></script>
+    <!-- 在 head 标签中添加 KodePay 配置 -->
+    <script>
+    // KodePay 配置 - 生产环境
+    window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
+    window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
+    window.KODEPAY_ENV = 'production';  // 改为生产环境
+
+    // 动态加载 KodePay SDK
+    (function() {
+        const script = document.createElement('script');
+        script.src = 'https://kodepay-global.zingfront.com/resource/kodepay/2.1.4/kodepay-website.js';
+        script.async = true;
+        document.head.appendChild(script);
+    })();
+    </script>
   </head>
   <body class="bg-gray-900">
     <header class="fixed w-full bg-gray-900/50 backdrop-blur-md z-50">
@@ -538,7 +581,7 @@
         <div class="container mx-auto max-w-6xl">
           <h2 class="section-title" data-i18n="features.title">功能特点</h2>
           <p class="section-description" data-i18n="features.description">
-            Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、音乐、语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创作可能
+            Fugatto是NVIDIA最新的生成式AI模型，可从文本和音频中生成声音、��乐、语音，支持声音效果创新、音频分离及风格变换，赋予创作者无限创作可能
           </p>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -552,15 +595,15 @@
             <!-- 创意声音效果 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎨</div>
-              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.1.title">创意声音效果</h3>
+              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.1.title">��意声音效果</h3>
               <p class="text-gray-400" data-i18n="features.cards.1.description">引导Fugatto创造意想不���的声音效果</p>
             </div>
 
-            <!-- 沉浸式音景 -->
+            <!-- 沉浸式��景 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎧</div>
               <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.2.title">沉浸式音景</h3>
-              <p class="text-gray-400" data-i18n="features.cards.2.description">为电影和音频制作提供丰富多变的声音体验</p>
+              <p class="text-gray-400" data-i18n="features.cards.2.description">为���影和音频制作提供丰富多变的声音体验</p>
             </div>
 
             <!-- 音频元素提取 -->
@@ -759,7 +802,7 @@
               <!-- 基础版按钮 -->
               <button 
                 class="btn-primary w-full" 
-                onclick="handleSubscription('prod_655649d5e1c2493f', 'usd')"
+                onclick="handleSubscription('prod_421f8f2ef81f40bd', 'usd')"
                 data-i18n="pricing.basic.cta">
                 立即订阅
               </button>
@@ -792,7 +835,7 @@
               <!-- 专业版按钮 -->
               <button 
                 class="btn-primary w-full" 
-                onclick="handleSubscription('prod_19a55e4a69304ab3', 'usd')"
+                onclick="handleSubscription('prod_47963f49f96749fa', 'usd')"
                 data-i18n="pricing.pro.cta">
                 立即订阅
               </button>
@@ -817,7 +860,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a1">
-                Fugatto是NVIDIA的生成式AI音频模型，能够根据文本提示创建音乐、音效和语音，特别适合创意产业使用。
+                Fugatto是NVIDIA的生���式AI音频模型，能够根据文本提示创建音乐、音效和语音，特别适合创意产业使用。
               </div>
             </div>
             <div class="faq-item">
@@ -1140,7 +1183,7 @@
       const startButton = document.getElementById('startTranscribeBtn');
       
       if (files.length > 0) {
-        // 获取当前文件数量
+        // ��取当前文件数量
         const currentFiles = fileList.children.length;
         
         // 验证总文件数量
@@ -1149,7 +1192,7 @@
           return;
         }
 
-        // 显示文件列表区域
+        // ���示文件列表区域
         initialUpload.classList.add('hidden');
         uploadedFiles.classList.remove('hidden');
         
@@ -1235,7 +1278,7 @@
       const k = 1024;
       const sizes = ['B', 'KB', 'MB', 'GB'];
       const i = Math.floor(Math.log(bytes) / Math.log(k));
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]);
     }
     </script>
     <script>
@@ -1361,6 +1404,13 @@
       // 等待 i18next 初始化完成
       await initI18n();
       updateTranslateOptions('zh');
+    });
+    </script>
+    <script>
+    // 监听 KodePay SDK 加载
+    window.addEventListener('load', function() {
+        console.log('Window loaded');
+        console.log('KodePay status:', !!window.KodePay);
     });
     </script>
   </body>
