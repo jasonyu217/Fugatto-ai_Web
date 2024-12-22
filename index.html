@@ -35,12 +35,18 @@
     <title>AI Fugatto - Advanced AI Audio Generation</title>
     <link rel="stylesheet" href="/src/css/styles.css">
     <meta http-equiv="Content-Security-Policy" content="
-      default-src 'self' api.kodepay.io *.kodepay.io;
-      script-src 'self' 'unsafe-eval' 'unsafe-inline' api.kodepay.io *.kodepay.io;
+      default-src 'self' api.kodepay.io *.kodepay.io kodepay-global.zingfront.com;
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' 
+        api.kodepay.io *.kodepay.io 
+        kodepay-global.zingfront.com
+        https://www.googleadservices.com 
+        https://www.google-analytics.com 
+        https://www.googletagmanager.com 
+        https://*.doubleclick.net;
       style-src 'self' 'unsafe-inline';
-      connect-src 'self' api.kodepay.io *.kodepay.io;
-      frame-src 'self' kodepay.io *.kodepay.io;
-      img-src 'self' data: https:;
+      connect-src 'self' api.kodepay.io *.kodepay.io kodepay-global.zingfront.com;
+      frame-src 'self' kodepay.io *.kodepay.io kodepay-global.zingfront.com;
+      img-src 'self' data: https: *.google-analytics.com *.googletagmanager.com;
       font-src 'self' data:;
     ">
     <script src="src/i18n/translations/en.js"></script>
@@ -76,10 +82,10 @@
     <script defer src="/src/js/payment.js"></script>
     <!-- 在 head 标签中添加 KodePay 配置 -->
     <script>
-    // KodePay 配置 - 生产环境
-    window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
-    window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
-    window.KODEPAY_ENV = 'production';  // 改为生产环境
+    // KodePay 配置 - 测试环境
+    window.KODEPAY_APPLICATION_ID = '88fec018-b7ce-11ef-a86f-aa6962b9d5ea';
+    window.KODEPAY_CLIENT_ID = '0d74e6ec-b7cf-11ef-a3bb-4a5bb4ed3f3b';
+    window.KODEPAY_ENV = 'development';  // 改为 sandbox 环境
 
     // 动态加载 KodePay SDK
     (function() {
@@ -105,8 +111,8 @@
         <div class="flex items-center gap-8">
           <!-- AI Voice Generator 下拉菜单 -->
           <div class="relative group">
-            <a href="/workspace" class="nav-link">
-              工作台
+            <a href="/workspace" class="nav-link" data-i18n="nav.aiAudioLab">
+              AI Audio Lab
             </a>
             <!-- 下拉菜单 -->
             <div class="dropdown-menu">
@@ -589,11 +595,11 @@
             <!-- 创意声音效果 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎨</div>
-              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.1.title">��意声音效果</h3>
+              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.1.title">创意声音效果</h3>
               <p class="text-gray-400" data-i18n="features.cards.1.description">引导Fugatto创造意想不���的声音效果</p>
             </div>
 
-            <!-- 沉浸式��景 -->
+            <!-- 沉���式��景 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎧</div>
               <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.2.title">沉浸式音景</h3>
@@ -841,7 +847,7 @@
       <!-- FAQ -->
       <section class="py-20 px-4">
         <div class="container mx-auto max-w-6xl">
-          <h2 class="section-title" data-i18n="faq.title">常见问题</h2>
+          <h2 class="section-title" data-i18n="faq.title">��见问题</h2>
           <p class="section-description" data-i18n="faq.description">
             我们收集了用户最常见的问题和详细解答，帮助您更好地了解 Fugatto AI 的功能和使用方法。
           </p>
@@ -887,7 +893,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a4">
-                是的，它可以生成和调���具有���同口音、情感和语调的声音。
+                是的，它可以生成和调���具有�����口音、情感和语调的声音。
               </div>
             </div>
             <div class="faq-item">
@@ -1177,7 +1183,7 @@
       const startButton = document.getElementById('startTranscribeBtn');
       
       if (files.length > 0) {
-        // ��取当前文件数量
+        // 获取当前文件数量
         const currentFiles = fileList.children.length;
         
         // 验证总文件数量
@@ -1274,131 +1280,6 @@
       const i = Math.floor(Math.log(bytes) / Math.log(k));
       return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]);
     }
-    </script>
-    <script>
-    // 语言按钮点击处理
-    document.querySelectorAll('#languageButtons button').forEach(button => {
-      button.addEventListener('click', () => {
-        // 移除其他按钮的激活状态
-        document.querySelectorAll('#languageButtons button').forEach(btn => {
-          btn.classList.remove('bg-teal-500/20');
-          btn.classList.add('bg-white/5', 'hover:bg-white/10', 'hover:bg-teal-500/10');
-        });
-        
-        // 激活当前按钮
-        button.classList.remove('bg-white/5', 'hover:bg-white/10', 'hover:bg-teal-500/10');
-        button.classList.add('bg-teal-500/20');
-        
-        // 更新翻译选项
-        const lang = button.getAttribute('data-lang');
-        updateTranslateOptions(lang);
-      });
-    });
-
-    // 区分发言人按钮点击处理
-    document.querySelectorAll('#speakerButtons button').forEach(button => {
-      button.addEventListener('click', () => {
-        // 移除其他按钮的激活状态
-        document.querySelectorAll('#speakerButtons button').forEach(btn => {
-          btn.classList.remove('bg-teal-500/20');
-          btn.classList.add('bg-white/5', 'hover:bg-white/10', 'hover:bg-teal-500/10');
-        });
-        
-        // 激活当前按钮
-        button.classList.remove('bg-white/5', 'hover:bg-white/10', 'hover:bg-teal-500/10');
-        button.classList.add('bg-teal-500/20');
-      });
-    });
-
-    // 更新翻译选项
-    function updateTranslateOptions(sourceLang) {
-      const translateSelect = document.getElementById('translateSelect');
-      translateSelect.innerHTML = ''; // 清空现有选项
-      
-      switch(sourceLang) {
-        case 'zh': // 中文
-          translateSelect.disabled = false;
-          addOptions(translateSelect, [
-            { value: 'none', i18nKey: 'input.speechToText.translationOptions.fromZh.none' },
-            { value: 'en', i18nKey: 'input.speechToText.translationOptions.fromZh.toEn' },
-            { value: 'ja', i18nKey: 'input.speechToText.translationOptions.fromZh.toJa' }
-          ]);
-          break;
-          
-        case 'en': // 英语
-          translateSelect.disabled = false;
-          addOptions(translateSelect, [
-            { value: 'none', i18nKey: 'input.speechToText.translationOptions.fromEn.none' },
-            { value: 'zh', i18nKey: 'input.speechToText.translationOptions.fromEn.toZh' }
-          ]);
-          break;
-          
-        case 'ja': // 日语
-          translateSelect.disabled = false;
-          addOptions(translateSelect, [
-            { value: 'none', i18nKey: 'input.speechToText.translationOptions.fromJa.none' },
-            { value: 'zh', i18nKey: 'input.speechToText.translationOptions.fromJa.toZh' }
-          ]);
-          break;
-          
-        case 'yue': // 粤语
-          translateSelect.disabled = true;
-          addOptions(translateSelect, [
-            { value: 'none', i18nKey: 'input.speechToText.translationOptions.fromYue.unsupported' }
-          ]);
-          break;
-          
-        case 'zh-en': // 中英文自由说
-          translateSelect.disabled = false;
-          addOptions(translateSelect, [
-            { value: 'none', i18nKey: 'input.speechToText.translationOptions.fromZhEn.none' },
-            { value: 'zh', i18nKey: 'input.speechToText.translationOptions.fromZhEn.toZh' },
-            { value: 'en', i18nKey: 'input.speechToText.translationOptions.fromZhEn.toEn' }
-          ]);
-          break;
-      }
-      
-      // 强制更新所有翻译选项的文本
-      Array.from(translateSelect.options).forEach(option => {
-        const key = option.getAttribute('data-i18n');
-        if (key) {
-          option.textContent = window.i18next.t(key);
-        }
-      });
-    }
-
-    // 辅助函数：添加选项
-    function addOptions(selectElement, options) {
-      options.forEach(option => {
-        const optionElement = document.createElement('option');
-        optionElement.value = option.value;
-        optionElement.setAttribute('data-i18n', option.i18nKey);
-        // 设置翻译文本
-        if (window.i18next && window.i18next.isInitialized) {
-          optionElement.textContent = window.i18next.t(option.i18nKey);
-        } else {
-          optionElement.textContent = option.i18nKey;
-        }
-        selectElement.add(optionElement);
-      });
-      
-      // 强制更新所有翻译选项的文本
-      if (window.i18next && window.i18next.isInitialized) {
-        Array.from(selectElement.options).forEach(option => {
-          const key = option.getAttribute('data-i18n');
-          if (key) {
-            option.textContent = window.i18next.t(key);
-          }
-        });
-      }
-    }
-
-    // 初始化时设置默认选项（假设默认选中中文）
-    document.addEventListener('DOMContentLoaded', async function() {
-      // 等待 i18next 初始化完成
-      await initI18n();
-      updateTranslateOptions('zh');
-    });
     </script>
     <script>
     // 监听 KodePay SDK 加载

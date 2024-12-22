@@ -201,7 +201,8 @@ export default {
     },
     audioCreation: 'AI 音频创作',
     community: '语音社区',
-    pricing: '价格方案'
+    pricing: '价格方案',
+    aiAudioLab: 'AI 音频实验室'
   },
   faq: {
     title: "常见问题",
@@ -434,5 +435,8 @@ export default {
     ja: "日语",
     yue: "粤语",
     zhEn: "中英文自由说"
+  },
+  workspace: {
+    title: 'AI 音频实验室 - Fugatto AI'
   }
 }

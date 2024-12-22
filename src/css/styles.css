@@ -694,3 +694,28 @@ audio::-webkit-media-controls-mute-button {
 .faq-answer br + br {
   @apply hidden;
 }
+
+/* Tab样式 */
+.workspace-tab {
+    padding: 12px 24px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.workspace-tab.active {
+    border-bottom: 2px solid #007bff;
+    color: #007bff;
+    font-weight: 600;
+}
+
+.tab-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+    opacity: 1;
+}

@@ -16,7 +16,8 @@ export default {
     },
     audioCreation: 'Creación de Audio IA',
     community: 'Comunidad de Voz',
-    pricing: 'Precios'
+    pricing: 'Precios',
+    aiAudioLab: 'Laboratorio de Audio AI'
   },
   hero: {
     title: "Fugatto AI - El Sonido Más Flexible del Mundo",
@@ -356,5 +357,8 @@ export default {
       email: "Por favor, introduce un correo electrónico válido",
       required: "Este campo es obligatorio"
     }
+  },
+  workspace: {
+    title: 'Laboratorio de Audio AI - Fugatto AI'
   }
 }

@@ -16,7 +16,8 @@ export default {
     },
     audioCreation: 'ИИ Создание Аудио',
     community: 'Голосовое Сообщество',
-    pricing: 'Цены'
+    pricing: 'Цены',
+    aiAudioLab: 'AI Аудио Лаборатория'
   },
   hero: {
     title: "Выберите Подходящий для Вас План",
@@ -344,5 +345,8 @@ export default {
       email: "Пожалуйста, введите действительный адрес электронной почты",
       required: "Это поле обязательно для заполнения"
     }
+  },
+  workspace: {
+    title: 'AI Аудио Лаборатория - Fugatto AI'
   }
 }

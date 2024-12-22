@@ -12,7 +12,8 @@ export default {
     audioCreation: 'AI Audio Creation',
     community: 'Voice Community',
     pricing: 'Pricing',
-    signIn: 'Sign In'
+    signIn: 'Sign In',
+    aiAudioLab: 'AI Audio Lab'
   },
   hero: {
     title: "AI - World's Most Flexible Sound",
@@ -472,5 +473,8 @@ export default {
     ja: "Japanese",
     yue: "Cantonese",
     zhEn: "Chinese-English Mixed"
+  },
+  workspace: {
+    title: 'AI Audio Lab - Fugatto AI'
   }
 }

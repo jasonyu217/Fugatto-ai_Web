@@ -16,7 +16,8 @@ export default {
     },
     audioCreation: 'إنشاء الصوت بالذكاء الاصطناعي',
     community: 'مجتمع الصوت',
-    pricing: 'التسعير'
+    pricing: 'التسعير',
+    aiAudioLab: 'مختبر الصوت AI'
   },
   hero: {
     title: "اختر الخطة المناسبة لك",
@@ -347,5 +348,8 @@ export default {
       email: "يرجى إدخال عنوان بريد إلكتروني صالح",
       required: "هذا الحقل مطلوب"
     }
+  },
+  workspace: {
+    title: 'مختبر الصوت AI - Fugatto AI'
   }
 }

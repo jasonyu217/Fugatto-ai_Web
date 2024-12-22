@@ -16,7 +16,8 @@ export default {
     },
     audioCreation: 'AI オーディオ制作',
     community: '音声コミュニティ',
-    pricing: '料金プラン'
+    pricing: '料金プラン',
+    aiAudioLab: 'AI オーディオラボ'
   },
   hero: {
     title: "Fugatto AI - 世界最高の柔軟な音声",
@@ -384,5 +385,8 @@ export default {
       email: "有効なメールアドレスを入力してください",
       required: "この項目は必須です"
     }
+  },
+  workspace: {
+    title: 'AI オーディオラボ - Fugatto AI'
   }
 }

@@ -98,3 +98,28 @@ npm run preview
 ## 📄 许可证
 
 本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+
+# Workspace页面Tab导航功能
+
+## 功能说明
+该功能允许用户从首页直接跳转到Workspace页面的特定功能Tab。
+
+### 使用方法
+1. 在首页点击任意功能卡片，将自动跳转到对应的Workspace Tab
+2. URL参数格式：`/workspace?tab=功能名称`
+   - 例如：`/workspace?tab=text-to-speech`
+
+### 支持的Tab参数
+- text-to-speech：文字转语音功能
+- speech-to-text：语音转文字功能
+- image-generation：图像生成功能
+- code-generation：代码生成功能
+
+### 技术实现
+- 使用URL参数传递目标Tab信息
+- JavaScript自动处理Tab切换和视觉反馈
+- CSS提供平滑的过渡动画效果
+
+## 注意事项
+- 确保URL参数与Tab的data-tab属性值匹配
+- 支持浏览器的前进/后退操作
