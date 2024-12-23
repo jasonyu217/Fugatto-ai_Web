@@ -102,6 +102,22 @@
         window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
         window.KODEPAY_ENV = 'production';  // 改为生产环境
     </script>
+    
+    <!-- SEO Meta 标签 -->
+    <meta name="description" content="Fugatto AI - 先进的AI音频生成平台,为创作者和企业提供专业的语音服务解决方案。支持文本转语音、语音转文本、语音克隆等功能。">
+    <meta name="keywords" content="AI语音,文本转语音,语音克隆,AI配音,语音合成,Fugatto">
+    
+    <!-- Open Graph Meta 标签 -->
+    <meta property="og:title" content="Fugatto AI - 先进的AI音频生成平台">
+    <meta property="og:description" content="为创作者和企业提供专业的语音服务解决方案">
+    <meta property="og:image" content="https://fugatto.ai/images/og-image.png">
+    <meta property="og:url" content="https://fugatto.ai">
+    
+    <!-- Twitter Card Meta 标签 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fugatto AI - 先进的AI音频生成平台">
+    <meta name="twitter:description" content="为创作者和企业提供专业的语音服务解决方案">
+    <meta name="twitter:image" content="https://fugatto.ai/images/twitter-card.png">
   </head>
   <body class="bg-gray-900">
     <header class="fixed w-full bg-gray-900/50 backdrop-blur-md z-50">
@@ -301,7 +317,7 @@
                     </div>
                   </div>
 
-                  <!-- 音频控制区�� -->
+                  <!-- 音频控制区域 -->
                   <div class="audio-controls bg-black/20 backdrop-blur-md rounded-xl p-6">
                     <!-- 状态指示器 -->
                     <div class="status-indicator flex items-center gap-3 mb-4">
@@ -808,10 +824,8 @@
               </ul>
               <!-- 基础版按钮 -->
               <button 
-                class="btn-primary w-full payment-button" 
-                data-product-id="prod_655649d5e1c2493f"
-                data-currency="usd"
-                disabled
+                class="btn-primary w-full" 
+                onclick="handleSubscription('prod_655649d5e1c2493f', 'usd')"
                 data-i18n="pricing.basic.cta">
                 立即订阅
               </button>
@@ -843,10 +857,8 @@
               </ul>
               <!-- 专业版按钮 -->
               <button 
-                class="btn-primary w-full payment-button" 
-                data-product-id="prod_19a55e4a69304ab3"
-                data-currency="usd"
-                disabled
+                class="btn-primary w-full" 
+                onclick="handleSubscription('prod_19a55e4a69304ab3', 'usd')"
                 data-i18n="pricing.pro.cta">
                 立即订阅
               </button>
@@ -865,7 +877,7 @@
           <div class="space-y-6 max-w-4xl mx-auto mt-12">
             <div class="faq-item">
               <button class="faq-question px-8 py-6 bg-white/5 hover:bg-white/10 w-full rounded-xl transition-all duration-300 [&.active]:rounded-b-none">
-                <span data-i18n="faq.q1">什么是NVIDIA Fugatto AI��</span>
+                <span data-i18n="faq.q1">什么是NVIDIA Fugatto AI？</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>

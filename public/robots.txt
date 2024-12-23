@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# 禁止访问管理后台
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://fugatto.ai/sitemap.xml 
