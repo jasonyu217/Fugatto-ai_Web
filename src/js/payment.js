@@ -56,7 +56,7 @@ async function handlePayment() {
 }
 
 // 支付处理函数
-window.handleSubscription = async function(productId, currency) {
+async function handleSubscription(productId, currency) {
     try {
         console.log('Starting payment process:', { productId, currency });
         
@@ -102,7 +102,10 @@ window.handleSubscription = async function(productId, currency) {
         console.error('Payment error:', error);
         alert('支付初始化失败，请稍后重试');
     }
-};
+}
+
+// 确保函数在全局可用
+window.handleSubscription = handleSubscription;
 
 // 支付成功回调
 function paySuccessCallback(userInfo, status) {
