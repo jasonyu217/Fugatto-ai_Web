@@ -1,34 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- 首页 -->
   <url>
-    <loc>https://fugatto.ai/</loc>
+    <loc>https://fugatto-ai.com/</loc>
     <lastmod>2024-03-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   
-  <!-- Workspace页面 -->
   <url>
-    <loc>https://fugatto.ai/workspace</loc>
+    <loc>https://fugatto-ai.com/workspace</loc>
     <lastmod>2024-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
-  <!-- 定价页面 -->
   <url>
-    <loc>https://fugatto.ai/pricing</loc>
+    <loc>https://fugatto-ai.com/pricing</loc>
     <lastmod>2024-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  
-  <!-- 其他重要页面 -->
-  <url>
-    <loc>https://fugatto.ai/about</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
 </urlset> 

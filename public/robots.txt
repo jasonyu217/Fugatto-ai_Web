@@ -6,4 +6,4 @@ Disallow: /admin/
 Disallow: /api/
 
 # Sitemap
-Sitemap: https://fugatto.ai/sitemap.xml 
+Sitemap: https://fugatto-ai.com/sitemap.xml 
