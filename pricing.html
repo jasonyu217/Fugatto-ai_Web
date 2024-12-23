@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
+        window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
+        window.KODEPAY_ENV = 'production';
+    </script>
+    <script src="/src/js/vendor/kodepay-website.js"></script>
     <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self' api.kodepay.io *.kodepay.io;
+        default-src 'self' api.kodepay.io *.kodepay.io *.fugatto-ai.com;
         script-src 'self' 'unsafe-eval' 'unsafe-inline' 
             api.kodepay.io *.kodepay.io
             https://www.googleadservices.com 
             https://www.google-analytics.com 
             https://www.googletagmanager.com 
-            https://*.doubleclick.net;
+            https://*.doubleclick.net
+            https://*.fugatto-ai.com;
         style-src 'self' 'unsafe-inline';
-        connect-src 'self' api.kodepay.io *.kodepay.io;
+        connect-src 'self' api.kodepay.io *.kodepay.io *.fugatto-ai.com;
         frame-src 'self' *.kodepay.io;
         img-src 'self' data: https: *.google-analytics.com *.googletagmanager.com;
     ">
@@ -54,14 +61,6 @@
     <!-- 先加载主要的JavaScript文件 -->
     <script src="/src/js/main.js"></script>
     
-    <!-- 先加载 KodePay 配置和SDK -->
-    <script>
-        window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
-        window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
-        window.KODEPAY_ENV = 'production';
-    </script>
-    <script src="/src/js/vendor/kodepay-website.js"></script>
-
     <!-- 确保pricing.js作为模块加载 -->
     <script type="module">
         try {
@@ -83,12 +82,20 @@
 
     <!-- 最后加载支付处理脚本 -->
     <script>
-        // 直接在页面中定义handleSubscription函数
+        // 添加调试日志
+        console.log('Domain:', window.location.origin);
+        console.log('KodePay Config:', {
+            applicationId: window.KODEPAY_APPLICATION_ID,
+            clientId: window.KODEPAY_CLIENT_ID,
+            env: window.KODEPAY_ENV
+        });
+        
         window.handleSubscription = async function(productId, currency) {
             try {
                 console.log('Starting payment process:', { productId, currency });
                 
                 if (!window.KodePay) {
+                    console.error('KodePay not found in window object');
                     throw new Error('KodePay SDK not loaded');
                 }
 
@@ -100,13 +107,13 @@
                 const paymentParams = {
                     payment_channel: 'stripe',
                     payment_method: 'card',
-                    redirect_url: window.location.origin + '/payment/success',
+                    redirect_url: 'https://fugatto-ai.com/payment/success',
                     price_id: productId,
                     currency: currency,
                     original_data: originalData,
                     onSuccess: (result) => {
                         console.log('Payment success:', result);
-                        window.location.href = window.location.origin + '/payment/success';
+                        window.location.href = 'https://fugatto-ai.com/payment/success';
                     },
                     onError: (error) => {
                         console.error('Payment error:', error);
@@ -129,5 +136,13 @@
             }
         };
     </script>
+
+    <!-- 基础版按钮 -->
+    <button 
+        class="btn-primary w-full" 
+        onclick="window.handleSubscription('prod_655649d5e1c2493f', 'usd')"
+        data-i18n="pricing.basic.cta">
+        立即订阅
+    </button>
 </body>
 </html>
