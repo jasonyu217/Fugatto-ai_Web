@@ -54,6 +54,14 @@
     <!-- 先加载主要的JavaScript文件 -->
     <script src="/src/js/main.js"></script>
     
+    <!-- 先加载 KodePay 配置和SDK -->
+    <script>
+        window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
+        window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
+        window.KODEPAY_ENV = 'production';
+    </script>
+    <script src="/src/js/vendor/kodepay-website.js"></script>
+
     <!-- 确保pricing.js作为模块加载 -->
     <script type="module">
         try {
@@ -73,15 +81,53 @@
         }
     </script>
 
-    <!-- KodePay 配置 -->
+    <!-- 最后加载支付处理脚本 -->
     <script>
-        window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
-        window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
-        window.KODEPAY_ENV = 'production';
+        // 直接在页面中定义handleSubscription函数
+        window.handleSubscription = async function(productId, currency) {
+            try {
+                console.log('Starting payment process:', { productId, currency });
+                
+                if (!window.KodePay) {
+                    throw new Error('KodePay SDK not loaded');
+                }
+
+                const originalData = {
+                    order_id: Date.now(),
+                    user_id: 'guest_' + Math.random().toString(36).substr(2, 9)
+                };
+
+                const paymentParams = {
+                    payment_channel: 'stripe',
+                    payment_method: 'card',
+                    redirect_url: window.location.origin + '/payment/success',
+                    price_id: productId,
+                    currency: currency,
+                    original_data: originalData,
+                    onSuccess: (result) => {
+                        console.log('Payment success:', result);
+                        window.location.href = window.location.origin + '/payment/success';
+                    },
+                    onError: (error) => {
+                        console.error('Payment error:', error);
+                        alert('支付失败，请重试');
+                    },
+                    onClose: () => {
+                        console.log('Payment window closed');
+                    }
+                };
+
+                await window.KodePay.open_payment_choose_page(
+                    productId,
+                    currency,
+                    paymentParams
+                );
+
+            } catch (error) {
+                console.error('Payment error:', error);
+                alert('支付初始化失败，请稍后重试');
+            }
+        };
     </script>
-    <!-- 先加载 KodePay SDK -->
-    <script src="/src/js/vendor/kodepay-website.js"></script>
-    <!-- 再加载支付处理脚本 -->
-    <script src="/src/js/payment.js"></script>
 </body>
 </html>
