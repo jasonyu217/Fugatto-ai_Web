@@ -111,6 +111,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.KodePay) {
         window.KodePay.on_pay_completed.addListener(paySuccessCallback);
     }
+
+    // 为所有支付按钮添加点击事件
+    const paymentButtons = document.querySelectorAll('.payment-button');
+    paymentButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const productId = button.getAttribute('data-product-id');
+            const currency = button.getAttribute('data-currency');
+            handleSubscription(productId, currency);
+        });
+    });
 });
 
 // 添加全局错误处理
