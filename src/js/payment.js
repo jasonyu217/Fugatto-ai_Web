@@ -1,3 +1,50 @@
+// 确保KodePay已经加载完成
+function ensureKodePayReady() {
+    return new Promise((resolve, reject) => {
+        if (window.KodePay) {
+            resolve();
+            return;
+        }
+
+        // 如果5秒内没有加载完成，就报错
+        const timeout = setTimeout(() => {
+            reject(new Error('KodePay SDK load timeout'));
+        }, 5000);
+
+        // 定期检查KodePay是否已加载
+        const checkInterval = setInterval(() => {
+            if (window.KodePay) {
+                clearTimeout(timeout);
+                clearInterval(checkInterval);
+                resolve();
+            }
+        }, 100);
+    });
+}
+
+// 在使用KodePay之前先确保它已经准备就绪
+async function initializePayment() {
+    try {
+        await ensureKodePayReady();
+        // 这里写您的支付初始化逻辑
+        console.log('Payment system initialized');
+    } catch (error) {
+        console.error('Failed to initialize payment:', error);
+        // 这里可以添加适当的错误处理，比如显示错误提示给用户
+    }
+}
+
+// 调用支付功能时先确保初始化完成
+async function handlePayment() {
+    try {
+        await ensureKodePayReady();
+        // 这里写您的支付处理逻辑
+    } catch (error) {
+        console.error('Payment failed:', error);
+        // 处理支付错误
+    }
+}
+
 // 支付处理函数
 window.handleSubscription = async function(productId, currency) {
     try {

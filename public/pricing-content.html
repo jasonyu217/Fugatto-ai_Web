@@ -12,145 +12,81 @@
     </div>
 
     <!-- 价格卡片 -->
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
       <!-- 基础版 -->
-      <div class="price-card group hover:scale-105 transition-transform duration-300">
-        <div>
-          <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.basic.title">基础版</h3>
-          <div class="price-amount">
-            <div class="flex items-baseline">
-              <span class="text-4xl font-bold">$9.99</span>
-              <span class="text-gray-400 ml-1">/<span data-i18n="pricing.basic.unit">月</span></span>
-            </div>
-          </div>
-          <p class="text-gray-400 mb-6" data-i18n="pricing.basic.description">适合个人创作者起步使用</p>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.basic.features.0">每月100分钟音频生成</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.basic.features.1">基础音色选择</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.basic.features.2">标准API访问</span>
-            </li>
-          </ul>
-          <button class="btn-primary w-full" 
-            onclick="handleSubscription('prod_421f8f2ef81f40bd', 'usd')" 
-            data-i18n="pricing.basic.cta">
-            立即订阅
-          </button>
-        </div>
+      <div class="price-card">
+        <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.basic.title">基础版</h3>
+        <p class="text-4xl font-bold mb-6">
+          <span data-i18n="pricing.basic.price">¥9.99/月</span>
+        </p>
+        <p class="text-gray-400 mb-6" data-i18n="pricing.basic.description">适合个人创作者起步使用</p>
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span data-i18n="pricing.basic.features.0">每月100分钟音频生成</span>
+          </li>
+          <li class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span data-i18n="pricing.basic.features.1">基础音色选择</span>
+          </li>
+          <li class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span data-i18n="pricing.basic.features.2">标准API访问</span>
+          </li>
+        </ul>
+        <button 
+          class="btn-primary w-full" 
+          onclick="handleSubscription('prod_655649d5e1c2493f', 'usd')"
+          data-i18n="pricing.basic.cta">
+          立即订阅
+        </button>
       </div>
 
       <!-- 专业版 -->
-      <div class="price-card pro group hover:scale-105 transition-transform duration-300">
-        <!-- 推荐标签 -->
-        <div class="pro-badge">
-          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-          </svg>
-          <span class="pro-badge-text" data-i18n="pricing.pro.badge">最受欢迎</span>
-        </div>
-        
-        <div>
-          <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.pro.title">专业版</h3>
-          <div class="price-amount">
-            <div class="flex items-baseline">
-              <span class="text-4xl font-bold">$29.99</span>
-              <span class="text-gray-400 ml-1">/<span data-i18n="pricing.pro.unit">月</span></span>
-            </div>
-          </div>
-          <p class="text-gray-400 mb-6" data-i18n="pricing.pro.description">适合专业创作者和小型团队</p>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.pro.features.0">每月500分钟音频生成</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.pro.features.1">高级音色库</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.pro.features.2">优先API访问</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.pro.features.3">高级技术支持</span>
-            </li>
-          </ul>
-          <button class="btn-primary w-full" 
-            onclick="handleSubscription('prod_47963f49f96749fa', 'usd')" 
-            data-i18n="pricing.pro.cta">
-            立即订阅
-          </button>
-        </div>
-      </div>
-
-      <!-- 企业版 -->
-      <div class="price-card pro group hover:scale-105 transition-transform duration-300">
-        <div>
-          <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.enterprise.title">企业版</h3>
-          <div class="price-amount">
-            <div class="flex items-baseline">
-              <span class="text-4xl font-bold" data-i18n="pricing.enterprise.price">联系我们</span>
-            </div>
-          </div>
-          <p class="text-gray-400 mb-6" data-i18n="pricing.enterprise.description">为大型企业提供定制化解决方案</p>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.enterprise.features.0">无限制的API调用</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.enterprise.features.1">专属客户成功经理</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.enterprise.features.2">定制化培训与支持</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.enterprise.features.3">服务级别协议(SLA)保障</span>
-            </li>
-            <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span data-i18n="pricing.enterprise.features.4">优先技术支持</span>
-            </li>
-          </ul>
-          <button class="btn-secondary w-full group-hover:btn-primary transition-all duration-300" onclick="handleSubscription('enterprise')">
-            <span data-i18n="pricing.enterprise.cta">联系我们</span>
-          </button>
-        </div>
+      <div class="price-card border-white/20">
+        <h3 class="text-2xl font-bold mb-2" data-i18n="pricing.pro.title">专业版</h3>
+        <p class="text-4xl font-bold mb-6">
+          <span data-i18n="pricing.pro.price">$29.99/月</span>
+        </p>
+        <p class="text-gray-400 mb-6" data-i18n="pricing.pro.description">适合专业创作者和小型团队</p>
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span data-i18n="pricing.pro.features.0">每月500分钟音频生成</span>
+          </li>
+          <li class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span data-i18n="pricing.pro.features.1">高级音色库</span>
+          </li>
+          <li class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span data-i18n="pricing.pro.features.2">优先API访问</span>
+          </li>
+          <li class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span data-i18n="pricing.pro.features.3">高级技术支持</span>
+          </li>
+        </ul>
+        <button 
+          class="btn-primary w-full" 
+          onclick="handleSubscription('prod_19a55e4a69304ab3', 'usd')"
+          data-i18n="pricing.pro.cta">
+          立即订阅
+        </button>
       </div>
     </div>
   </div>
