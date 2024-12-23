@@ -62,14 +62,34 @@
     // KodePay 配置 - 生产环境
     window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
     window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
-    window.KODEPAY_ENV = 'production';
+    window.KODEPAY_ENV = 'production';  // 切换到生产环境
     </script>
 
     <!-- 然后加载 KodePay SDK -->
     <script src="/src/js/vendor/kodepay-website.js"></script>
     
-    <!-- 立即加载支付脚本 -->
-    <script src="/src/js/payment.js"></script>
+    <!-- 添加 SDK 加载事件监听 -->
+    <script>
+        function loadKodePaySDK() {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = '/src/js/vendor/kodepay-website.js';
+                script.async = true;
+                script.onload = () => {
+                    console.log('KodePay SDK loaded from local CDN');
+                    resolve();
+                };
+                script.onerror = () => {
+                    reject(new Error('Failed to load KodePay SDK from local CDN'));
+                };
+                document.head.appendChild(script);
+            });
+        }
+    </script>
+
+    <!-- 移除原有的 SDK 引用 -->
+    <!-- 我们的支付脚本 -->
+    <script defer src="/src/js/payment.js"></script>
     
     <!-- SEO Meta 标签 -->
     <meta name="description" content="Fugatto AI - 先进的AI音频生成平台,为创作者和企业提供专业的语音服务解决方案。支持文本转语音、语音转文本、语音克隆等功能。">
@@ -579,7 +599,7 @@
             <!-- AI驱动的音频生成 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎵</div>
-              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.0.title">AI驱动的���频生成</h3>
+              <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.0.title">AI驱动的音频生成</h3>
               <p class="text-gray-400" data-i18n="features.cards.0.description">通过文本和音频输入创造独特的声音、语音和�����乐</p>
             </div>
 
@@ -606,7 +626,7 @@
 
             <!-- 乐�����实验 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
-              <div class="text-3xl mb-4">���</div>
+              <div class="text-3xl mb-4">🎸</div>
               <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.4.title">乐器实验</h3>
               <p class="text-gray-400" data-i18n="features.cards.4.description">让音乐家在现有音频中添加新乐器</p>
             </div>
@@ -793,7 +813,7 @@
               <!-- 基础版按钮 -->
               <button 
                 class="btn-primary w-full" 
-                onclick="window.handleSubscription && window.handleSubscription('prod_655649d5e1c2493f', 'usd')"
+                onclick="handleSubscription('prod_655649d5e1c2493f', 'usd')"
                 data-i18n="pricing.basic.cta">
                 立即订阅
               </button>
@@ -826,7 +846,7 @@
               <!-- 专业版按钮 -->
               <button 
                 class="btn-primary w-full" 
-                onclick="window.handleSubscription && window.handleSubscription('prod_19a55e4a69304ab3', 'usd')"
+                onclick="handleSubscription('prod_19a55e4a69304ab3', 'usd')"
                 data-i18n="pricing.pro.cta">
                 立即订阅
               </button>

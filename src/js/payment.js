@@ -1,3 +1,6 @@
+// 添加在文件开头
+console.log('Payment.js loaded');
+
 // 确保KodePay已经加载完成
 function ensureKodePayReady() {
     return new Promise((resolve, reject) => {
@@ -74,13 +77,13 @@ async function handleSubscription(productId, currency) {
         const paymentParams = {
             payment_channel: 'stripe',
             payment_method: 'card',
-            redirect_url: 'http://localhost:3000/payment/success',
+            redirect_url: window.location.origin + '/payment/success',
             price_id: productId,
             currency: currency,
             original_data: originalData,
             onSuccess: (result) => {
                 console.log('Payment success:', result);
-                window.location.href = 'http://localhost:3000/payment/success';
+                window.location.href = window.location.origin + '/payment/success';
             },
             onError: (error) => {
                 console.error('Payment error:', error);
@@ -104,7 +107,7 @@ async function handleSubscription(productId, currency) {
     }
 }
 
-// 确保函数在全局可用
+// 确保函数在全局作用域可用
 window.handleSubscription = handleSubscription;
 
 // 支付成功回调
@@ -120,6 +123,7 @@ function paySuccessCallback(userInfo, status) {
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, handleSubscription available:', !!window.handleSubscription);
     // 注册支付成功回调
     if (window.KodePay) {
         window.KodePay.on_pay_completed.addListener(paySuccessCallback);
