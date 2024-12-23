@@ -1,4 +1,4 @@
-// 添加在文件开头
+// 添加调试日志
 console.log('Payment.js loaded');
 
 // 确保KodePay已经加载完成
@@ -59,7 +59,7 @@ async function handlePayment() {
 }
 
 // 支付处理函数
-async function handleSubscription(productId, currency) {
+window.handleSubscription = async function(productId, currency) {
     try {
         console.log('Starting payment process:', { productId, currency });
         
@@ -105,7 +105,7 @@ async function handleSubscription(productId, currency) {
         console.error('Payment error:', error);
         alert('支付初始化失败，请稍后重试');
     }
-}
+};
 
 // 确保函数在全局作用域可用
 window.handleSubscription = handleSubscription;
