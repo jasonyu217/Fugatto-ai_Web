@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' kodepay-global.zingfront.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' kodepay-global.zingfront.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' kodepay-global.zingfront.com">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval';
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' data:;
+        connect-src 'self'
+    ">
     <title>定价方案 - Fugatto</title>
     <link rel="stylesheet" href="/src/css/styles.css">
     <script src="/src/js/payment.js" defer></script>
@@ -68,5 +74,8 @@
         window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
         window.KODEPAY_ENV = 'production';
     </script>
+
+    <!-- 替换为本地CDN引用 -->
+    <script src="/src/js/vendor/kodepay-website.js"></script>
 </body>
 </html>

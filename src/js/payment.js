@@ -6,10 +6,10 @@ function ensureKodePayReady() {
             return;
         }
 
-        // 如果5秒内没有加载完成，就报错
+        // 增加超时时间到10秒
         const timeout = setTimeout(() => {
-            reject(new Error('KodePay SDK load timeout'));
-        }, 5000);
+            reject(new Error('KodePay SDK load timeout from local CDN'));
+        }, 10000);
 
         // 定期检查KodePay是否已加载
         const checkInterval = setInterval(() => {
@@ -24,13 +24,23 @@ function ensureKodePayReady() {
 
 // 在使用KodePay之前先确保它已经准备就绪
 async function initializePayment() {
-    try {
-        await ensureKodePayReady();
-        // 这里写您的支付初始化逻辑
-        console.log('Payment system initialized');
-    } catch (error) {
-        console.error('Failed to initialize payment:', error);
-        // 这里可以添加适当的错误处理，比如显示错误提示给用户
+    let retries = 3;
+    while (retries > 0) {
+        try {
+            await ensureKodePayReady();
+            console.log('Payment system initialized from local CDN');
+            break;
+        } catch (error) {
+            retries--;
+            console.error(`Failed to initialize payment (${retries} retries left):`, error);
+            if (retries === 0) {
+                // 显示用户友好的错误信息
+                alert('支付系统暂时无法使用,请稍后重试');
+                throw error;
+            }
+            // 等待2秒后重试
+            await new Promise(resolve => setTimeout(resolve, 2000));
+        }
     }
 }
 
@@ -56,21 +66,21 @@ window.handleSubscription = async function(productId, currency) {
 
         // 添加用户自定义数据
         const originalData = {
-            order_id: Date.now(), // 使用时间戳作为订单号
-            user_id: 'guest_' + Math.random().toString(36).substr(2, 9) // 临时用户ID
+            order_id: Date.now(),
+            user_id: 'guest_' + Math.random().toString(36).substr(2, 9)
         };
 
         // 支付参数
         const paymentParams = {
             payment_channel: 'stripe',
             payment_method: 'card',
-            redirect_url: window.location.origin + '/payment/success',
+            redirect_url: 'http://localhost:3000/payment/success',
             price_id: productId,
             currency: currency,
             original_data: originalData,
             onSuccess: (result) => {
                 console.log('Payment success:', result);
-                window.location.href = '/payment/success';
+                window.location.href = 'http://localhost:3000/payment/success';
             },
             onError: (error) => {
                 console.error('Payment error:', error);

@@ -32,20 +32,19 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Fugatto - Advanced AI Audio Generation</title>
+    <title>Fugatto AI - Advanced AI Audio Generation</title>
     <link rel="stylesheet" href="/src/css/styles.css">
     <meta http-equiv="Content-Security-Policy" content="
-      default-src 'self' api.kodepay.io *.kodepay.io kodepay-global.zingfront.com;
+      default-src 'self' api.kodepay.io *.kodepay.io;
       script-src 'self' 'unsafe-eval' 'unsafe-inline' 
-        api.kodepay.io *.kodepay.io 
-        kodepay-global.zingfront.com
+        api.kodepay.io *.kodepay.io
         https://www.googleadservices.com 
         https://www.google-analytics.com 
         https://www.googletagmanager.com 
         https://*.doubleclick.net;
       style-src 'self' 'unsafe-inline';
-      connect-src 'self' api.kodepay.io *.kodepay.io kodepay-global.zingfront.com;
-      frame-src 'self' kodepay.io *.kodepay.io kodepay-global.zingfront.com;
+      connect-src 'self' api.kodepay.io *.kodepay.io;
+      frame-src 'self' *.kodepay.io;
       img-src 'self' data: https: *.google-analytics.com *.googletagmanager.com;
       font-src 'self' data:;
     ">
@@ -57,51 +56,40 @@
     <script src="src/i18n/translations/zh.js"></script>
     <!-- 添加 Google Analytics -->
     <include src="./src/partials/analytics.html"></include>
-    <!-- 在 head 标签中添加，注意顺序很重要 -->
-    <script src="https://cdn.kodepay.com/js/kodepay-website.js"></script>
+    
+    <!-- 先添加 KodePay 配置 -->
+    <script>
+    // KodePay 配置 - 生产环境
+    window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
+    window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
+    window.KODEPAY_ENV = 'production';  // 切换到生产环境
+    </script>
+
+    <!-- 然后加载 KodePay SDK -->
+    <script src="/src/js/vendor/kodepay-website.js"></script>
+    
     <!-- 添加 SDK 加载事件监听 -->
     <script>
         function loadKodePaySDK() {
             return new Promise((resolve, reject) => {
                 const script = document.createElement('script');
-                script.src = 'https://kodepay-global.zingfront.com/resource/kodepay/2.1.4/kodepay-website.js';
+                script.src = '/src/js/vendor/kodepay-website.js';
                 script.async = true;
                 script.onload = () => {
-                    console.log('KodePay SDK loaded');
+                    console.log('KodePay SDK loaded from local CDN');
                     resolve();
                 };
                 script.onerror = () => {
-                    reject(new Error('Failed to load KodePay SDK'));
+                    reject(new Error('Failed to load KodePay SDK from local CDN'));
                 };
                 document.head.appendChild(script);
             });
         }
     </script>
+
     <!-- 移除原有的 SDK 引用 -->
     <!-- 我们的支付脚本 -->
     <script defer src="/src/js/payment.js"></script>
-    <!-- 在 head 标签中添加 KodePay 配置 -->
-    <script>
-    // KodePay 配置 - 测试环境
-    window.KODEPAY_APPLICATION_ID = '88fec018-b7ce-11ef-a86f-aa6962b9d5ea';
-    window.KODEPAY_CLIENT_ID = '0d74e6ec-b7cf-11ef-a3bb-4a5bb4ed3f3b';
-    window.KODEPAY_ENV = 'development';  // 改为 sandbox 环境
-
-    // 动态加载 KodePay SDK
-    (function() {
-        const script = document.createElement('script');
-        script.src = 'https://kodepay-global.zingfront.com/resource/kodepay/2.1.4/kodepay-website.js';
-        script.async = true;
-        document.head.appendChild(script);
-    })();
-    </script>
-    <!-- 修改 KodePay 配置为正式环境 -->
-    <script>
-        // KodePay 配置参数必须在SDK加载之前定义
-        window.KODEPAY_APPLICATION_ID = 'dbb7a9f0-b7d3-11ef-9e3f-fafce7015687';
-        window.KODEPAY_CLIENT_ID = 'f7c10b9c-b903-11ef-90bd-4a5bb4ed3f3b';
-        window.KODEPAY_ENV = 'production';  // 改为生产环境
-    </script>
     
     <!-- SEO Meta 标签 -->
     <meta name="description" content="Fugatto AI - 先进的AI音频生成平台,为创作者和企业提供专业的语音服务解决方案。支持文本转语音、语音转文本、语音克隆等功能。">
@@ -622,7 +610,7 @@
               <p class="text-gray-400" data-i18n="features.cards.1.description">引导Fugatto创造意想不���的声音效果</p>
             </div>
 
-            <!-- 沉���式��景 -->
+            <!-- 沉���式���� -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎧</div>
               <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.2.title">沉浸式音景</h3>
@@ -636,7 +624,7 @@
               <p class="text-gray-400" data-i18n="features.cards.3.description">轻松从音乐中分离人声等音频元素</p>
             </div>
 
-            <!-- 乐器实验 -->
+            <!-- 乐�����实验 -->
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎸</div>
               <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.4.title">乐器实验</h3>
@@ -872,7 +860,7 @@
         <div class="container mx-auto max-w-6xl">
           <h2 class="section-title" data-i18n="faq.title">��见问题</h2>
           <p class="section-description" data-i18n="faq.description">
-            我们收集了用户最常见的问题和详细解答，帮助您更好地了解 Fugatto AI 的功能和使用方法。
+            我们收集了用户最常见的问题和详细解答，帮助您更好地了解 Fugatto AI ���功能���使用方法。
           </p>
           <div class="space-y-6 max-w-4xl mx-auto mt-12">
             <div class="faq-item">
@@ -905,7 +893,7 @@
                 </svg>
               </button>
               <div class="hidden px-8 py-6 text-gray-300 leading-relaxed bg-white/5 rounded-b-xl [.faq-item.active_&]:mt-0" data-i18n="faq.a3">
-                音乐制作、游戏、广告和电影行业可以使用它来创建独特的音频内容并增强体验。
+                音乐制作、游戏、广告和电影行业可以使用它来创建独特的音频内���并增强体验。
               </div>
             </div>
             <div class="faq-item">
