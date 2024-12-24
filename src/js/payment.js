@@ -58,57 +58,64 @@ async function handlePayment() {
     }
 }
 
-// 支付处理函数
-window.handleSubscription = async function(productId, currency) {
-    try {
-        console.log('Starting payment process:', { productId, currency });
-        
-        if (!window.KodePay) {
-            throw new Error('KodePay SDK not loaded');
-        }
-
-        // 添加用户自定义数据
-        const originalData = {
-            order_id: Date.now(),
-            user_id: 'guest_' + Math.random().toString(36).substr(2, 9)
-        };
-
-        // 支付参数
-        const paymentParams = {
-            payment_channel: 'stripe',
-            payment_method: 'card',
-            redirect_url: window.location.origin + '/payment/success',
-            price_id: productId,
-            currency: currency,
-            original_data: originalData,
-            onSuccess: (result) => {
-                console.log('Payment success:', result);
-                window.location.href = window.location.origin + '/payment/success';
-            },
-            onError: (error) => {
-                console.error('Payment error:', error);
-                alert('支付失败，请重试');
-            },
-            onClose: () => {
-                console.log('Payment window closed');
+// 定义全局支付处理函数
+const initializeHandleSubscription = () => {
+    window.handleSubscription = async function(productId, currency) {
+        try {
+            console.log('Starting payment process:', { productId, currency });
+            
+            if (!window.KodePay) {
+                throw new Error('KodePay SDK not loaded');
             }
-        };
 
-        // 打开支付选择页面
-        await window.KodePay.open_payment_choose_page(
-            productId,
-            currency,
-            paymentParams
-        );
+            const originalData = {
+                order_id: Date.now(),
+                user_id: 'guest_' + Math.random().toString(36).substr(2, 9)
+            };
 
-    } catch (error) {
-        console.error('Payment error:', error);
-        alert('支付初始化失败，请稍后重试');
-    }
+            const paymentParams = {
+                payment_channel: 'stripe',
+                payment_method: 'card',
+                redirect_url: 'https://fugatto-ai.com/payment/success',
+                price_id: productId,
+                currency: currency,
+                original_data: originalData,
+                onSuccess: (result) => {
+                    console.log('Payment success:', result);
+                    window.location.href = 'https://fugatto-ai.com/payment/success';
+                },
+                onError: (error) => {
+                    console.error('Payment error:', error);
+                    alert('支付失败，请重试');
+                },
+                onClose: () => {
+                    console.log('Payment window closed');
+                }
+            };
+
+            await window.KodePay.open_payment_choose_page(
+                productId,
+                currency,
+                paymentParams
+            );
+
+        } catch (error) {
+            console.error('Payment error:', error);
+            alert('支付初始化失败，请稍后重试');
+        }
+    };
 };
 
-// 确保函数在全局作用域可用
-window.handleSubscription = handleSubscription;
+// 页面加载完成后初始化
+document.addEventListener('DOMContentLoaded', () => {
+    // 初始化全局支付函数
+    initializeHandleSubscription();
+    console.log('DOM loaded, handleSubscription available:', !!window.handleSubscription);
+    // 注册支付成功回调
+    if (window.KodePay) {
+        window.KodePay.on_pay_completed.addListener(paySuccessCallback);
+    }
+});
 
 // 支付成功回调
 function paySuccessCallback(userInfo, status) {
@@ -120,15 +127,6 @@ function paySuccessCallback(userInfo, status) {
         console.log('Payment failed:', status);
     }
 }
-
-// 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, handleSubscription available:', !!window.handleSubscription);
-    // 注册支付成功回调
-    if (window.KodePay) {
-        window.KodePay.on_pay_completed.addListener(paySuccessCallback);
-    }
-});
 
 // 添加全局错误处理
 window.addEventListener('error', function(event) {

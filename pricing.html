@@ -80,63 +80,6 @@
         }
     </script>
 
-    <!-- 最后加载支付处理脚本 -->
-    <script>
-        // 添加调试日志
-        console.log('Domain:', window.location.origin);
-        console.log('KodePay Config:', {
-            applicationId: window.KODEPAY_APPLICATION_ID,
-            clientId: window.KODEPAY_CLIENT_ID,
-            env: window.KODEPAY_ENV
-        });
-        
-        window.handleSubscription = async function(productId, currency) {
-            try {
-                console.log('Starting payment process:', { productId, currency });
-                
-                if (!window.KodePay) {
-                    console.error('KodePay not found in window object');
-                    throw new Error('KodePay SDK not loaded');
-                }
-
-                const originalData = {
-                    order_id: Date.now(),
-                    user_id: 'guest_' + Math.random().toString(36).substr(2, 9)
-                };
-
-                const paymentParams = {
-                    payment_channel: 'stripe',
-                    payment_method: 'card',
-                    redirect_url: 'https://fugatto-ai.com/payment/success',
-                    price_id: productId,
-                    currency: currency,
-                    original_data: originalData,
-                    onSuccess: (result) => {
-                        console.log('Payment success:', result);
-                        window.location.href = 'https://fugatto-ai.com/payment/success';
-                    },
-                    onError: (error) => {
-                        console.error('Payment error:', error);
-                        alert('支付失败，请重试');
-                    },
-                    onClose: () => {
-                        console.log('Payment window closed');
-                    }
-                };
-
-                await window.KodePay.open_payment_choose_page(
-                    productId,
-                    currency,
-                    paymentParams
-                );
-
-            } catch (error) {
-                console.error('Payment error:', error);
-                alert('支付初始化失败，请稍后重试');
-            }
-        };
-    </script>
-
     <!-- 基础版按钮 -->
     <button 
         class="btn-primary w-full" 
