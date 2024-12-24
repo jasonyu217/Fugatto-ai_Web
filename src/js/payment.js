@@ -60,6 +60,9 @@ async function handlePayment() {
 
 // 定义全局支付处理函数
 const initializeHandleSubscription = () => {
+    if (window.handleSubscription) {
+        console.warn('handleSubscription already exists, will be overwritten');
+    }
     window.handleSubscription = async function(productId, currency) {
         try {
             console.log('Starting payment process:', { productId, currency });
@@ -104,12 +107,22 @@ const initializeHandleSubscription = () => {
             alert('支付初始化失败，请稍后重试');
         }
     };
+    // 添加属性描述符，防止函数被意外覆盖
+    Object.defineProperty(window, 'handleSubscription', {
+        configurable: false,
+        writable: false
+    });
 };
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', () => {
     // 初始化全局支付函数
     initializeHandleSubscription();
+    console.log('Payment initialization complete:', {
+        handleSubscriptionExists: !!window.handleSubscription,
+        handleSubscriptionType: typeof window.handleSubscription,
+        isFunction: typeof window.handleSubscription === 'function'
+    });
     console.log('DOM loaded, handleSubscription available:', !!window.handleSubscription);
     // 注册支付成功回调
     if (window.KodePay) {
