@@ -69,10 +69,6 @@
     <!-- 然后加载 KodePay SDK -->
     <script src="/src/js/vendor/kodepay-website.js"></script>
     
-    <!-- 移除原有的 SDK 引用 -->
-    <!-- 我们的支付脚本 -->
-    <script defer src="/src/js/payment.js"></script>
-    
     <!-- SEO Meta 标签 -->
     <meta name="description" content="Fugatto AI - 先进的AI音频生成平台,为创作者和企业提供专业的语音服务解决方案。支持文本转语音、语音转文本、语音克隆等功能。">
     <meta name="keywords" content="AI语音,文本转语音,语音克隆,AI配音,语音合成,Fugatto">
@@ -582,7 +578,7 @@
             <div class="feature-card p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
               <div class="text-3xl mb-4">🎵</div>
               <h3 class="text-xl font-bold mb-2" data-i18n="features.cards.0.title">AI驱动的音频生成</h3>
-              <p class="text-gray-400" data-i18n="features.cards.0.description">通过文本和音频输入创造独特的声音、语音和�����乐</p>
+              <p class="text-gray-400" data-i18n="features.cards.0.description">通过���本和音频输入创造独特的声音、语音和�����乐</p>
             </div>
 
             <!-- 创意声音效果 -->
@@ -1273,13 +1269,6 @@
       const i = Math.floor(Math.log(bytes) / Math.log(k));
       return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]);
     }
-    </script>
-    <script>
-    // 监听 KodePay SDK 加载
-    window.addEventListener('load', function() {
-        console.log('Window loaded');
-        console.log('KodePay status:', !!window.KodePay);
-    });
     </script>
   </body>
 </html>
