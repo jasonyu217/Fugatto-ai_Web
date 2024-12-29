@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import AIAudioView from '../views/AIAudioView.vue'
 
 const routes = [
   {
@@ -24,6 +25,14 @@ const routes = [
       {
         path: 'voice-cloning',
         component: () => import('../components/workspace/VoiceCloning.vue')
+      },
+      {
+        path: '/workspace/ai-audio',
+        name: 'ai-audio',
+        component: AIAudioView,
+        meta: {
+          title: 'AI音频创作'
+        }
       }
     ]
   }
