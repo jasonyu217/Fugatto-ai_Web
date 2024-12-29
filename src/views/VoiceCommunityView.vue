@@ -1,81 +1,58 @@
 <template>
   <div class="voice-community">
-    <h1 class="page-title">Voice Community</h1>
-    
-    <!-- 创意示例部分 -->
-    <section class="section">
-      <h2>创意示例</h2>
-      <div class="examples-grid">
-        <div class="example-card">
-          <h3>说唱歌曲</h3>
-          <div class="audio-player">
-            <audio controls>
-              <source src="/audio/rap song.mp3" type="audio/mp3">
-            </audio>
-          </div>
-          <p class="tags">
-            <span class="tag">声音合成</span>
-            <span class="tag">文字转语音</span>
-            <span class="tag">文字转音频</span>
-          </p>
-        </div>
+    <!-- 背景渐变 -->
+    <div class="background-gradient"></div>
 
-        <div class="example-card">
-          <h3>电影配乐</h3>
-          <div class="audio-player">
-            <audio controls>
-              <source src="https://fugatto-ai.com/audio/rap backing track.mp3" type="audio/mp3">
-            </audio>
-          </div>
-          <p class="tags">
-            <span class="tag">配乐合成</span>
-            <span class="tag">音效</span>
-          </p>
-        </div>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+      <div class="nav-content">
+        <a href="/" class="nav-logo">Fugatto AI</a>
       </div>
-    </section>
+    </nav>
 
-    <!-- 新兴声音部分 -->
-    <section class="section">
-      <h2>新兴声音</h2>
-      <div class="sound-table">
-        <table>
-          <thead>
-            <tr>
-              <th>音频</th>
-              <th>描述</th>
-              <th>创新点</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <audio controls>
-                  <source src="/audio/Electronic Dance Music, Dogs Barking, Cats Meowing.wav" type="audio/wav">
-                </audio>
-              </td>
-              <td>Electronic Dance Music, Dogs Barking, Cats Meowing</td>
-              <td>Dogs barking in sync with the music.</td>
-            </tr>
-            <tr>
-              <td>
-                <audio controls>
-                  <source src="/audio/Banjo and rainfall.wav" type="audio/wav">
-                </audio>
-              </td>
-              <td>Banjo and rainfall</td>
-              <td>Unique sound combination</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <!-- 主要内容 -->
+    <main class="container">
+      <h1 class="page-title">Voice Community</h1>
+      
+      <!-- 介绍部分 -->
+      <section class="intro-section">
+        <!-- 从HTML版本复制完整的内容 -->
+      </section>
+
+      <!-- 其他部分... -->
+    </main>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'VoiceCommunityView'
+  name: 'VoiceCommunityView',
+  mounted() {
+    // 音频错误处理
+    const audioElements = document.querySelectorAll('audio');
+    audioElements.forEach(audio => {
+      audio.addEventListener('error', this.handleAudioError);
+      audio.addEventListener('loadstart', this.handleAudioLoadStart);
+      audio.addEventListener('canplay', this.handleAudioCanPlay);
+    });
+  },
+  methods: {
+    handleAudioError(e) {
+      console.error('Audio loading failed:', e);
+      const playerContainer = e.target.parentElement;
+      playerContainer.innerHTML = `
+        <div class="audio-error">
+          Audio loading failed, please try again later
+        </div>
+      `;
+    },
+    handleAudioLoadStart(e) {
+      e.target.parentElement.classList.add('loading');
+    },
+    handleAudioCanPlay(e) {
+      e.target.parentElement.classList.remove('loading');
+    }
+  }
 }
 </script>
 

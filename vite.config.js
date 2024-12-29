@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
+import path from 'path';
 
 export default defineConfig({
   plugins: [vue()],
@@ -21,12 +22,14 @@ export default defineConfig({
     }
   },
   build: {
-    assetsDir: 'assets',
     rollupOptions: {
-      output: {
-        manualChunks: undefined
+      input: {
+        main: './index.html',
+        workspace: './workspace.html'
       }
-    }
+    },
+    outDir: 'dist',
+    assetsDir: 'static'
   },
   css: {
     postcss: {
@@ -36,6 +39,10 @@ export default defineConfig({
       ],
     },
   },
-  base: '/',
-  publicDir: 'public',
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    }
+  },
+  publicDir: 'public'
 });

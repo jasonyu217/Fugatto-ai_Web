@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import VoiceCommunityView from '../views/VoiceCommunityView.vue'
 
 const routes = [
   {
@@ -27,17 +26,11 @@ const routes = [
         component: () => import('../components/workspace/VoiceCloning.vue')
       }
     ]
-  },
-  {
-    path: '/voice-community',
-    name: 'voice-community',
-    component: VoiceCommunityView,
-    props: true
   }
 ]
 
 const router = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory(),
   routes
 })
 

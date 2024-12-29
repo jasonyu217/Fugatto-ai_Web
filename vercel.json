@@ -1,5 +1,4 @@
 {
-    "version": 2,
     "builds": [
         {
             "src": "package.json",
@@ -7,19 +6,50 @@
             "config": {
                 "distDir": "dist"
             }
-        }
-    ],
-    "routes": [
-        {
-            "src": "/audio/(.*)",
-            "dest": "/audio/$1",
-            "headers": {
-                "cache-control": "public, max-age=31536000, immutable"
-            }
         },
         {
-            "src": "/(.*)",
-            "dest": "/index.html"
+            "src": "api/**/*.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/api/(.*)",
+            "headers": [
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "*"
+                },
+                {
+                    "key": "Access-Control-Allow-Methods",
+                    "value": "GET, POST, OPTIONS"
+                },
+                {
+                    "key": "Access-Control-Allow-Headers",
+                    "value": "Content-Type, Accept"
+                }
+            ]
+        }
+    ],
+    "trailingSlash": false,
+    "cleanUrls": true,
+    "routes": [
+        {
+            "src": "/static/(.*)",
+            "headers": { "cache-control": "public, max-age=31536000, immutable" },
+            "dest": "/static/$1"
+        },
+        { "handle": "filesystem" },
+        { "src": "/(.*)", "dest": "/index.html" },
+        {
+            "src": "/voice-community",
+            "dest": "/voice-community.html"
         }
     ]
 }
