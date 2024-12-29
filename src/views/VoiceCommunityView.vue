@@ -10,7 +10,7 @@
           <h3>说唱歌曲</h3>
           <div class="audio-player">
             <audio controls>
-              <source src="/audio/rap song.mp3" type="audio/mp3">
+              <source src="https://fugatto-ai.com/audio/rap song.mp3" type="audio/mp3">
             </audio>
           </div>
           <p class="tags">
@@ -24,7 +24,7 @@
           <h3>电影配乐</h3>
           <div class="audio-player">
             <audio controls>
-              <source src="/audio/rap backing track.mp3" type="audio/mp3">
+              <source src="https://fugatto-ai.com/audio/rap backing track.mp3" type="audio/mp3">
             </audio>
           </div>
           <p class="tags">
