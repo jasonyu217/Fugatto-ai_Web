@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --port 3001 --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "vercel-build": "vite build"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.5.13",
