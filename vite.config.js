@@ -25,7 +25,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: './index.html',
-        workspace: './workspace.html'
+        workspace: './workspace.html',
+        voiceCommunity: './voice-community.html'
       }
     },
     outDir: 'dist',

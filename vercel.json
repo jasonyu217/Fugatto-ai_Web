@@ -8,6 +8,12 @@
             }
         }
     ],
+    "rewrites": [
+        {
+            "source": "/voice-community",
+            "destination": "/voice-community.html"
+        }
+    ],
     "routes": [
         {
             "src": "/voice-community",
