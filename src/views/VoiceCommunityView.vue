@@ -10,7 +10,7 @@
           <h3>说唱歌曲</h3>
           <div class="audio-player">
             <audio controls>
-              <source src="./audio/rap song.mp3" type="audio/mp3">
+              <source src="/audio/rap song.mp3" type="audio/mp3">
             </audio>
           </div>
           <p class="tags">
@@ -24,7 +24,7 @@
           <h3>电影配乐</h3>
           <div class="audio-player">
             <audio controls>
-              <source src="./audio/rap backing track.mp3" type="audio/mp3">
+              <source src="/audio/rap backing track.mp3" type="audio/mp3">
             </audio>
           </div>
           <p class="tags">
@@ -51,7 +51,7 @@
             <tr>
               <td>
                 <audio controls>
-                  <source src="./audio/Electronic Dance Music, Dogs Barking, Cats Meowing.wav" type="audio/wav">
+                  <source src="/audio/Electronic Dance Music, Dogs Barking, Cats Meowing.wav" type="audio/wav">
                 </audio>
               </td>
               <td>Electronic Dance Music, Dogs Barking, Cats Meowing</td>
@@ -60,7 +60,7 @@
             <tr>
               <td>
                 <audio controls>
-                  <source src="./audio/Banjo and rainfall.wav" type="audio/wav">
+                  <source src="/audio/Banjo and rainfall.wav" type="audio/wav">
                 </audio>
               </td>
               <td>Banjo and rainfall</td>
