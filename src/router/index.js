@@ -31,7 +31,8 @@ const routes = [
   {
     path: '/voice-community',
     name: 'voice-community',
-    component: VoiceCommunityView
+    component: VoiceCommunityView,
+    props: true
   }
 ]
 
