@@ -27,12 +27,8 @@ const routes = [
         component: () => import('../components/workspace/VoiceCloning.vue')
       },
       {
-        path: '/workspace/ai-audio',
-        name: 'ai-audio',
-        component: AIAudioView,
-        meta: {
-          title: 'AI音频创作'
-        }
+        path: 'ai-audio',
+        component: () => import('../components/workspace/AIAudioCreation.vue')
       }
     ]
   }

@@ -47,6 +47,7 @@ import SpeechToSpeechIcon from '../icons/SpeechToSpeechIcon.vue'
 import VoiceCloningIcon from '../icons/VoiceCloningIcon.vue'
 import VoiceLibraryIcon from '../icons/VoiceLibraryIcon.vue'
 import HistoryIcon from '../icons/HistoryIcon.vue'
+import AIAudioIcon from '../icons/AIAudioIcon.vue'
 
 const props = defineProps({
   isCollapsed: {
@@ -80,6 +81,16 @@ const menuSections = [
         title: '语音克隆',
         path: '/workspace/voice-cloning',
         icon: VoiceCloningIcon
+      }
+    ]
+  },
+  {
+    title: 'AI创作',
+    items: [
+      {
+        title: 'AI音频创作',
+        path: '/workspace/ai-audio',
+        icon: AIAudioIcon
       }
     ]
   },
