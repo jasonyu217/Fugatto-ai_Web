@@ -21,10 +21,10 @@ export default defineConfig({
     }
   },
   build: {
+    assetsDir: 'assets',
     rollupOptions: {
-      input: {
-        main: './index.html',
-        workspace: './workspace.html'
+      output: {
+        manualChunks: undefined
       }
     }
   },

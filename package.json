@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 3001 --host",
-    "build": "vite build",
+    "dev": "vite",
+    "build": "vite build && cp -r public/audio dist/",
     "preview": "vite preview"
   },
   "devDependencies": {
