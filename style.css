@@ -944,3 +944,56 @@ audio:not([controls]) + .fallback-text {
         grid-template-columns: 1fr;
     }
 }
+
+/* MIDI-2-Audio表格样式 */
+.midi2audio-table {
+    overflow-x: auto;
+    margin: 2rem 0;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    max-width: 100%;
+}
+
+.midi2audio-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.midi2audio-table th,
+.midi2audio-table td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    vertical-align: middle;
+}
+
+.midi2audio-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+    .midi2audio-table table {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .midi2audio-table thead {
+        display: none;
+    }
+
+    .midi2audio-table tr {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .midi2audio-table td {
+        padding: 0.75rem;
+        border: none;
+    }
+}
